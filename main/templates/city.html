@@ -1,9 +1,22 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Weather {{name}}
+Weather {{city}}
 {% endblock title %}
 
+
 {% block content %}
-<h1>{{name}}</h1>
+{% if city_info %}
+<article class="city-query">
+    <h2>{{city_info.name}}</h2>
+    <ul>
+        {% for item in city_info.weather %}
+        <li><strong>{{item.description}}</strong></li>
+        {% endfor %}
+        <li>Gradi {{city_info.main.temp}}°</li>
+        <li>Percepiti {{city_info.main.feels_like}}°</li>
+        <li>Umidità {{city_info.main.humidity}}%</li>
+    </ul>
+  </article>
+{% endif %}
 {% endblock content %}

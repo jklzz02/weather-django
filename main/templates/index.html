@@ -1,18 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-    {% if city_info %}
-    <article class="city-query">
-        <h2>{{city_info.name}}</h2>
-        <ul>
-            {% for item in city_info.weather %}
-            <li><strong>{{item.description}}</strong></li>
-            {% endfor %}
-            <li>Gradi {{city_info.main.temp}}°</li>
-            <li>Percepiti {{city_info.main.feels_like}}°</li>
-            <li>Umidità {{city_info.main.humidity}}%</li>
-        </ul>
-      </article>
-    {% endif %}
+
     <section class="city-container">
         {% if start_cities_info %}
           {% for city_info in start_cities_info %}

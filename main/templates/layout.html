@@ -11,9 +11,11 @@
 </head>
 <body>
     <main>
-        <img src="{% static 'img/favicon.png' %}" alt="" srcset="" width="300" height="300">
+        <a href="/">
+            <img src="{% static 'img/favicon.png' %}" alt="" srcset="" width="300" height="300">
+        </a>
         {% block form %}
-        <form action="{% url "index" %}" method="post">
+        <form action="{% url "city_page" %}" method="post">
             {% csrf_token %}
             <div class="input-group">
                 {% if city_info %}
