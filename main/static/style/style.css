@@ -131,6 +131,7 @@ button[type="submit"]:hover {
 .city-box:hover {
   cursor: pointer;
   transform: scale(1.05);
+  box-shadow: 1px 1px 10px rgba(0, 0,  0, 0.2);
 }
 
 .no-style, .no-style:visited {
@@ -159,11 +160,18 @@ li {
     button[type="submit"] {
         display: none;
     }
+    .city-container {
+        padding: 0;
+        margin: 0;
+        margin-inline: 10px;
+    }
+
     .city-box {
-        text-align: center;
+        text-align: start;
+        width: 100%;
     }
 
     .city-box > ul {
-        text-align: center;
+        text-align: start;
     }
 }

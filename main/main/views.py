@@ -43,5 +43,5 @@ def index(request):
 
 
 def city_page(request):
-     name = request.GET.get("id")
+     name = request.GET.get("id").replace("/", "")
      return render(request, "city.html", {"name" : name})
