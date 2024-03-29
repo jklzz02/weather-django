@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>{% block title %}Weather app{% endblock title %}</title>
+</head>
+<body>
+    <main>
+        
+        {% block form %}
+        <form action="{% url "index" %}" method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                {% if city_info %}
+                <input type="text" value="{{city_info.name}}" placeholder="{{city_info.name}}..." name="city" id="city">
+                {% else %}
+                <input type="text" placeholder="Scrivi il nome di una città..." name="city" id="city">
+                {% endif %}
+                <button type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
+        {% endblock form %}
+        
+        {% block content %}
+        {% endblock content %}
+
+    </main>
+</body>
+</html>
