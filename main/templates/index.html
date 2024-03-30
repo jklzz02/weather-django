@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+
 {% block content %}
 
     <section class="city-container">
@@ -7,9 +8,13 @@
 
               <a href="/city_page?id={{city_info.name}}/" class="no-style">
                 <article class="city-box">
+                  <!--
+                  {% for item in city_info.weather %}
+                    <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png">
+                  {% endfor %}
+                  -->
                   <h2>{{city_info.name}}</h2>
                   <ul>
-  
                       {% for item in city_info.weather %}
                       <li><strong>{{item.description}}</strong></li>
                       {% endfor %}

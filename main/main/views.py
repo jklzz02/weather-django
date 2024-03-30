@@ -1,9 +1,9 @@
-from django.http import request
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render
 from dotenv import load_dotenv
 import os
 import requests
-import pprint
 
 load_dotenv()
 key = os.getenv("API_KEY")
@@ -26,9 +26,6 @@ def index(request):
         
         request.session["start_cities_info"] = start_cities_info
 
-    pprint.pprint(start_cities_info)     
-
-
     return render(request, "index.html", {"city_info" : city_info, "start_cities_info" : start_cities_info})
 
 
@@ -44,6 +41,10 @@ def city_page(request):
             
      if city:
         city_info = get_weather(city, key)
+
+     if city_info["cod"] != 200:
+          # condizione corretta rivedere il redirect
+          return HttpResponseRedirect(reverse("index"))
        
 
 

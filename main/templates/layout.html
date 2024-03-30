@@ -11,24 +11,25 @@
 </head>
 <body>
     <main>
-        <a href="/">
-            <img src="{% static 'img/favicon.png' %}" alt="" srcset="" width="300" height="300">
-        </a>
-        {% block form %}
-        <form action="{% url "city_page" %}" method="post">
-            {% csrf_token %}
-            <div class="input-group">
-                {% if city_info %}
-                <input type="text" value="{{city_info.name}}" placeholder="{{city_info.name}}..." name="city" id="city">
-                {% else %}
-                <input type="text" placeholder="Scrivi il nome di una città..." name="city" id="city">
-                {% endif %}
-                <button type="submit">
-                    <i class="bi bi-search"></i>
-                </button>
-            </div>
-        </form>
-        {% endblock form %}
+            <a href="/">
+                <img src="{% static 'img/favicon.png' %}" alt="" srcset="" width="300" height="300">
+            </a>
+            
+            {% block form %}
+            <form action="{% url "city_page" %}" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    {% if city_info %}
+                    <input type="text" value="{{city_info.name}}" placeholder="{{city_info.name}}..." name="city" id="city">
+                    {% else %}
+                    <input type="text" placeholder="Scrivi il nome di una città..." name="city" id="city">
+                    {% endif %}
+                    <button type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+            {% endblock form %}
         
         {% block content %}
         {% endblock content %}
