@@ -104,7 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'it-EU'
 
 TIME_ZONE = 'UTC'
 
@@ -125,3 +125,8 @@ STATICFILES_DIRS= [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# make the session expire when the browser is closed
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
