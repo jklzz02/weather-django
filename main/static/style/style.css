@@ -150,6 +150,7 @@ li {
 @media screen and (max-width: 800px) {
 
     :root {
+        --xxl-size: 52px;
         --xl-size: 47px;
         --lg-size: 39px;
         --md-size: 27px;

@@ -2,8 +2,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from dotenv import load_dotenv
-import os
 import requests
+import pprint
+import os
+
 
 load_dotenv()
 key = os.getenv("API_KEY")
@@ -31,21 +33,23 @@ def index(request):
 
 def city_page(request):
      city = request.GET.get("id")
+     city_info = ""
+     error = False
 
      if city:
-          city = city.replace("/", "")
-     city_info = ""
+      city = city.replace("/", "")
+     
      if request.method == "POST":
 
         city = request.POST.get('city')
             
-     if city:
-        city_info = get_weather(city, key)
+     city_info = get_weather(city, key)
 
      if city_info["cod"] != 200:
-          # condizione corretta rivedere il redirect
-          return HttpResponseRedirect(reverse("index"))
-       
+          error = True
 
 
-     return render(request, "city.html", {"city" : city, "city_info" : city_info})
+     pprint.pprint(city_info)    
+
+
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info})
