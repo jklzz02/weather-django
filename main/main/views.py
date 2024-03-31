@@ -9,6 +9,7 @@ import os
 
 load_dotenv()
 key = os.getenv("API_KEY")
+map_key = os.getenv("MAP_KEY")
 def get_weather(city, key):
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang=it'
         weather_data = requests.get(request_url).json()
@@ -41,6 +42,7 @@ def city_page(request):
 
      if city:
       city = city.replace("/", "")
+      query = city.replace(" ", "+")
      
      if request.method == "POST":
 
@@ -55,4 +57,4 @@ def city_page(request):
      pprint.pprint(city_info)    
 
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info})
+     return render(request, "city.html", {"city" : city, "query" : query, "error" : error, "city_info" : city_info, "map_key" : map_key})

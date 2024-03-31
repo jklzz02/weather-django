@@ -25,6 +25,18 @@ Weather Not Found
         <li>Vento {{city_info.wind.speed}} m/s</li>
     </ul>
   </article>
+  <!--
+   BOZZA PER INCORPORARE LA MAPPA DEL LUOGO
+
+  <iframe
+  width="450"
+  height="250"
+  frameborder="0" style="border:0"
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/view?key={{map_key}}&center={{city_info.coord.lat}},{{city_info.coord.lon}}"
+  allowfullscreen>
+  </iframe>
+-->
 {% elif error %}
  <h2>città -{{city}}- non trovata</h2>
 {% endif %}
