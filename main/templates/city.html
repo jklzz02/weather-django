@@ -11,28 +11,36 @@ Weather Not Found
 {% block content %}
 {% if city_info and not error %}
 <article class="city-query-container">
-    <div class="city-query-box">
-        <h2>{{city_info.name}}</h2>
-      <div class="date">{{date}}</div>
-      <strong style="font-size: 46px;"> {{city_info.main.temp}}°C</strong>
-      <!--
-        BISOGNA SOLO DECIDERE COME E DOVE METTERE I GRADI PERCEPITI
 
-      <strong style="font-size: 46px; color: white; float: right;">Percepiti  {{city_info.main.feels_like}}°C</strong>
-      -->
-      {% for item in city_info.weather %}
-      <div class="info-container">
-        <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png">
-        <strong >{{item.description}} </strong>
+    <section class="city-query-box">
 
-      </div>
-      {% endfor %}
-      <div class="query-infos">
-     Umidità {{city_info.main.humidity}}%
-     Vento {{city_info.wind.speed}} m/s
-      </div>
+        <header>
+          <h2>{{city_info.name}}</h2>
+        </header>
+        <time class="date" datetime="{{date}}">{{date}}</time>
 
-    </div>
+        <section>
+            <strong style="font-size: 46px;"> {{city_info.main.temp}}°C</strong>
+            <!--
+              BISOGNA SOLO DECIDERE COME E DOVE METTERE I GRADI PERCEPITI
+
+            <strong>Percepiti  {{city_info.main.feels_like}}°C</strong>
+            -->
+            {% for item in city_info.weather %}
+            <figure class="info-container">
+              <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png" alt="{{item.description}}">
+              <figcaption>{{item.description}} </figcaption>
+            </figure>
+            {% endfor %}
+        </section>
+
+        <footer class="query-infos">
+          <p>Umidità {{city_info.main.humidity}}%</p>
+          <p>Vento {{city_info.wind.speed}} m/s</p>
+        </footer>
+
+    </section>
+
   </article>
   <!--
    BOZZA PER INCORPORARE LA MAPPA DEL LUOGO

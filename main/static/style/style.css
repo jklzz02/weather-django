@@ -109,6 +109,7 @@ button[type="submit"]:hover, .main-icon:hover {
 .date {
     font-size: var(--md-size);
     margin-bottom: 1.5rem;
+    display: block;
 }
 
 .city-query-container {
@@ -126,8 +127,11 @@ button[type="submit"]:hover, .main-icon:hover {
 }
 
 .query-infos{
-
     font-size: var(--lg-size);
+}
+
+.query-infos > p {
+    display: inline;
 }
 .info-container {
     display: flex;
@@ -135,7 +139,7 @@ button[type="submit"]:hover, .main-icon:hover {
     gap: 1.5rem;
 }
 
-.info-container > strong {
+.info-container > figcaption {
     align-self: center;
     font-size: var(--xl-size);
 }
