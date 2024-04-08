@@ -106,8 +106,9 @@ button[type="submit"]:hover, .main-icon:hover {
     opacity: 0.8;
 }
 
-date {
+.date {
     font-size: var(--md-size);
+    margin-bottom: 1.5rem;
 }
 
 .city-query-container {
@@ -131,7 +132,7 @@ date {
 .info-container {
     display: flex;
     justify-content: start;
-    margin-block: 1.5rem;
+    gap: 1.5rem;
 }
 
 .info-container > strong {

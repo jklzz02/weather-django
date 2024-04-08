@@ -13,19 +13,21 @@ Weather Not Found
 <article class="city-query-container">
     <div class="city-query-box">
         <h2>{{city_info.name}}</h2>
-        <date>{{date}}</date>
-      <div class="info-container">
-        {% for item in city_info.weather %}
-        <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png">
-        <strong >{{item.description}} {{city_info.main.temp}}°C</strong>
+      <div class="date">{{date}}</div>
+      <strong style="font-size: 46px;"> {{city_info.main.temp}}°C</strong>
+      <!--
+        BISOGNA SOLO DECIDERE COME E DOVE METTERE I GRADI PERCEPITI
 
-        {% endfor %}
-      </div>
+      <strong style="font-size: 46px; color: white; float: right;">Percepiti  {{city_info.main.feels_like}}°C</strong>
+      -->
       {% for item in city_info.weather %}
-      {% endfor %}
+      <div class="info-container">
+        <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png">
+        <strong >{{item.description}} </strong>
 
+      </div>
+      {% endfor %}
       <div class="query-infos">
-     Percepiti {{city_info.main.feels_like}}°
      Umidità {{city_info.main.humidity}}%
      Vento {{city_info.wind.speed}} m/s
       </div>
