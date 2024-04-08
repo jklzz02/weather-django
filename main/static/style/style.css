@@ -63,6 +63,13 @@ form {
     margin-top: 1rem;
 }
 
+.main-icon {
+    height: 300px;
+    width: 300px;
+    transition: opacity 200ms;
+}
+
+
 .input-group {
     margin-block: 15px;
 }
@@ -91,11 +98,12 @@ button[type="submit"] {
     padding: 10px 18px;
     border-radius: 8px;
     border: none;
+    transition: opacity 200ms;
 }
 
-button[type="submit"]:hover {
+button[type="submit"]:hover, .main-icon:hover {
     cursor: pointer;
-    opacity: 0.7;
+    opacity: 0.8;
 }
 
 date {
@@ -144,12 +152,12 @@ date {
     padding: 20px 35px;
     border-radius: 8px;
     box-shadow: var(--shadow);
-    transition: transform ease 400ms;
+    transition: transform ease 400ms, background ease 400ms;
 }
 
 .city-box:hover {
   cursor: pointer;
-  transform: scale(1.05);
+  transform: scale(1.08);
   box-shadow: 1px 1px 10px rgba(0, 0,  0, 0.2);
 }
 
@@ -166,7 +174,12 @@ li {
     font-size: var(--sm-size);
 }
 
-@media screen and (max-width: 800px) {
+
+@media screen and (max-width: 1600px) {
+    .main-icon {
+        height: 200px;
+        width: 200px;
+    }
 
     :root {
         --xxl-size: 52px;
@@ -175,6 +188,27 @@ li {
         --md-size: 27px;
         --sm-size: 19px;
         --xs-size: 12px;
+    }
+
+    input[type="text"] {
+        width: 60%;
+        font-size: var(--md-size);
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    :root {
+        --xxl-size: 47px;
+        --xl-size: 42px;
+        --lg-size: 34px;
+        --md-size: 22px;
+        --sm-size: 14px;
+        --xs-size: 7px;
+    }
+    .main-icon {
+        height: 100px;
+        width: 100px;
     }
 
     button[type="submit"] {
