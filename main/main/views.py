@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from dotenv import load_dotenv
 from functools import lru_cache
+from datetime import date
 import requests
 import pprint
 import os
@@ -42,9 +43,11 @@ def city_page(request):
      city_info = ""
      error = False
 
+     today = date.today()
+     formatted_date = today.strftime('%d/%m/%Y')
+
      if city:
       city = city.replace("/", "")
-      query = city.replace(" ", "+")
      
      if request.method == "POST":
 
@@ -55,9 +58,8 @@ def city_page(request):
      if city_info["cod"] != 200:
           error = True
 
-
      pprint.pprint(city_info)    
      print(get_weather.cache_info())
 
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date})

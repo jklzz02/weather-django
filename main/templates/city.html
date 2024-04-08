@@ -10,20 +10,27 @@ Weather Not Found
 
 {% block content %}
 {% if city_info and not error %}
-<article class="city-query">
-    {% for item in city_info.weather %}
-      <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png">
-    {% endfor %}
-    <h2>{{city_info.name}}</h2>
-    <ul>
+<article class="city-query-container">
+    <div class="city-query-box">
+        <h2>{{city_info.name}}</h2>
+        <date>{{date}}</date>
+      <div class="info-container">
         {% for item in city_info.weather %}
-        <li><strong>{{item.description}}</strong></li>
+        <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png">
+        <strong >{{item.description}} {{city_info.main.temp}}°C</strong>
+
         {% endfor %}
-        <li>Gradi {{city_info.main.temp}}°</li>
-        <li>Percepiti {{city_info.main.feels_like}}°</li>
-        <li>Umidità {{city_info.main.humidity}}%</li>
-        <li>Vento {{city_info.wind.speed}} m/s</li>
-    </ul>
+      </div>
+      {% for item in city_info.weather %}
+      {% endfor %}
+
+      <div class="query-infos">
+     Percepiti {{city_info.main.feels_like}}°
+     Umidità {{city_info.main.humidity}}%
+     Vento {{city_info.wind.speed}} m/s
+      </div>
+
+    </div>
   </article>
   <!--
    BOZZA PER INCORPORARE LA MAPPA DEL LUOGO

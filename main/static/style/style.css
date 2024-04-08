@@ -98,19 +98,38 @@ button[type="submit"]:hover {
     opacity: 0.7;
 }
 
-.city-query > h2 {
+date {
+    font-size: var(--md-size);
+}
+
+.city-query-container {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.city-query-box h2 {
     font-size: var(--xxl-size);
     color: var(--secondary-color);
 }
 
-.city-query > ul > li, .city-query > ul > li > strong {
+.query-infos{
+
+    font-size: var(--lg-size);
+}
+.info-container {
+    display: flex;
+    justify-content: start;
+    margin-block: 1.5rem;
+}
+
+.info-container > strong {
+    align-self: center;
     font-size: var(--xl-size);
 }
-
-.city-query > ul > li  > strong{
-    color: var(--accent-color);
-}
-
 
 .city-container {
     margin: 2rem;
