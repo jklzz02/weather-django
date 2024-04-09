@@ -142,6 +142,7 @@ button[type="submit"]:hover, .main-icon:hover {
 .info-container > figcaption {
     align-self: center;
     font-size: var(--xl-size);
+    color: var(--complementary-color);
 }
 
 .city-container {
@@ -231,6 +232,32 @@ li {
     }
 
     .city-box > ul {
+        text-align: start;
+    }
+
+    .city-query-container {
+        text-align: center;
+    }
+
+    .info-container {
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+
+    .info-container > img {
+        width: 80px;
+        height: 80px;
+    }
+
+    figcaption {
+        margin-bottom: .5rem;
+    }
+
+    .query-infos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         text-align: start;
     }
 }
