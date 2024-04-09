@@ -26,11 +26,12 @@ def index(request):
 
     if request.session.get("start_cities_info"):
          start_cities_info = request.session.get("start_cities_info")
-         print("non lo sto facendo")
+
     else:
-     start_cities_info = []
-     for city in start_cities:
-                    start_cities_info.append(get_weather(city, key))
+        start_cities_info = []
+
+        for city in start_cities:
+               start_cities_info.append(get_weather(city, key))
         
     request.session["start_cities_info"] = start_cities_info
     print(get_weather.cache_info())
@@ -60,6 +61,10 @@ def city_page(request):
 
      pprint.pprint(city_info)    
      print(get_weather.cache_info())
+
+
+     if not city:
+          return HttpResponseRedirect(reverse("index"))
 
 
      return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date})
