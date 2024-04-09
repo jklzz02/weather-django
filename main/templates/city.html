@@ -2,9 +2,9 @@
 
 {% block title %}
 {% if not error %}
-Weather {{city}}
+ {{city}}
 {% else %}
-Weather Not Found
+ Not Found
 {% endif %}
 {% endblock title %}
 
@@ -20,11 +20,11 @@ Weather Not Found
         <time class="date" datetime="{{date}}">{{date}}</time>
 
         <section>
-            <strong style="font-size: 46px;"> {{city_info.main.temp}}°C</strong>
+            <strong style="font-size: 46px;"> {{city_info.main.temp|floatformat:"0"}}°C</strong>
             <!--
               BISOGNA SOLO DECIDERE COME E DOVE METTERE I GRADI PERCEPITI
 
-            <strong>Percepiti  {{city_info.main.feels_like}}°C</strong>
+            <strong>Percepiti  {{city_info.main.feels_like|floatformat:"0"}}°C</strong>
             -->
             {% for item in city_info.weather %}
             <figure class="info-container">

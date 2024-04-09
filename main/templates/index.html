@@ -18,8 +18,8 @@
                       {% for item in city_info.weather %}
                       <li><strong>{{item.description}}</strong></li>
                       {% endfor %}
-                      <li>Gradi {{city_info.main.temp}}°</li>
-                      <li>Percepiti {{city_info.main.feels_like}}°</li>
+                      <li>Gradi {{city_info.main.temp|floatformat:"0"}}°</li>
+                      <li>Percepiti {{city_info.main.feels_like|floatformat:"0"}}°</li>
                       <li>Umidità {{city_info.main.humidity}}%</li>
                       <li>Vento {{city_info.wind.speed}} m/s</li>
                   </ul>
