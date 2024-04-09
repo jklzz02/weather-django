@@ -217,9 +217,7 @@ li {
         width: 100px;
     }
 
-    button[type="submit"] {
-        display: none;
-    }
+
     .city-container {
         padding: 0;
         margin: 0;
@@ -243,6 +241,7 @@ li {
         flex-direction: column;
         align-content: center;
         align-items: center;
+        margin-bottom: .5rem;
     }
 
     .info-container > img {
@@ -251,7 +250,8 @@ li {
     }
 
     figcaption {
-        margin-bottom: .5rem;
+       text-align: start;
+       width: 100%;
     }
 
     .query-infos {
