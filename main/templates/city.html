@@ -43,7 +43,7 @@
 
     </section>
 
-  </article>
+</article>
   <!--
    BOZZA PER INCORPORARE LA MAPPA DEL LUOGO
 
@@ -62,4 +62,15 @@
   <img class="error-icon" src="{% static "img/not-found.svg" %}">
 </div>
 {% endif %}
+{% comment "section forecast" %}
+<section>
+  {% for day in forecast_weather.daily %}
+  <ul>
+     {% for info in day %}
+      <li>{{info}}</li>
+     {% endfor %}
+  </ul>
+  {% endfor %}
+</section>
+{% endcomment %}
 {% endblock content %}

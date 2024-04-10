@@ -49,6 +49,7 @@ def index(request):
 def city_page(request):
      city = request.GET.get("id")
      city_info = ""
+     forecast_weather = ""
      error = False
 
      today = date.today()
@@ -84,4 +85,4 @@ def city_page(request):
           return HttpResponseRedirect(reverse("index"))
 
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "forecast_weather" : forecast_weather, "map_key" : map_key, "date" : formatted_date})
