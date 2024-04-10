@@ -62,4 +62,28 @@
   <img class="error-icon" src="{% static "img/not-found.svg" %}">
 </div>
 {% endif %}
+{% comment "forecast" %}
+{% if forecast_info %}
+<section style="display: flex; flex-wrap: wrap;">
+{% for day in forecast_info %}
+<div style="margin: 2rem; border: 2px solid black;">
+  <ul style="text-align: start;">
+    <li>{{day.data}}</li>
+    <li>{{day.summary}}</li>
+    <li>{{day.humidity}}%</li>
+    <li>{{day.temp.day|floatformat:"0"}}</li>
+    <li>{{day.temp.eve|floatformat:"0"}}</li>
+    <li>{{day.temp.night|floatformat:"0"}}</li>
+    {% for info in day.weather %}
+    <li>{{info.description}}</li>
+    <li>{{info.icon}}</li>
+    <li>{{info.main}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endfor %}
+</section>
+{% endif %}
+{% endcomment %}
 {% endblock content %}
