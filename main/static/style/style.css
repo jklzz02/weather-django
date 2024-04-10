@@ -69,6 +69,11 @@ form {
     transition: opacity 200ms;
 }
 
+.error-icon {
+    max-height: 20rem;
+    margin: 3rem;
+}
+
 
 .input-group {
     margin-block: 15px;

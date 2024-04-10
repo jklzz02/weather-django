@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block title %}
 {% if not error %}
  {{city}}
@@ -10,6 +10,7 @@
 
 {% block content %}
 {% if city_info and not error %}
+
 <article class="city-query-container">
 
     <section class="city-query-box">
@@ -55,7 +56,10 @@
   allowfullscreen>
   </iframe>
 -->
-{% elif error %}
- <h2>città -{{city}}- non trovata</h2>
+{% else %}
+<div class="error-box">
+  <h2>città -{{ city }}- non trovata</h2>
+  <img class="error-icon" src="{% static "img/not-found.svg" %}">
+</div>
 {% endif %}
 {% endblock content %}
