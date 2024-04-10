@@ -4,6 +4,7 @@ from django.shortcuts import render
 from dotenv import load_dotenv
 from functools import lru_cache
 from datetime import date
+import datetime
 import requests
 import pprint
 import os
@@ -26,6 +27,11 @@ def get_forecast_weather(lat, lon, key):
      forecast_data = requests.get(request_url).json()
      pprint.pprint(forecast_data)
      return(forecast_data)
+
+def unix_converter(timestamp):
+     dt_object = datetime.datetime.fromtimestamp(timestamp)
+     readable_date = dt_object.strftime("%d/%m/%Y")
+     return readable_date
 
 def index(request):
     city_info = ""
@@ -50,6 +56,7 @@ def city_page(request):
      city = request.GET.get("id")
      city_info = ""
      forecast_weather = ""
+     forecast_info = []
      error = False
 
      today = date.today()
@@ -76,13 +83,24 @@ def city_page(request):
           lon = city_info['coord']['lon']
 
           forecast_weather = get_forecast_weather(lat, lon, key)
+          
+          for day in forecast_weather["daily"]:
 
-          print("##################################################################################################################")
-          pprint.pprint(forecast_weather)
+               data = unix_converter(day["dt"])
+               summary = day["summary"]
+               weather = day["weather"]
+               temp = day["temp"]
+               humidity = day["humidity"]
+               wind = day["wind_speed"]
 
+               city_forecast = {"data" : data, "summary" : summary, "weather" : weather, "temp" : temp, "humidity" : humidity, "wind" : wind}
+               forecast_info.append(city_forecast)
+
+          print("############################################FORECAST INFO#########################################################")
+          pprint.pprint(forecast_info)
 
      if not city:
           return HttpResponseRedirect(reverse("index"))
 
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "forecast_weather" : forecast_weather, "map_key" : map_key, "date" : formatted_date})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info})
