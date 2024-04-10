@@ -17,8 +17,15 @@ map_key = os.getenv("MAP_KEY")
 def get_weather(city, key):
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang=it'
         weather_data = requests.get(request_url).json()
-        print(weather_data)
+        pprint.pprint(weather_data)
         return weather_data
+
+@lru_cache
+def get_forecast_weather(lat, lon, key):
+     request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang=it'
+     forecast_data = requests.get(request_url).json()
+     pprint.pprint(forecast_data)
+     return(forecast_data)
 
 def index(request):
     city_info = ""
@@ -61,6 +68,16 @@ def city_page(request):
 
      pprint.pprint(city_info)    
      print(get_weather.cache_info())
+
+     if city_info:
+
+          lat = city_info['coord']['lat']
+          lon = city_info['coord']['lon']
+
+          forecast_weather = get_forecast_weather(lat, lon, key)
+
+          print("##################################################################################################################")
+          pprint.pprint(forecast_weather)
 
 
      if not city:
