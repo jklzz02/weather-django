@@ -62,7 +62,6 @@
   <img class="error-icon" src="{% static "img/not-found.svg" %}">
 </div>
 {% endif %}
-{% comment "forecast" %}
 {% if forecast_info %}
 <section style="display: flex; flex-wrap: wrap;">
 {% for day in forecast_info %}
@@ -80,10 +79,12 @@
     <li>{{info.main}}</li>
     {% endfor %}
   </ul>
+  {% if forcecast_info.alert %}
+    <p>{{forcecast_info.alert}}</p>
+  {% endif %}
 </div>
 
 {% endfor %}
 </section>
 {% endif %}
-{% endcomment %}
 {% endblock content %}

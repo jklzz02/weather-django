@@ -97,7 +97,7 @@ def city_page(request):
                forecast_info.append(city_forecast)
 
           print("############################################FORECAST INFO#########################################################")
-          pprint.pprint(forecast_info)
+          #pprint.pprint(forecast_info)
 
      if not city:
           return HttpResponseRedirect(reverse("index"))
