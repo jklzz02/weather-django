@@ -23,7 +23,7 @@ def get_weather(city, key):
 
 @lru_cache
 def get_forecast_weather(lat, lon, key):
-     request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang=it'
+     request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang=it&tz=+01:00'
      forecast_data = requests.get(request_url).json()
      pprint.pprint(forecast_data)
      return(forecast_data)
