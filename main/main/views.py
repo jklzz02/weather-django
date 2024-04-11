@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.shortcuts import render
 from dotenv import load_dotenv
 from functools import lru_cache
-from datetime import date
 import datetime
 import requests
 import pprint
@@ -59,8 +58,9 @@ def city_page(request):
      forecast_info = []
      error = False
 
-     today = date.today()
-     formatted_date = today.strftime('%d/%m/%Y')
+     today = datetime.datetime.now()
+     formatted_date = today.strftime('%d/%m/%Y %H:%M')
+     print(today, formatted_date)
 
      if city:
       city = city.replace("/", "")

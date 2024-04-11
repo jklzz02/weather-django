@@ -26,7 +26,7 @@
             <!--
               BISOGNA SOLO DECIDERE COME E DOVE METTERE I GRADI PERCEPITI
 
-            <strong>Percepiti  {{city_info.main.feels_like|floatformat:"0"}}°C</strong>
+            <strong>Percepiti  {{city_info.main.feels_pke|floatformat:"0"}}°C</strong>
             -->
             {% for item in city_info.weather %}
             <figure class="info-container">
@@ -62,29 +62,42 @@
   <img class="error-icon" src="{% static "img/not-found.svg" %}">
 </div>
 {% endif %}
+{% comment "forecast" %}
+
 {% if forecast_info %}
-<section style="display: flex; flex-wrap: wrap;">
+<section class="forecast-container">
 {% for day in forecast_info %}
-<div style="margin: 2rem; border: 2px solid black;">
-  <ul style="text-align: start;">
-    <li>{{day.data}}</li>
-    <li>{{day.summary}}</li>
-    <li>{{day.humidity}}%</li>
-    <li>{{day.temp.day|floatformat:"0"}}</li>
-    <li>{{day.temp.eve|floatformat:"0"}}</li>
-    <li>{{day.temp.night|floatformat:"0"}}</li>
+<article class="forecast-box">
+  <header>
+    <h2>{{city_info.name}}</h2>
+    <time  class="date" datetime="{{day.data}}"><span>{{day.data}}</span></time>
+  </header>
+  <section>
+    <p>{{day.summary}}</p>
+    <p>Umidità{{day.humidity}}%</p>
+  </section>
+  <section>
+    <h3>Temperatura</h3>
+    <ul>
+      <li>mattina {{day.temp.day|floatformat:"0"}}°C</li>
+      <li>pomeriggio {{day.temp.eve|floatformat:"0"}}°C</li>
+      <li>sera {{day.temp.night|floatformat:"0"}}°C</li>
+    </ul>
+  </section>
     {% for info in day.weather %}
-    <li>{{info.description}}</li>
-    <li>{{info.icon}}</li>
-    <li>{{info.main}}</li>
+    <figure class="info-container">
+      <img src="https://openweathermap.org/img/wn/{{info.icon}}@2x.png" alt="{{info.description}}">
+      <figcaption>{{info.description}} </figcaption>
+    </figure>
     {% endfor %}
-  </ul>
   {% if forcecast_info.alert %}
     <p>{{forcecast_info.alert}}</p>
   {% endif %}
-</div>
+</article>
 
 {% endfor %}
 </section>
 {% endif %}
+{% endcomment %}
+
 {% endblock content %}

@@ -185,6 +185,22 @@ li {
     font-size: var(--sm-size);
 }
 
+.forecast-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.forecast-box {
+    text-align: left;
+    width: calc(90% /4);
+}
+
+.forecast-box p {
+    overflow-wrap: break-word;
+}
+
 
 @media screen and (max-width: 1600px) {
     .main-icon {
