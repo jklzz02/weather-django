@@ -190,11 +190,15 @@ li {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
 .forecast-box {
     text-align: left;
-    width: calc(90% /4);
+    width: calc(90% /2);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    border-radius: 8px;
 }
 
 .forecast-box p {

@@ -62,7 +62,6 @@
   <img class="error-icon" src="{% static "img/not-found.svg" %}">
 </div>
 {% endif %}
-{% comment "forecast" %}
 
 {% if forecast_info %}
 <section class="forecast-container">
@@ -98,6 +97,5 @@
 {% endfor %}
 </section>
 {% endif %}
-{% endcomment %}
 
 {% endblock content %}
