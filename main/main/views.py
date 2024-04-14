@@ -3,9 +3,10 @@ from django.urls import reverse
 from django.shortcuts import render
 from dotenv import load_dotenv
 from functools import lru_cache
+from googletrans import Translator
+from pprint import pprint
 import datetime
 import requests
-import pprint
 import os
 
 
@@ -13,25 +14,38 @@ load_dotenv()
 key = os.getenv("API_KEY")
 map_key = os.getenv("MAP_KEY")
 
+# building translator object from library
+translator = Translator()
+
+#get current weather conditions from API
 @lru_cache
 def get_weather(city, key):
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang=it'
         weather_data = requests.get(request_url).json()
-        pprint.pprint(weather_data)
+        pprint(weather_data)
         return weather_data
 
+# get forecast info from API
 @lru_cache
 def get_forecast_weather(lat, lon, key):
      request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang=it&tz=+01:00'
      forecast_data = requests.get(request_url).json()
-     pprint.pprint(forecast_data)
+     pprint(forecast_data)
      return(forecast_data)
 
+# timestamp to readable date
 def unix_converter(timestamp):
      dt_object = datetime.datetime.fromtimestamp(timestamp)
      readable_date = dt_object.strftime("%d/%m/%Y")
      return readable_date
 
+# treanslate text to italian we could add a paramater to translate from geo infos of user
+def translate_it(translator, text):
+     translation = translator.translate(text, dest="it")
+     return translation.text
+     
+
+# views
 def index(request):
     city_info = ""
     start_cities = ["torino", "roma, it", "firenze", "napoli", "palermo"]
@@ -74,7 +88,7 @@ def city_page(request):
      if city_info["cod"] != 200:
           error = True
 
-     pprint.pprint(city_info)    
+     pprint(city_info)    
      print(get_weather.cache_info())
 
      if city_info:
@@ -87,7 +101,7 @@ def city_page(request):
           for day in forecast_weather["daily"]:
 
                data = unix_converter(day["dt"])
-               summary = day["summary"]
+               summary = translate_it(translator, day["summary"])
                weather = day["weather"]
                temp = day["temp"]
                humidity = day["humidity"]
@@ -97,7 +111,7 @@ def city_page(request):
                forecast_info.append(city_forecast)
 
           print("############################################FORECAST INFO#########################################################")
-          pprint.pprint(forecast_info)
+          pprint(forecast_info)
 
      if not city:
           return HttpResponseRedirect(reverse("index"))
