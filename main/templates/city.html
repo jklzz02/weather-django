@@ -72,10 +72,6 @@
     <time  class="date" datetime="{{day.data}}"><span>{{day.data}}</span></time>
   </header>
   <section>
-    <p>{{day.summary}}</p>
-    <p>Umidità{{day.humidity}}%</p>
-  </section>
-  <section>
     <h3>Temperatura</h3>
     <ul>
       <li>mattina {{day.temp.day|floatformat:"0"}}°C</li>
@@ -83,14 +79,21 @@
       <li>sera {{day.temp.night|floatformat:"0"}}°C</li>
     </ul>
   </section>
+  <section>
+    <p>{{day.summary}}</p>
+  </section>
     {% for info in day.weather %}
     <figure class="info-container">
       <img src="https://openweathermap.org/img/wn/{{info.icon}}@2x.png" alt="{{info.description}}">
       <figcaption>{{info.description}} </figcaption>
     </figure>
+    <aside>
+      <span>Umidità {{day.humidity}}%</span>
+      <span>Vento {{day.wind}} m/s</span>
+    </aside>
     {% endfor %}
-  {% if forcecast_info.alert %}
-    <p>{{forcecast_info.alert}}</p>
+  {% if forecast_info.alert %}
+    <p>{{forecast_info.alert}}</p>
   {% endif %}
 </article>
 

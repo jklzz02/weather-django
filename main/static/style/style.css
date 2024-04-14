@@ -242,7 +242,6 @@ li {
         width: 100px;
     }
 
-
     .city-container {
         padding: 0;
         margin: 0;
@@ -284,5 +283,10 @@ li {
         flex-direction: column;
         justify-content: center;
         text-align: start;
+    }
+
+    .forecast-box {
+        width: 100%;
+        margin-inline: 1rem;
     }
 }
