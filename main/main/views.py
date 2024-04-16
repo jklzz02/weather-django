@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from functools import lru_cache
 from googletrans import Translator
 from pprint import pprint
-from geopy.geocoders import Nominatim
+import geocoder
 import datetime
 import requests
 import os
@@ -18,27 +18,27 @@ map_key = os.getenv("MAP_KEY")
 # building translator object from library
 translator = Translator()
 
-# def get_location():
-#      response = requests.get('https://ipinfo.io')
-#      data = response.json()
-#      return data
+@lru_cache
+def get_country():
+     g = geocoder.ip('me')
+     return g.country
 
-# data = get_location()
-# pprint(data)
+# get user language form ip with geocoder
+lang = get_country()
 
 
 #get current weather conditions from API
 @lru_cache
-def get_weather(city, key):
-        request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang=it'
+def get_weather(city, key, lang):
+        request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
         weather_data = requests.get(request_url).json()
         pprint(weather_data)
         return weather_data
 
 # get forecast info from API
 @lru_cache
-def get_forecast_weather(lat, lon, key):
-     request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang=it&tz=+01:00'
+def get_forecast_weather(lat, lon, key, lang):
+     request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang={lang}'
      forecast_data = requests.get(request_url).json()
      pprint(forecast_data)
      return(forecast_data)
@@ -50,8 +50,8 @@ def unix_converter(timestamp):
      return readable_date
 
 # treanslate text to italian we could add a paramater to translate from geo infos of user
-def translate_it(translator, text):
-     translation = translator.translate(text, dest="it")
+def translate(translator, text, lang):
+     translation = translator.translate(text, dest=lang)
      return translation.text
      
 
@@ -67,7 +67,7 @@ def index(request):
         start_cities_info = []
 
         for city in start_cities:
-               start_cities_info.append(get_weather(city, key))
+               start_cities_info.append(get_weather(city, key, lang))
         
     request.session["start_cities_info"] = start_cities_info
     print(get_weather.cache_info())
@@ -93,7 +93,7 @@ def city_page(request):
 
         city = request.POST.get('city')
             
-     city_info = get_weather(city, key)
+     city_info = get_weather(city, key, lang)
 
      if city_info["cod"] != 200:
           error = True
@@ -106,12 +106,12 @@ def city_page(request):
           lat = city_info['coord']['lat']
           lon = city_info['coord']['lon']
 
-          forecast_weather = get_forecast_weather(lat, lon, key)
+          forecast_weather = get_forecast_weather(lat, lon, key, lang)
           
           for day in forecast_weather["daily"]:
 
                data = unix_converter(day["dt"])
-               summary = translate_it(translator, day["summary"])
+               summary = translate(translator, day["summary"], lang)
                weather = day["weather"]
                temp = day["temp"]
                humidity = day["humidity"]
