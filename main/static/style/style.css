@@ -290,3 +290,18 @@ li {
         margin-inline: 1rem;
     }
 }
+
+@media (prefers-color-scheme: light) {
+
+    :root {
+       --dark-color: #f0f0f0;
+       --light-color: #292929;
+       --grey: #0b0b0b;
+       --accent-color: var(--secondary-color); 
+       --complementary-color: var(--main-color);
+    }
+
+    button {
+        color: var(--dark-color) !important;
+    }
+}

@@ -64,6 +64,17 @@
 {% endif %}
 
 {% if forecast_info %}
+{% comment "alert" %}
+
+BISOGNA SOLO METTERLO IN DISPLAY E FARE LO STILE
+
+{% if alert %}
+
+<h3>{{alert}}</h3>
+
+{% endif %}
+{% endcomment %}
+
 <section class="forecast-container">
 {% for day in forecast_info %}
 <article class="forecast-box">

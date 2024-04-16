@@ -79,6 +79,7 @@ def city_page(request):
      city = request.GET.get("id")
      city_info = ""
      forecast_weather = ""
+     alert = ""
      forecast_info = []
      error = False
 
@@ -120,6 +121,10 @@ def city_page(request):
                city_forecast = {"data" : data, "summary" : summary, "weather" : weather, "temp" : temp, "humidity" : humidity, "wind" : wind}
                forecast_info.append(city_forecast)
 
+          if "alerts" in forecast_weather:
+               alert = forecast_weather["alerts"][0]["description"]
+               alert = translate(translator, alert, lang)
+
           print("############################################FORECAST INFO#########################################################")
           pprint(forecast_info)
 
@@ -127,4 +132,4 @@ def city_page(request):
           return HttpResponseRedirect(reverse("index"))
 
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert})
