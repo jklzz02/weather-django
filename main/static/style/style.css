@@ -205,7 +205,7 @@ li {
     overflow-wrap: break-word;
 }
 
-
+/* media query for medium size viewport */
 @media screen and (max-width: 1600px) {
     .main-icon {
         height: 200px;
@@ -227,6 +227,7 @@ li {
     }
 }
 
+/* media query for small size viewport and mobile */
 @media screen and (max-width: 800px) {
 
     :root {
@@ -291,6 +292,7 @@ li {
     }
 }
 
+/* media query for light preference from browser */
 @media (prefers-color-scheme: light) {
 
     :root {
