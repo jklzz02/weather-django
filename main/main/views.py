@@ -23,8 +23,8 @@ translator = Translator()
 #      data = response.json()
 #      return data
 
-data = get_location()
-pprint(data)
+# data = get_location()
+# pprint(data)
 
 
 #get current weather conditions from API
