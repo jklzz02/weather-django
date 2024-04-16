@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from functools import lru_cache
 from googletrans import Translator
 from pprint import pprint
+from geopy.geocoders import Nominatim
 import datetime
 import requests
 import os
@@ -16,6 +17,15 @@ map_key = os.getenv("MAP_KEY")
 
 # building translator object from library
 translator = Translator()
+
+# def get_location():
+#      response = requests.get('https://ipinfo.io')
+#      data = response.json()
+#      return data
+
+data = get_location()
+pprint(data)
+
 
 #get current weather conditions from API
 @lru_cache
