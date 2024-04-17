@@ -18,12 +18,13 @@ map_key = os.getenv("MAP_KEY")
 # building translator object from library
 translator = Translator()
 
+#geocoder function to get infos from user
 @lru_cache
 def get_country():
      g = geocoder.ip('me')
      return g.country
 
-# get user language form ip with geocoder
+# get user language from ip with geocoder
 lang = get_country()
 
 
@@ -99,9 +100,6 @@ def city_page(request):
      if city_info["cod"] != 200:
           error = True
 
-     pprint(city_info)    
-     print(get_weather.cache_info())
-
      if not error:
 
           lat = city_info['coord']['lat']
@@ -124,9 +122,6 @@ def city_page(request):
           if "alerts" in forecast_weather:
                alert = forecast_weather["alerts"][0]["description"]
                alert = translate(translator, alert, lang)
-
-          print("############################################FORECAST INFO#########################################################")
-          pprint(forecast_info)
 
      if not city:
           return HttpResponseRedirect(reverse("index"))
