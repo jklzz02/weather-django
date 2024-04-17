@@ -38,6 +38,7 @@ body {
     background-color: var(--dark-color);
     color: var(--light-color);
     height: 100dvh;
+    transition: background 400ms;
 }
 
 main {
@@ -275,6 +276,32 @@ font-size: var(--md-size);
    display: none;
 }
 
+
+/*
+
+.light-mode {
+
+  background-color: var(--light-color);
+
+}
+
+.light-mode article {
+
+  color: var(--dark-color);
+
+}
+
+.lightmode section article .forecast-box img , .light-mode .city-query-box img {
+
+     background-color: var(--light-icon-bg);
+ 
+ }
+ 
+ #darkIcon, #lightIcon {
+     color: #b19219;
+ }
+
+*/
 
 /* media query for medium size viewport */
 @media screen and (max-width: 1600px) {
