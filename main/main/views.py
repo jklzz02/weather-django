@@ -102,7 +102,7 @@ def city_page(request):
      pprint(city_info)    
      print(get_weather.cache_info())
 
-     if city_info:
+     if not error:
 
           lat = city_info['coord']['lat']
           lon = city_info['coord']['lon']
