@@ -250,7 +250,7 @@ font-size: var(--md-size);
 
 .theme-toggle {
     border: none;
-    background: var(--dark-icon-bg);
+    background: none;
     padding: 10px 18px;
     border-radius: 15px;
     transition: transform 400ms, color 400ms;
@@ -384,11 +384,7 @@ font-size: var(--md-size);
         background-color: var(--light-icon-bg);
     
     }
-
-    .theme-toggle {
-        background-color: var(--light-icon-bg);
-    }
-
+    
     #darkIcon, #lightIcon {
         color: #b19219;
     }
