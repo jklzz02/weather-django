@@ -59,21 +59,11 @@
 {% else %}
 <div class="error-box">
   <h2>città -{{ city }}- non trovata</h2>
-  <img class="error-icon" src="{% static "img/not-found.svg" %}">
+  <img class="error-icon" src="{% static "img/not-found.svg" %}" alr="city not found">
 </div>
 {% endif %}
 
 {% if forecast_info %}
-{% comment "alert" %}
-
-BISOGNA SOLO METTERLO IN DISPLAY E FARE LO STILE
-
-{% if alert %}
-
-<h3>{{alert}}</h3>
-
-{% endif %}
-{% endcomment %}
 
 <section class="forecast-container">
 {% for day in forecast_info %}
@@ -83,15 +73,15 @@ BISOGNA SOLO METTERLO IN DISPLAY E FARE LO STILE
     <time  class="date" datetime="{{day.data}}"><span>{{day.data}}</span></time>
   </header>
   <section>
-    <h3>Temperatura</h3>
+    <strong>Temperatura</strong>
     <ul>
-      <li>mattina {{day.temp.day|floatformat:"0"}}°C</li>
+      <li>mattina    {{day.temp.day|floatformat:"0"}}°C</li>
       <li>pomeriggio {{day.temp.eve|floatformat:"0"}}°C</li>
-      <li>sera {{day.temp.night|floatformat:"0"}}°C</li>
+      <li>sera       {{day.temp.night|floatformat:"0"}}°C</li>
     </ul>
   </section>
   <section>
-    <p>{{day.summary}}</p>
+    <p class="summary">{{day.summary}}</p>
   </section>
     {% for info in day.weather %}
     <figure class="info-container">
@@ -110,6 +100,15 @@ BISOGNA SOLO METTERLO IN DISPLAY E FARE LO STILE
 
 {% endfor %}
 </section>
+
+{% if alert %}
+
+
+<section class="alert-container">
+  <h3 class="alert">{{alert}}</h3>
+</section>
+
+{% endif %}
 {% endif %}
 
 {% endblock content %}
