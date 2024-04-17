@@ -15,8 +15,10 @@
     --complementary-color: #d45e03;
     --accent-color: #ffcc00;
     --dark-color: #292929;
+    --dark-icon-bg: rgb(87, 87, 87);
     --grey: #f3f3f3;
     --light-color: #f0f0f0;
+    --light-icon-bg: rgb(220, 220, 220);
 }
 
 /* effetcs */
@@ -208,7 +210,7 @@ li {
 
 .forecast-box img , .city-query-box img {
 
-    background-color: rgb(87, 87, 87);
+    background-color: var(--dark-icon-bg);
     margin-block: 1rem;
     border-radius: 15px;
 
@@ -236,6 +238,41 @@ font-size: var(--md-size);
     color: rgba(240, 20, 20);
     text-align: start;
     font-size: var(--md-size);
+}
+
+/* container to dark/light mode buttons */
+
+#layout-btn-container {
+    position: absolute;
+    top: 1rem;
+    left: 1.5rem;
+}
+
+.theme-toggle {
+    border: none;
+    background: var(--dark-icon-bg);
+    padding: 10px 18px;
+    border-radius: 15px;
+    transition: transform 400ms, color 400ms;
+    box-shadow: var(--shadow);
+
+}
+
+.theme-toggle:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#darkIcon, #lightIcon {
+    font-size: var(--xl-size);
+    color: var(--accent-color);
+}
+
+
+/* utility classes */
+
+.hidden {
+   display: none;
 }
 
 
@@ -344,8 +381,15 @@ font-size: var(--md-size);
 
     .forecast-box img , .city-query-box img {
 
-        background-color: rgb(220, 220, 220);
+        background-color: var(--light-icon-bg);
     
     }
 
+    .theme-toggle {
+        background-color: var(--light-icon-bg);
+    }
+
+    #darkIcon, #lightIcon {
+        color: #b19219;
+    }
 }
