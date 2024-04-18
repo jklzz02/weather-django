@@ -2,12 +2,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from dotenv import load_dotenv
-from functools import lru_cache
 from googletrans import Translator
-from pprint import pprint
-import geocoder
+from .services import get_weather, get_forecast_weather, unix_converter, translate, get_country, make_link
 import datetime
-import requests
 import os
 import re
 
@@ -19,48 +16,11 @@ map_key = os.getenv("MAP_KEY")
 # building translator object from library
 translator = Translator()
 
-#geocoder function to get infos from user
-@lru_cache
-def get_country():
-     g = geocoder.ip('me')
-     return g.country
-
-# get user language from ip with geocoder
+# get user lang from ip
 lang = get_country()
 
 #regex for urls in alert
 alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
-# function to call in re.sub
-def make_link(match):
-    url = match.group(0)
-    return f'<br><a href="{url}" target="_blank">{url}</a>'
-
-#get current weather conditions from API
-@lru_cache
-def get_weather(city, key, lang):
-        request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
-        weather_data = requests.get(request_url).json()
-        return weather_data
-
-# get forecast info from API
-@lru_cache
-def get_forecast_weather(lat, lon, key, lang):
-     request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang={lang}'
-     forecast_data = requests.get(request_url).json()
-     pprint(forecast_data)
-     return(forecast_data)
-
-# timestamp to readable date
-def unix_converter(timestamp):
-     dt_object = datetime.datetime.fromtimestamp(timestamp)
-     readable_date = dt_object.strftime("%d/%m/%Y")
-     return readable_date
-
-# treanslate text to italian we could add a paramater to translate from geo infos of user
-def translate(translator, text, lang):
-     translation = translator.translate(text, dest=lang)
-     return translation.text
-     
 
 # views
 def index(request):
