@@ -214,6 +214,7 @@ li {
     background-color: var(--dark-icon-bg);
     margin-block: 1rem;
     border-radius: 15px;
+    transition: background 400ms;
 
  }
 
@@ -267,6 +268,21 @@ font-size: var(--md-size);
 #darkIcon, #lightIcon {
     font-size: var(--xl-size);
     color: var(--accent-color);
+}
+
+
+/* link style */
+
+a {
+    color: var(--main-color);
+}
+
+a:visited {
+   color: var(--secondary-color);
+}
+
+h3 a:hover {
+    opacity: .8;
 }
 
 

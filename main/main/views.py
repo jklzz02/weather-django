@@ -9,6 +9,7 @@ import geocoder
 import datetime
 import requests
 import os
+import re
 
 
 load_dotenv()
@@ -27,6 +28,12 @@ def get_country():
 # get user language from ip with geocoder
 lang = get_country()
 
+#regex for urls in alert
+alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
+# function to call in re.sub
+def make_link(match):
+    url = match.group(0)
+    return f'<a href="{url}" target="_blank">{url}</a>'
 
 #get current weather conditions from API
 @lru_cache
@@ -122,6 +129,7 @@ def city_page(request):
           if "alerts" in forecast_weather:
                alert = forecast_weather["alerts"][0]["description"]
                alert = translate(translator, alert, lang)
+               alert = alertRegex.sub(make_link, alert)
 
      if not city:
           return HttpResponseRedirect(reverse("index"))
