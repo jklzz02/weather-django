@@ -15,7 +15,7 @@
     --complementary-color: #d45e03;
     --accent-color: #ffcc00;
     --dark-color: #292929;
-    --dark-icon-bg: rgb(87, 87, 87);
+    --dark-icon-bg: rgb(180, 180, 180);
     --grey: #f3f3f3;
     --light-color: #f0f0f0;
     --light-icon-bg: rgb(220, 220, 220);
@@ -302,6 +302,8 @@ h3 a:hover {
 }
 
 
+/* light mode */
+
 .light-mode {
 
   background-color: var(--light-color);
@@ -331,12 +333,22 @@ h3 a:hover {
     border-color: var(--secondary-color);
 
  }
- 
- #darkIcon, #lightIcon {
-     color: #b19219;
+
+.light-mode h2 {
+    color: var(--main-color);
+}
+
+ .light-mode strong {
+    color: var(--secondary-color);
  }
 
+ .light-mode figcaption {
+    color: var(--main-color);
+ }
 
+ .light-mode #darkIcon, .light-mode #lightIcon {
+    color: #b19219;
+}
 
 /* media query for medium size viewport */
 @media screen and (max-width: 1600px) {

@@ -33,14 +33,13 @@ alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
 # function to call in re.sub
 def make_link(match):
     url = match.group(0)
-    return f'<a href="{url}" target="_blank">{url}</a>'
+    return f'<br><a href="{url}" target="_blank">{url}</a>'
 
 #get current weather conditions from API
 @lru_cache
 def get_weather(city, key, lang):
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
         weather_data = requests.get(request_url).json()
-        pprint(weather_data)
         return weather_data
 
 # get forecast info from API
