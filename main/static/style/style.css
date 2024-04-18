@@ -284,7 +284,7 @@ font-size: var(--md-size);
 .fade-in {
     animation: fadeIn 0.5s ease-in-out forwards;
 }
-/*
+
 
 .light-mode {
 
@@ -298,17 +298,29 @@ font-size: var(--md-size);
 
 }
 
-.lightmode section article .forecast-box img , .light-mode .city-query-box img {
+.light-mode figure img {
 
      background-color: var(--light-icon-bg);
  
+ }
+
+ .light-mode input[type="text"] {
+    color: var(--dark-color);
+    border-color: var(--dark-color)
+
+ }
+
+ .light-mode input[type="text"]:focus {
+
+    border-color: var(--secondary-color);
+
  }
  
  #darkIcon, #lightIcon {
      color: #b19219;
  }
 
-*/
+
 
 /* media query for medium size viewport */
 @media screen and (max-width: 1600px) {
@@ -398,7 +410,7 @@ font-size: var(--md-size);
 
 }
 
-/* media query for light preference from browser */
+/* media query for light preference from browser 
 @media (prefers-color-scheme: light) {
 
     :root {
@@ -423,3 +435,5 @@ font-size: var(--md-size);
         color: #b19219;
     }
 }
+
+*/
