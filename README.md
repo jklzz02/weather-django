@@ -25,7 +25,7 @@ All of them are documented with comments in the code.
 
 * `get_weather(city, key, lang)`: makes an `API` request to retrieve the current weather conditions.
 
-* `get_forecast_weather(lat, lon, key, lang)`: Similar to get_weather(), this function makes an API request to retrieve a daily forecast for the upcoming week. It also requires an API key and a location parameter.
+* `get_forecast_weather(lat, lon, key, lang)`: Similar to `get_weather()`, this function makes an `API` request to retrieve a daily forecast for the upcoming week.
 
 * `unix_converter(unix_timestamp)`: Given a Unix timestamp, this function returns a human-readable date. The function converts the timestamp into a more readable format.
 
