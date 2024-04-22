@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.shortcuts import render
 from dotenv import load_dotenv
 from googletrans import Translator
-from .services import get_weather, get_forecast_weather, unix_converter, translate, get_country, make_link
+from .services import *
 import datetime
 import os
 import re
@@ -75,14 +75,14 @@ def city_page(request):
           
           for day in forecast_weather["daily"]:
 
-               data = unix_converter(day["dt"])
+               forecast_date = unix_converter(day["dt"])
                summary = translate(translator, day["summary"], lang)
                weather = day["weather"]
                temp = day["temp"]
                humidity = day["humidity"]
                wind = day["wind_speed"]
 
-               city_forecast = {"data" : data, "summary" : summary, "weather" : weather, "temp" : temp, "humidity" : humidity, "wind" : wind}
+               city_forecast = {"forecast_date" : forecast_date, "summary" : summary, "weather" : weather, "temp" : temp, "humidity" : humidity, "wind" : wind}
                forecast_info.append(city_forecast)
 
           if "alerts" in forecast_weather:

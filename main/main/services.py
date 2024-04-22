@@ -27,8 +27,17 @@ def get_weather(city, key, lang):
 def get_forecast_weather(lat, lon, key, lang):
      request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang={lang}'
      forecast_data = requests.get(request_url).json()
-     pprint(forecast_data)
      return(forecast_data)
+
+'''
+risposta ottenuta 200 -> successo
+probabilmente bisogna fare una richiesta in jscript
+def get_weather_map(key):
+     request_url = f'https://tile.openweathermap.org/map/precipitation_new/1/1/1.png?appid={key}'
+     weather_map = requests.get(request_url)
+     print(weather_map)
+     return(weather_map)
+'''
 
 # timestamp to readable date
 def unix_converter(timestamp):
@@ -40,4 +49,3 @@ def unix_converter(timestamp):
 def translate(translator, text, lang):
      translation = translator.translate(text, dest=lang)
      return translation.text
-     
