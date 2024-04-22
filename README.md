@@ -9,7 +9,7 @@ def get_weather(city, key, lang):
         return weather_data
 
 ```
-In the provided code Snippet you can see how the API call is made to get current weather informations. 
+In the provided code Snippet youn can see how the API call is made to get current weather informations. 
 
 **3 parameters are required**:
 * `city` the name of the city to be geocoded 
@@ -22,20 +22,20 @@ There are a series of custom function made for this project in the [services.py]
 All of them are documented with comments in the code.
 
 **Services**
-`get_weather()`
- - makes an API request to retrieve current weather conditions
-`get_forecast_weather()`
- - makes an API request to retrieve daily forecast conditions for a week
-`unix_converter()`
- - given a `unix timestamp` date return a human readable date
-`get_country()`
- - using the `geocoder` library, returns user country code
-`translate()`
- - requires a `lang` parameter likely obtained via `get_country()` and returns a translated version of a string in the specified language
-`make_link()`
- - A function to be called in the `re.sub` method of a `regex` object returns the match wrapped in an `<a>` tag with the same match as `href` attribute.
 
-## Libraries & Dependencies
+* `get_weather(city, key, lang)`: makes an `API` request to retrieve the current weather conditions.
+
+* `get_forecast_weather(lat, lon, key, lang)`: Similar to get_weather(), this function makes an API request to retrieve a daily forecast for the upcoming week. It also requires an API key and a location parameter.
+
+* `unix_converter(unix_timestamp)`: Given a Unix timestamp, this function returns a human-readable date. The function converts the timestamp into a more readable format.
+
+* `get_country()`: Using the `geocoder` library, this function returns the user's country code based on their IP address.
+
+* `translate(transalator, text, lang)`: requires a lang parameter, likely obtained via `get_country()`, and returns a translated version of a string in the specified language.
+
+* `make_link(match)`: to be called with the `re.sub` method of a `regex object`. It takes a match object as input and returns the match wrapped in an `<a> ` tag with the same match as the `href` attribute. converts plain text into clickable links.
+
+## Libraries & Dependancies
 
 in the [Requirements](requirements.txt) Document, you can find every needed library which can be installed using this simple command:
 
