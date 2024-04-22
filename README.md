@@ -27,7 +27,7 @@ All of them are documented with comments in the code.
 
 * `get_forecast_weather(lat, lon, key, lang)`: Similar to `get_weather()`, this function makes an `API` request to retrieve a daily forecast for the upcoming week.
 
-* `unix_converter(unix_timestamp)`: Given a Unix timestamp, returns a human-readable date.
+* `unix_converter(timestamp)`: Given a Unix timestamp, returns a human-readable date.
 
 * `get_country()`: Using the `geocoder` library, this function returns the user's country code based on their IP address.
 
