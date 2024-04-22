@@ -23,17 +23,17 @@ All of them are documented with comments in the code.
 
 **Services**
 `get_weather()`
- - makes an API request to retrieve current weather conditions
+* makes an API request to retrieve current weather conditions
 `get_forecast_weather()`
- - makes an API request to retrieve daily forecast conditions for a week
+* makes an API request to retrieve daily forecast conditions for a week
 `unix_converter()`
- - given a `unix timestamp` date return a human readable date
+* given a `unix timestamp` date return a human readable date
 `get_country()`
- - using the `geocoder` library, returns user country code
+* using the `geocoder` library, returns user country code
 `translate()`
- - requires a `lang` parameter likely obtained via `get_country()` and returns a translated version of a string in the specified language
+* requires a `lang` parameter likely obtained via `get_country()` and returns a translated version of a string in the specified language
 `make_link()`
- - A function to be called in the `re.sub` method of a `regex` object returns the match wrapped in an `<a>` tag with the same match as `href` attribute.
+* A function to be called in the `re.sub` method of a `regex` object returns the match wrapped in an `<a>` tag with the same match as `href` attribute.
 
 ## Libraries & Dependencies
 
