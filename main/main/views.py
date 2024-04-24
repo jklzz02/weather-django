@@ -51,7 +51,7 @@ def city_page(request):
      error = False
 
      today = datetime.datetime.now()
-     formatted_date = today.strftime('%d/%m/%Y %H:%M')
+     formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
      print(today, formatted_date)
 
      if city:
@@ -75,7 +75,7 @@ def city_page(request):
           
           for day in forecast_weather["daily"]:
 
-               forecast_date = unix_converter(day["dt"])
+               forecast_date = translate(translator, unix_converter(day['dt']), lang)
                summary = translate(translator, day["summary"], lang)
                weather = day["weather"]
                temp = day["temp"]

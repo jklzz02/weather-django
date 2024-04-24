@@ -42,7 +42,7 @@ def get_weather_map(key):
 # timestamp to readable date
 def unix_converter(timestamp):
      dt_object = datetime.datetime.fromtimestamp(timestamp)
-     readable_date = dt_object.strftime("%d/%m/%Y")
+     readable_date = dt_object.strftime("%A %d/%m/%Y")
      return readable_date
 
 # treanslate text to italian we could add a paramater to translate from geo infos of user
