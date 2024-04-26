@@ -1,14 +1,21 @@
 from pprint import pprint
 from functools import lru_cache
+from timezonefinder import TimezoneFinder
 import requests
 import datetime
 import geocoder
 
 #geocoder function to get infos from user
 @lru_cache
-def get_country():
+def get_user_info():
      g = geocoder.ip('me')
-     return g.country
+     latitude, longitude = g.latlng
+     user_language = g.country
+
+     timezone_finder = TimezoneFinder()
+     user_timezone = timezone_finder.timezone_at(lat=latitude, lng=longitude)
+     user_infos = {"language" : user_language, "timezone" : user_timezone}
+     return user_infos
 
 # function to call in re.sub
 def make_link(match):

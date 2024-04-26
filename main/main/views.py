@@ -4,6 +4,7 @@ from django.shortcuts import render
 from dotenv import load_dotenv
 from googletrans import Translator
 from .services import *
+from django.conf import settings
 import datetime
 import os
 import re
@@ -16,8 +17,11 @@ map_key = os.getenv("MAP_KEY")
 # building translator object from library
 translator = Translator()
 
+#getting user infos from settings
+user_info = settings.USER_INFO
+
 # get user lang from ip
-lang = get_country()
+lang =  user_info["language"]
 
 #regex for urls in alert
 alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')

@@ -11,7 +11,13 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from .services import get_user_info
 import os   
+
+user_info = get_user_info()
+
+# obtained user infos from get_user_info()
+USER_INFO = user_info
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -104,9 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'it-EU'
+LANGUAGE_CODE = user_info["language"]
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = user_info["timezone"]
 
 USE_I18N = True
 
