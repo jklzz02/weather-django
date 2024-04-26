@@ -29,7 +29,7 @@ All of them are documented with comments in the code.
 
 * `unix_converter(timestamp)`: Given a Unix timestamp, returns a human-readable date.
 
-* `get_user_info()`: Using the `geocoder` library, this function returns the user's country code based on their IP address and their Languange and Timezone. This functio is called in the [Settings](settings.py) **Django** file to change default Timezone and Language for the application
+* `get_user_info()`: Using the `geocoder` library, this function returns the user's country code based on their IP address and their Languange and Timezone. This functio is called in the [Settings](main/main/settings.py) **Django** file to change default Timezone and Language for the application
 
 * `translate(transalator, text, lang)`: requires a lang parameter, likely obtained via `get_user_info()`, and returns a translated version of a string in the specified language.
 
