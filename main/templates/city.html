@@ -9,7 +9,30 @@
 {% endblock title %}
 
 {% block content %}
+
+{% comment "url for precipitation map API" %}
+  'https://tile.openweathermap.org/map/precipitation_new/1/1/1.png?appid={key}'
+{% endcomment %}
+
 {% if city_info and not error %}
+
+{% comment "hourly forecast info display" %}
+<div class="hourly-container">
+  
+  {% for item in hourly_forecast %}
+  <br>
+  <legend>{{item.n}}</legend>
+  <br>
+  <ul>
+    <li>{{item.hour}}</li>
+    <li>{{item.description}}</li>
+    <li><img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png" alt="{{item.description}}"></li>
+    <li>{{item.temp}}</li>
+  </ul>
+  {% endfor %}
+
+</div>
+{% endcomment %}
 
 <article class="city-query-container">
 
@@ -17,17 +40,13 @@
 
         <header>
           <h2>{{city_info.name}}</h2>
-          <!-- da vedere come gesire anche questa  <h2>{{city_info.sys.country}}</h2> -->
+          <!--  <h2>{{city_info.sys.country}}</h2> -->
         </header>
         <time class="date" datetime="{{date}}">{{date}}</time>
 
         <section>
             <strong style="font-size: 46px;"> {{city_info.main.temp|floatformat:"0"}}°C</strong>
-            <!--
-              BISOGNA SOLO DECIDERE COME E DOVE METTERE I GRADI PERCEPITI
-
-            <strong>Percepiti  {{city_info.main.feels_pke|floatformat:"0"}}°C</strong>
-            -->
+            <!-- <strong>Percepiti  {{city_info.main.feels_pke|floatformat:"0"}}°C</strong> -->
             {% for item in city_info.weather %}
             <figure class="info-container">
               <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png" alt="{{item.description}}">

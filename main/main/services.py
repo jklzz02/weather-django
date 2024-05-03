@@ -32,24 +32,20 @@ def get_weather(city, key, lang):
 # get forecast info from API
 @lru_cache
 def get_forecast_weather(lat, lon, key, lang):
-     request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,current&appid={key}&units=metric&lang={lang}'
+     request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,current&appid={key}&units=metric&lang={lang}'
      forecast_data = requests.get(request_url).json()
+     pprint(forecast_data)
      return(forecast_data)
 
-'''
-risposta ottenuta 200 -> successo
-probabilmente bisogna fare una richiesta in jscript
-def get_weather_map(key):
-     request_url = f'https://tile.openweathermap.org/map/precipitation_new/1/1/1.png?appid={key}'
-     weather_map = requests.get(request_url)
-     print(weather_map)
-     return(weather_map)
-'''
-
 # timestamp to readable date
-def unix_converter(timestamp):
+def unix_converter(timestamp, date_format):
      dt_object = datetime.datetime.fromtimestamp(timestamp)
-     readable_date = dt_object.strftime("%A %d/%m/%Y")
+
+     if date_format == "date":
+          readable_date = dt_object.strftime("%A %d/%m/%Y")
+     else:
+         readable_date = dt_object.strftime("%H:%M")
+
      return readable_date
 
 # treanslate text to italian we could add a paramater to translate from geo infos of user

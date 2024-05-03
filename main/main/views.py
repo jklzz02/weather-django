@@ -52,6 +52,7 @@ def city_page(request):
      forecast_weather = ""
      alert = ""
      forecast_info = []
+     hourly_forecast = []
      error = False
 
      today = datetime.datetime.now()
@@ -79,7 +80,7 @@ def city_page(request):
           
           for day in forecast_weather["daily"]:
 
-               forecast_date = translate(translator, unix_converter(day['dt']), lang)
+               forecast_date = translate(translator, unix_converter(day['dt'], date_format="date"), lang)
                summary = translate(translator, day["summary"], lang)
                weather = day["weather"]
                temp = day["temp"]
@@ -89,13 +90,25 @@ def city_page(request):
                city_forecast = {"forecast_date" : forecast_date, "summary" : summary, "weather" : weather, "temp" : temp, "humidity" : humidity, "wind" : wind}
                forecast_info.append(city_forecast)
 
+          for hour in forecast_weather["hourly"]:
+ 
+               hour_date = unix_converter(hour["dt"], date_format="hour")
+               description = hour["weather"][0]["description"]
+               icon = hour["weather"][0]["icon"]
+               hour_temp = hour["temp"]
+
+               hour_city_forecast = {"hour" : hour_date, "description" : description, "icon" : icon, "temp" : hour_temp }
+               hourly_forecast.append(hour_city_forecast)
+          
+
           if "alerts" in forecast_weather:
                alert = forecast_weather["alerts"][0]["description"]
                alert = translate(translator, alert, lang)
                alert = alertRegex.sub(make_link, alert)
 
+
      if not city:
           return HttpResponseRedirect(reverse("index"))
 
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast[0:12]})
