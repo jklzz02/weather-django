@@ -90,8 +90,11 @@ def city_page(request):
                city_forecast = {"forecast_date" : forecast_date, "summary" : summary, "weather" : weather, "temp" : temp, "humidity" : humidity, "wind" : wind}
                forecast_info.append(city_forecast)
 
-          for hour in forecast_weather["hourly"]:
- 
+          for i, hour in enumerate(forecast_weather["hourly"]):
+
+               if i >= 6:
+                    break
+
                hour_date = unix_converter(hour["dt"], date_format="hour")
                description = hour["weather"][0]["description"]
                icon = hour["weather"][0]["icon"]
@@ -111,4 +114,4 @@ def city_page(request):
           return HttpResponseRedirect(reverse("index"))
 
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast[0:12]})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast})
