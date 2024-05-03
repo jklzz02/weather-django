@@ -16,23 +16,6 @@
 
 {% if city_info and not error %}
 
-{% comment "hourly forecast info display" %}
-<div class="hourly-container">
-  
-  {% for item in hourly_forecast %}
-  <br>
-  <legend>{{item.n}}</legend>
-  <br>
-  <ul>
-    <li>{{item.hour}}</li>
-    <li>{{item.description}}</li>
-    <li><img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png" alt="{{item.description}}"></li>
-    <li>{{item.temp}}</li>
-  </ul>
-  {% endfor %}
-
-</div>
-{% endcomment %}
 
 <article class="city-query-container">
 
@@ -63,18 +46,23 @@
     </section>
 
 </article>
-  <!--
-   BOZZA PER INCORPORARE LA MAPPA DEL LUOGO
 
-  <iframe
-  width="450"
-  height="250"
-  frameborder="0" style="border:0"
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/view?key={{map_key}}&center={{city_info.coord.lat}},{{city_info.coord.lon}}"
-  allowfullscreen>
-  </iframe>
--->
+{% comment %}
+
+<section id="hour-container">
+  
+  {% for item in hourly_forecast %}
+  <ul class="hour-list">
+    <li>{{item.hour}}</li>
+    <li>{{item.temp|floatformat:"0"}}°C</li>
+    <li>{{item.description}} <img class="hour-icon" src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png" alt="{{item.description}}"></li>
+  </ul>
+  {% endfor %}
+
+</section>
+
+{% endcomment %}
+
 {% else %}
 <div class="error-box">
   <h2>città - {{ city }} - non trovata</h2>

@@ -228,6 +228,25 @@ font-size: var(--md-size);
     font-size: var(--md-size);
 }
 
+#hour-container {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem;
+    padding: .5rem;
+    border-radius: 8px;
+    gap: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.hour-list {
+    
+    text-align: start;
+    width: 200px;
+    gap: .5rem;
+
+}
 
 .alert-container {
     width: 90%;
