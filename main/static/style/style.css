@@ -236,7 +236,7 @@ font-size: var(--md-size);
     margin: auto;
     margin-top: 1rem;
     width: 91%;
-    padding: .5rem;
+    padding: 1rem;
     border-radius: 8px;
     gap: 1rem;
     box-shadow: var(--shadow);
