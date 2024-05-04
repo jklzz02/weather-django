@@ -53,8 +53,8 @@
   
   {% for item in hourly_forecast %}
   <ul class="hour-list">
-    <li>{{item.hour}}</li>
-    <li>{{item.temp|floatformat:"0"}}°C</li>
+    <li><h2>{{item.hour}}</h2></li>
+    <li><strong>{{item.temp|floatformat:"0"}}°C</strong></li>
     <li>{{item.description}} <img class="hour-icon" src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png" alt="{{item.description}}"></li>
   </ul>
   {% endfor %}

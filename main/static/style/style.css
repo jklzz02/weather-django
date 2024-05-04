@@ -209,7 +209,7 @@ li {
 }
 
 
-.forecast-box img , .city-query-box img {
+.hour-icon, .forecast-box img , .city-query-box img {
 
     background-color: var(--dark-icon-bg);
     margin-block: 1rem;
@@ -232,8 +232,10 @@ font-size: var(--md-size);
 
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin: 1rem;
+    justify-content: space-evenly;
+    margin: auto;
+    margin-top: 1rem;
+    width: 91%;
     padding: .5rem;
     border-radius: 8px;
     gap: 1rem;
@@ -247,6 +249,8 @@ font-size: var(--md-size);
     gap: .5rem;
 
 }
+
+
 
 .alert-container {
     width: 90%;

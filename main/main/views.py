@@ -92,7 +92,7 @@ def city_page(request):
 
           for i, hour in enumerate(forecast_weather["hourly"]):
 
-               if i >= 6:
+               if i >= 8:
                     break
 
                hour_date = unix_converter(hour["dt"], date_format="hour")
