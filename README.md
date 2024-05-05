@@ -16,6 +16,17 @@ In the provided code Snippet youn can see how the API call is made to get curren
 * `key` Developer key from [Open Weather](https://openweathermap.org/)
 * `lang` the language that you want the response with the infos to be
 
+### Google Maps Embed API
+
+In this project we also use an API provided by [Google](https://developers.google.com/maps/documentation/embed/get-started) to embed a map of the place for which we are providing the weather information.
+
+**Call URL**
+```
+https://www.google.com/maps/embed/v1/place?key={{developer key}}&q={{city name}}
+```
+
+to make the call, you need to provide the name of the place to query and a developer key directly provided by google. You can review the API documentation [here](https://developers.google.com/maps/documentation/embed/get-started)
+
 ## Services
 
 There are a series of custom function made for this project in the [services.py](/main/main/services.py).
