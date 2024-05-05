@@ -123,10 +123,34 @@ button[type="submit"]:hover, .main-icon:hover {
 .city-query-container {
     text-align: start;
     display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
     margin-top: 2rem;
+}
+
+.map-city-container {
+
+   display: flex;
+   margin: auto;
+   border-radius: 8px;
+   box-shadow: var(--shadow);
+   overflow: clip;
+   
+}
+
+.city-query-box {
+
+   padding: 1.5rem;
+   min-height: 400px;
+
+}
+
+iframe {
+
+    min-height: 400px;
+    outline: none;
+    border: none;
+
 }
 
 .city-query-box h2 {
@@ -427,6 +451,19 @@ h3 a:hover {
 
     .city-query-container {
         text-align: center;
+    }
+
+    .map-city-container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    iframe, .city-query-box {
+        height: auto !important;
+    }
+
+    .city-query-box {
+        box-shadow: none !important;
     }
 
     .info-container {

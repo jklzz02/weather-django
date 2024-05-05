@@ -11,13 +11,15 @@
 {% block content %}
 
 {% comment "url for precipitation map API" %}
-  'https://tile.openweathermap.org/map/precipitation_new/1/1/1.png?appid={key}'
+  'https://tile.openweathermap.org/map/precipitation_new/1/1/1.png?appid={{key}}'
 {% endcomment %}
 
 {% if city_info and not error %}
 
 
 <article class="city-query-container">
+
+  <div class="map-city-container">
 
     <section class="city-query-box">
 
@@ -44,6 +46,14 @@
         </footer>
 
     </section>
+
+    <iframe
+    referrerpolicy="no-referrer-when-downgrade"
+    src="https://www.google.com/maps/embed/v1/place?key={{map_key}}&q={{city_info.name}}"
+    allowfullscreen>
+    </iframe>
+
+  </div>
 
 </article>
 
