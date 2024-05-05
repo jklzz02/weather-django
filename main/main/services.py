@@ -36,8 +36,12 @@ def get_forecast_weather(lat, lon, key, lang):
      forecast_data = requests.get(request_url).json()
      return(forecast_data)
 
-# timestamp to readable date
-def unix_converter(timestamp, date_format):
+'''
+this function converts a unix timestamp in the desired human-readable format
+it takes as an argument the timestamp to be converted and the format you want it to
+be returned in. You can simply pass in date_format="date".
+'''
+def unix_timestamp_converter(timestamp, date_format):
      dt_object = datetime.datetime.fromtimestamp(timestamp)
 
      if date_format == "date":
@@ -47,7 +51,11 @@ def unix_converter(timestamp, date_format):
 
      return readable_date
 
-# treanslate text to italian we could add a paramater to translate from geo infos of user
+'''
+this function takes as arguments a translator object from googletrans, 
+the text to be translated and the lang for which you want the text to be returned in
+you can get the user language dinamically by simly importing it from the settings file
+'''
 def translate(translator, text, lang):
      translation = translator.translate(text, dest=lang)
      return translation.text

@@ -29,7 +29,7 @@ alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
 # views
 def index(request):
     city_info = ""
-    start_cities = ["torino", "roma, it", "firenze", "napoli", "palermo"]
+    start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
 
     if request.session.get("start_cities_info"):
          start_cities_info = request.session.get("start_cities_info")
@@ -79,7 +79,7 @@ def city_page(request):
           
           for day in forecast_weather["daily"]:
 
-               forecast_date = translate(translator, unix_converter(day['dt'], date_format="date"), lang)
+               forecast_date = translate(translator, unix_timestamp_converter(day['dt'], date_format="date"), lang)
                summary = translate(translator, day["summary"], lang)
                weather = day["weather"]
                temp = day["temp"]
@@ -94,7 +94,7 @@ def city_page(request):
                if i >= 12:
                     break
 
-               hour_date = unix_converter(hour["dt"], date_format="hour")
+               hour_date = unix_timestamp_converter(hour["dt"], date_format="hour")
                description = hour["weather"][0]["description"]
                icon = hour["weather"][0]["icon"]
                hour_temp = hour["temp"]

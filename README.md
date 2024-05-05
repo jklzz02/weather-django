@@ -38,7 +38,7 @@ All of them are documented with comments in the code.
 
 * `get_forecast_weather(lat, lon, key, lang)`: Similar to `get_weather()`, this function makes an `API` request to retrieve a daily forecast for the upcoming week.
 
-* `unix_converter(timestamp, date_format)`: Given a Unix timestamp, returns a human-readable date. The date format attribute is required to make the function reusable, this allows you to decide which date format the given timestamp should be formatted. 
+* `unix_timestamp_converter(timestamp, date_format)`: Given a Unix timestamp, returns a human-readable date. The date format attribute is required to make the function reusable, this allows you to decide which date format the given timestamp should be formatted. 
 
 * `get_user_info()`: Using the `geocoder` library, this function returns the user's country code based on their IP address and their Languange and Timezone. This function is called in the [Settings](main/main/settings.py) **Django** file to change default Timezone and Language for the application
 
