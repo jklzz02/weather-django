@@ -41,7 +41,7 @@ def index(request):
                start_cities_info.append(get_weather(city, key, lang))
         
     request.session["start_cities_info"] = start_cities_info
-    print(get_weather.cache_info())
+    print(f"Current weather cache:{get_weather.cache_info()}")
 
     return render(request, "index.html", {"city_info" : city_info, "start_cities_info" : start_cities_info})
 
@@ -57,7 +57,6 @@ def city_page(request):
 
      today = datetime.datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
-     print(today, formatted_date)
 
      if city:
       city = city.replace("/", "")
@@ -92,7 +91,7 @@ def city_page(request):
 
           for i, hour in enumerate(forecast_weather["hourly"]):
 
-               if i >= 8:
+               if i >= 12:
                     break
 
                hour_date = unix_converter(hour["dt"], date_format="hour")
@@ -112,6 +111,8 @@ def city_page(request):
 
      if not city:
           return HttpResponseRedirect(reverse("index"))
+     
+     print(f"Forecast weather cache:{get_forecast_weather.cache_info()}")
 
 
      return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast})

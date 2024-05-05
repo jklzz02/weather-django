@@ -34,7 +34,6 @@ def get_weather(city, key, lang):
 def get_forecast_weather(lat, lon, key, lang):
      request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,current&appid={key}&units=metric&lang={lang}'
      forecast_data = requests.get(request_url).json()
-     pprint(forecast_data)
      return(forecast_data)
 
 # timestamp to readable date
