@@ -255,8 +255,7 @@ font-size: var(--md-size);
 #hour-container {
 
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     margin: auto;
     margin-top: 1rem;
     width: 91%;
@@ -264,6 +263,12 @@ font-size: var(--md-size);
     border-radius: 8px;
     gap: 1rem;
     box-shadow: var(--shadow);
+}
+
+#hour-box {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
 }
 
 .hour-list {
