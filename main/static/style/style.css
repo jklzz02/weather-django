@@ -332,13 +332,13 @@ h3 a:hover {
 
 }
 
-.light-mode article {
+.light-mode article, .light-mode section {
 
   color: var(--dark-color);
 
 }
 
-.light-mode figure img {
+.light-mode figure img, .hour-icon {
 
      background-color: var(--light-icon-bg);
  
