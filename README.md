@@ -49,21 +49,11 @@ All of them are documented with comments in the code.
 ## Libraries & Dependancies
 
 in the [Requirements](requirements.txt) Document, you can find every needed library which can be installed using this simple command:
-
-**Linux & MacOS**
 ```
-cat requirements.txt | xargs -n 1 pip install -U
-
+ pip install -r requirements.txt
 ```
-**Windows (PowerShell)**
-
-```
-Get-Content requirements.txt | ForEach-Object {pip install -U $_}
-
-```
-
 This command will read line by line the [Requirements](requirements.txt) document
-passing every package through `pip install -U` wich is the **python** package manager.
+passing every package through `pip ` which is the **python** package manager.
 
 ## How to Contribute
 
