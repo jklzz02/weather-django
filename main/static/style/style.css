@@ -500,6 +500,20 @@ h3 a:hover {
         margin-inline: 1rem;
     }
 
+    #hour-box {
+
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       gap: 2rem;
+       padding: 0;
+
+
+    }
+
+    .hour-list {
+        width: auto;
+    }
+
 }
 
 /* media query for light preference from browser 
