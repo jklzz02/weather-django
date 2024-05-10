@@ -267,7 +267,7 @@ font-size: var(--md-size);
 
 #hour-box {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
