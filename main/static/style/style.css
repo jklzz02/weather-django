@@ -401,6 +401,25 @@ h3 a:hover {
     color: #b19219;
 }
 
+/* media query for large size wieport */
+@media screen and (min-width: 1750px) {
+    
+    
+     #hour-box {
+
+         display: grid;
+         gap: 2rem;
+         grid-template-columns: repeat(12, 1fr);
+         grid-template-rows: 1fr;
+
+     }
+
+     .hour-list {
+        width: auto;
+     }
+
+}
+
 /* media query for medium size viewport */
 @media screen and (max-width: 1600px) {
     .main-icon {
