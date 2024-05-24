@@ -440,6 +440,12 @@ h3 a:hover {
         width: 60%;
         font-size: var(--md-size);
     }
+
+    .city-query-container {
+
+        margin-inline: 2rem;
+
+    }
 }
 
 /* media query for small size viewport and mobile */
@@ -475,6 +481,7 @@ h3 a:hover {
 
     .city-query-container {
         text-align: center;
+        margin: 0;
     }
 
     .map-city-container {
@@ -519,13 +526,20 @@ h3 a:hover {
         margin-inline: 1rem;
     }
 
+    #hour-container {
+        max-height: 400px;
+        overflow-y: scroll;
+        padding: 0;
+
+    }
+
     #hour-box {
 
+       width: 90%;
        display: grid;
        grid-template-columns: 1fr 1fr;
        gap: 2rem;
        padding: 0;
-
 
     }
 
