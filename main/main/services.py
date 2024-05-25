@@ -4,6 +4,7 @@ from timezonefinder import TimezoneFinder
 import requests
 import datetime
 import geocoder
+import json
 
 #geocoder function to get infos from user
 @lru_cache
@@ -28,6 +29,35 @@ def get_weather(city, key, lang):
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
         weather_data = requests.get(request_url).json()
         return weather_data
+
+@lru_cache
+def get_air_condition(lat, lon, key, lang):
+     url = f'https://airquality.googleapis.com/v1/currentConditions:lookup?key={key}'
+
+     payload = {
+     "universalAqi": True,
+     "location": {
+          "latitude": lat,
+          "longitude": lon
+     },
+     "extraComputations": [
+          "HEALTH_RECOMMENDATIONS",
+          "DOMINANT_POLLUTANT_CONCENTRATION",
+          "POLLUTANT_CONCENTRATION",
+          "LOCAL_AQI",
+          "POLLUTANT_ADDITIONAL_INFO"
+     ],
+     "languageCode": lang
+     }
+
+     headers = {
+     'Content-Type': 'application/json'
+     }
+
+     response = requests.post(url, headers=headers, data=json.dumps(payload))
+     air_conditions = response.json()
+
+     return json.dumps(air_conditions, indent=3)
 
 # get forecast info from API
 @lru_cache

@@ -13,6 +13,7 @@ import re
 load_dotenv()
 key = os.getenv("API_KEY")
 map_key = os.getenv("MAP_KEY")
+air_key = os.getenv("AIR_KEY")
 
 # building translator object from library
 translator = Translator()
@@ -76,7 +77,11 @@ def city_page(request):
           lon = city_info['coord']['lon']
 
           forecast_weather = get_forecast_weather(lat, lon, key, lang)
+
+          air_conditions = get_air_condition(lat, lon, air_key, lang)
           
+          print("AIR CONDITIONS \n", air_conditions)
+
           for day in forecast_weather["daily"]:
 
                forecast_date = translate(translator, unix_timestamp_converter(day['dt'], date_format="date"), lang)
@@ -112,7 +117,7 @@ def city_page(request):
      if not city:
           return HttpResponseRedirect(reverse("index"))
      
-     print(f"Forecast weather cache:{get_forecast_weather.cache_info()}")
+     print(f"Forecast weather cache:{get_forecast_weather.cache_info()}\nAir conditions cache:{get_air_condition.cache_info()}")
 
 
      return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast})
