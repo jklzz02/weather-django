@@ -444,7 +444,7 @@ h3 a:hover {
 }
 
 /* media query for small size viewport and mobile */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 920px) {
 
     :root {
         --xxl-size: 47px;
@@ -472,6 +472,18 @@ h3 a:hover {
 
     .city-box > ul {
         text-align: start;
+    }
+
+    .city-query-box .query-infos,
+    .city-query-box .info-container 
+    {
+
+        text-align: center;
+        align-items: center;
+    }
+
+    .city-query-box figcaption {
+        text-align: center;
     }
 
     .city-query-container {
