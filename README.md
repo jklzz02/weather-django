@@ -46,6 +46,8 @@ All of them are documented with comments in the code.
 
 * `make_link(match)`: to be called with the `re.sub` method of a `regex object`. It takes a match object as input and returns the match wrapped in an `<a> ` tag with the same match as the `href` attribute. converts plain text into clickable links.
 
+* `def get_air_condition(lat, lon, key, lang)`: makes an `API` call using the google [Air Quality API overview](https://developers.google.com/maps/documentation/air-quality/overview) to get the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The functions requires the latidute and longitude of the area to check, the api key and the language in which you desire getting the informations.
+
 ## Libraries & Dependancies
 
 in the [Requirements](requirements.txt) Document, you can find every needed library which can be installed using this simple command:

@@ -23,13 +23,14 @@ def make_link(match):
     url = match.group(0)
     return f'<br><a href="{url}" target="_blank">{url}</a>'
 
-#get current weather conditions from API
+# get current weather conditions from API
 @lru_cache
 def get_weather(city, key, lang):
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
         weather_data = requests.get(request_url).json()
         return weather_data
 
+# get current general air conditions of the zone
 @lru_cache
 def get_air_condition(lat, lon, key, lang):
      url = f'https://airquality.googleapis.com/v1/currentConditions:lookup?key={key}'
