@@ -51,6 +51,7 @@ def city_page(request):
      city = request.GET.get("id")
      city_info = ""
      forecast_weather = ""
+     air_conditions = ""
      alert = ""
      forecast_info = []
      hourly_forecast = []

@@ -53,7 +53,7 @@ def get_air_condition(lat, lon, key, lang):
 
      response = requests.post(url, headers=headers, data=json.dumps(payload))
 
-     if response.status_code == "200":
+     if response.status_code == 200:
           air_conditions = response.json()
           return json.dumps(air_conditions, indent=3)
 

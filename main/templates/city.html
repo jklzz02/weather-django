@@ -45,6 +45,14 @@
   allowfullscreen>
   </iframe>
 
+  {% if air_conditions and not error%}
+  
+  {{air_conditions}}
+  {% else %}
+  <h2>Condizioni dell'aria non disponibili</h2>
+  
+  {% endif %}
+
 </article>
 
 
