@@ -35,17 +35,14 @@ def get_air_condition(lat, lon, key, lang):
      url = f'https://airquality.googleapis.com/v1/currentConditions:lookup?key={key}'
 
      payload = {
-     "universalAqi": True,
      "location": {
           "latitude": lat,
           "longitude": lon
      },
      "extraComputations": [
-          "HEALTH_RECOMMENDATIONS",
           "DOMINANT_POLLUTANT_CONCENTRATION",
           "POLLUTANT_CONCENTRATION",
           "LOCAL_AQI",
-          "POLLUTANT_ADDITIONAL_INFO"
      ],
      "languageCode": lang
      }

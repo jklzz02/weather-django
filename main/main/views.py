@@ -79,7 +79,7 @@ def city_page(request):
           forecast_weather = get_forecast_weather(lat, lon, key, lang)
 
           air_conditions = get_air_condition(lat, lon, air_key, lang)
-          
+         
           print("AIR CONDITIONS \n", air_conditions)
 
           for day in forecast_weather["daily"]:
@@ -120,4 +120,4 @@ def city_page(request):
      print(f"Forecast weather cache:{get_forecast_weather.cache_info()}\nAir conditions cache:{get_air_condition.cache_info()}")
 
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast, "air_conditions" : air_conditions})
