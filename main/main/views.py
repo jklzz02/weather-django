@@ -8,6 +8,7 @@ from django.conf import settings
 import datetime
 import os
 import re
+from pprint import pprint
 
 
 load_dotenv()
@@ -51,7 +52,7 @@ def city_page(request):
      city = request.GET.get("id")
      city_info = ""
      forecast_weather = ""
-     air_conditions = ""
+     air_conditions = {}
      alert = ""
      forecast_info = []
      hourly_forecast = []
@@ -79,9 +80,17 @@ def city_page(request):
 
           forecast_weather = get_forecast_weather(lat, lon, key, lang)
 
-          air_conditions = get_air_condition(lat, lon, air_key, lang)
+          raw_air_conditions = get_air_condition(lat, lon, air_key, lang)
+          
+          if raw_air_conditions:
+               air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]
+               air_conditions["aqi_color"] = raw_air_conditions["indexes"][0]["color"]
+               air_conditions["category"] = raw_air_conditions["indexes"][0]["category"]
+               air_conditions["dominant_pollutant"] = raw_air_conditions["indexes"][0]["dominantPollutant"]
+               air_conditions["pollutants"] = raw_air_conditions["pollutants"]
+
          
-          print("AIR CONDITIONS \n", air_conditions)
+          pprint(air_conditions)
 
           for day in forecast_weather["daily"]:
 

@@ -1,4 +1,3 @@
-from pprint import pprint
 from functools import lru_cache
 from timezonefinder import TimezoneFinder
 import requests
@@ -56,7 +55,7 @@ def get_air_condition(lat, lon, key, lang):
 
      if response.status_code == 200:
           air_conditions = response.json()
-          return json.dumps(air_conditions, indent=3)
+          return air_conditions
 
      return
 

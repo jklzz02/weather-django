@@ -44,15 +44,26 @@
   src="https://www.google.com/maps/embed/v1/place?key={{map_key}}&q={{city_info.name}}"
   allowfullscreen>
   </iframe>
-
+{% comment "Ui for air conditions" %}
   {% if air_conditions and not error%}
   
-  {{air_conditions}}
+   <ul>
+    <li><strong>{{air_conditions.category}}</strong></li>
+    <li>{{air_conditions.aqi}}</li>
+    <li>{{air_conditions.aqi_colors}}</li>
+    <li>{{air_conditions.dominant_pollutant}}</li>
+    {% for pollutant in air_conditions.pollutants %}
+    <li>{{pollutant.concentration.value}}</li>
+    <li>{{pollutant.displayName}}</li>
+    <li>{{pollutant.fullName}}</li>
+    {% endfor %}
+   </ul>
+
   {% else %}
   <h2>Condizioni dell'aria non disponibili</h2>
   
   {% endif %}
-
+{% endcomment %}
 </article>
 
 
