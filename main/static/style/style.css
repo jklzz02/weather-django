@@ -546,30 +546,56 @@ h3 a:hover {
 
 }
 
-/* media query for light preference from browser 
+/* media query for light preference from browser   
 @media (prefers-color-scheme: light) {
 
-    :root {
-       --dark-color: #f0f0f0;
-       --light-color: #292929;
-       --grey: #0b0b0b;
-       --accent-color: var(--secondary-color); 
-       --complementary-color: var(--main-color);
-    }
 
-    button {
-        color: var(--dark-color) !important;
-    }
+    body {
 
-    .forecast-box img , .city-query-box img {
+        background-color: var(--light-color);
+      
+      }
+      
+       article,  section {
+      
+        color: var(--dark-color);
+      
+      }
+      
+       figure img, .hour-icon {
+      
+           background-color: var(--light-icon-bg);
+       
+       }
+      
+        input[type="text"] {
+          color: var(--dark-color);
+          border-color: var(--dark-color)
+      
+       }
+      
+        input[type="text"]:focus {
+      
+          border-color: var(--secondary-color);
+      
+       }
+      
+       h2 {
+          color: var(--main-color);
+      }
+      
+        strong {
+          color: var(--secondary-color);
+       }
+      
+        figcaption {
+          color: var(--main-color);
+       }
+      
+        #darkIcon,  #lightIcon {
+          color: #b19219;
+      }
 
-        background-color: var(--light-icon-bg);
-    
-    }
-    
-    #darkIcon, #lightIcon {
-        color: #b19219;
-    }
 }
 
 */
