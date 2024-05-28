@@ -17,6 +17,9 @@
     --grey: #f3f3f3;
     --light-color: #f0f0f0;
     --light-icon-bg: rgb(220, 220, 220);
+    --red:  #8B0000;
+    --green: #50C878;
+    --yellow:#FFD700;
 
     /* effects */
     --shadow: 0px 0px 10px rgba(0, 0,  0, 0.2);
@@ -132,6 +135,13 @@ button[type="submit"]:hover, .main-icon:hover {
    border-radius: 8px;
    box-shadow: var(--shadow);
 
+}
+
+.air_conditions-box {
+
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    padding: 1rem;
 }
 
 iframe {
@@ -344,13 +354,13 @@ h3 a:hover {
 }
 
 .red {
-    color: red;
+    color: var(--red);
 }
 .yellow {
-    color: yellow;
+    color: var(--yellow);
 }
 .green {
-    color: green;
+    color: var(--yellow);
 }
 
 /* light mode */
@@ -530,6 +540,14 @@ h3 a:hover {
     .forecast-box {
         width: 100%;
         margin-inline: 1rem;
+    }
+
+    .air_conditions-box {
+        padding: 2rem;
+    }
+
+    .air_conditions-box p, .air_conditions-box h3, .air_conditions-box h2 {
+        text-align: start;
     }
 
     #hour-container {
