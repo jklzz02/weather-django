@@ -343,6 +343,15 @@ h3 a:hover {
     animation: fadeIn 0.5s ease-in-out forwards;
 }
 
+.red {
+    color: red;
+}
+.yellow {
+    color: yellow;
+}
+.green {
+    color: green;
+}
 
 /* light mode */
 

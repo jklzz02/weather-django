@@ -84,7 +84,15 @@ def city_page(request):
           
           if raw_air_conditions:
                air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]
-               air_conditions["aqi_color"] = raw_air_conditions["indexes"][0]["color"]
+
+               if int(air_conditions["aqi"]) < 50:
+                    color = "green";
+               elif int(air_conditions["aqi"]) < 100:
+                    color = "yellow"
+               else:
+                    color = "red"
+
+               air_conditions["aqi_color"] = color
                air_conditions["category"] = raw_air_conditions["indexes"][0]["category"]
                air_conditions["dominant_pollutant"] = raw_air_conditions["indexes"][0]["dominantPollutant"]
                air_conditions["pollutants"] = raw_air_conditions["pollutants"]
