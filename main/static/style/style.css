@@ -5,7 +5,6 @@
     --lg-size: 44px;
     --md-size: 32px;
     --sm-size: 24px;
-    --xs-size: 18px;
 
     /* colors */    
     --main-color: rgb(69, 69, 199);
@@ -455,7 +454,6 @@ h3 a:hover {
         --lg-size: 39px;
         --md-size: 27px;
         --sm-size: 19px;
-        --xs-size: 12px;
     }
 
     input[type="text"] {
@@ -479,7 +477,6 @@ h3 a:hover {
         --lg-size: 34px;
         --md-size: 22px;
         --sm-size: 14px;
-        --xs-size: 7px;
     }
     .main-icon {
         height: 100px;
