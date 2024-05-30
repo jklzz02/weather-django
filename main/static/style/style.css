@@ -140,13 +140,7 @@ button[type="submit"]:hover, .main-icon:hover {
 
     border-radius: 15px;
     box-shadow: var(--shadow);
-    padding: 1rem;
-
-    
-    @media screen and (min-width: 923px) and (max-width: 1421px) {
-        width: 90%;
-        margin: auto;
-    }
+    padding: 1.5rem;
 }
 
 .air_conditions-box > p {
@@ -163,6 +157,11 @@ iframe {
    border-radius: 15px;
    box-shadow: var(--shadow);
 
+   @media screen and (min-width: 923px) and (max-width: 1421px) {
+    width: 90%;
+    margin: auto;
+}
+
 }
 
 .city-query-box h2 {
@@ -171,7 +170,7 @@ iframe {
 }
 
 .query-infos{
-    font-size: var(--lg-size);
+    font-size: var(--md-size);
 }
 
 .query-infos > p {
@@ -185,7 +184,7 @@ iframe {
 
 .info-container > figcaption {
     align-self: center;
-    font-size: var(--xl-size);
+    font-size: var(--md-size);
     color: var(--complementary-color);
 }
 
@@ -365,13 +364,13 @@ h3 a:hover {
 }
 
 .red {
-    color: var(--red);
+    color: var(--red) !important;
 }
 .yellow {
-    color: var(--yellow);
+    color: var(--yellow) !important;
 }
 .green {
-    color: var(--green);
+    color: var(--green) !important;
 }
 
 /* light mode */
@@ -388,7 +387,7 @@ h3 a:hover {
 
 }
 
-.light-mode figure img, .hour-icon {
+.light-mode figure img, .light-mode .hour-icon {
 
      background-color: var(--light-icon-bg);
  
@@ -439,6 +438,11 @@ h3 a:hover {
         width: auto;
      }
 
+     iframe {
+
+        width: 40%;
+     }
+
 }
 
 /* media query for medium size viewport */
@@ -465,6 +469,10 @@ h3 a:hover {
 
         margin-inline: 2rem;
 
+    }
+
+    iframe {
+        width: 30%;
     }
 }
 
