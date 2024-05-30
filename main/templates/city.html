@@ -44,7 +44,6 @@
   src="https://www.google.com/maps/embed/v1/place?key={{map_key}}&q={{city_info.name}}"
   allowfullscreen>
   </iframe>
-{% comment "air conditions UI" %}
   {% if air_conditions and not error%}
   
    <section class="air_conditions-box">
@@ -61,7 +60,6 @@
   <h2>Condizioni dell'aria non disponibili</h2>
   
   {% endif %}
-{% endcomment %}
 </article>
 
 

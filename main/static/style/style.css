@@ -103,7 +103,7 @@ button[type="submit"] {
     background-color: var(--main-color);
     margin-inline: 5px;
     padding: 10px 18px;
-    border-radius: 8px;
+    border-radius: 15px;
     border: none;
     transition: opacity 200ms;
 }
@@ -132,16 +132,28 @@ button[type="submit"]:hover, .main-icon:hover {
 
    padding: 1.5rem;
    min-height: 500px;
-   border-radius: 8px;
+   border-radius: 15px;
    box-shadow: var(--shadow);
 
 }
 
 .air_conditions-box {
 
-    border-radius: 8px;
+    border-radius: 15px;
     box-shadow: var(--shadow);
     padding: 1rem;
+
+    
+    @media screen and (min-width: 923px) and (max-width: 1421px) {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+.air_conditions-box > p {
+
+    margin-bottom: .5rem;
+
 }
 
 iframe {
@@ -149,7 +161,7 @@ iframe {
    min-height: 500px;
    outline: none;
    border: none;
-   border-radius: 8px;
+   border-radius: 15px;
    box-shadow: var(--shadow);
 
 }
@@ -189,7 +201,7 @@ iframe {
 .city-box {
     text-align: start;
     padding: 20px 35px;
-    border-radius: 8px;
+    border-radius: 15px;
     box-shadow: var(--shadow);
     transition: transform ease 400ms;
 }
@@ -226,7 +238,7 @@ li {
     width: calc(90% /2);
     box-shadow: var(--shadow);
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 15px;
 }
 
 .forecast-box h2 {
@@ -261,7 +273,7 @@ font-size: var(--md-size);
     margin-top: 1rem;
     width: 91%;
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 15px;
     gap: 1rem;
     box-shadow: var(--shadow);
 }
@@ -360,7 +372,7 @@ h3 a:hover {
     color: var(--yellow);
 }
 .green {
-    color: var(--yellow);
+    color: var(--green);
 }
 
 /* light mode */
@@ -544,6 +556,8 @@ h3 a:hover {
 
     .air_conditions-box {
         padding: 2rem;
+        width: 80%;
+        margin: auto;
     }
 
     .air_conditions-box p, .air_conditions-box h3, .air_conditions-box h2 {
