@@ -32,14 +32,10 @@ alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
 def index(request):
     city_info = ""
     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
+    
+    start_cities_info = []
 
-    if request.session.get("start_cities_info"):
-         start_cities_info = request.session.get("start_cities_info")
-
-    else:
-        start_cities_info = []
-
-        for city in start_cities:
+    for city in start_cities:
                start_cities_info.append(get_weather(city, key, lang))
         
     request.session["start_cities_info"] = start_cities_info
