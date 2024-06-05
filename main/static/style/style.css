@@ -157,7 +157,7 @@ iframe {
    border-radius: 15px;
    box-shadow: var(--shadow);
 
-   @media screen and (min-width: 923px) and (max-width: 1421px) {
+   @media screen and (min-width: 923px) and (max-width: 1438px) {
     width: 90%;
     margin: auto;
 }
@@ -446,7 +446,7 @@ h3 a:hover {
 }
 
 /* media query for medium size viewport */
-@media screen and (max-width: 1600px) {
+@media screen and (min-width: 1440px) and (max-width: 1600px) {
     .main-icon {
         height: 200px;
         width: 200px;
