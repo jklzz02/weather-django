@@ -79,7 +79,7 @@ def city_page(request):
           raw_air_conditions = get_air_condition(lat, lon, air_key, lang)
           
           if raw_air_conditions:
-               air_conditions["aqi"] = 200 #raw_air_conditions["indexes"][0]["aqiDisplay"]
+               air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]
 
                if int(air_conditions["aqi"]) < 50:
                     color = "green";
