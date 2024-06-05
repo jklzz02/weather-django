@@ -364,13 +364,13 @@ h3 a:hover {
 }
 
 .red {
-    color: var(--red) !important;
+    color: var(--red);
 }
 .yellow {
-    color: var(--yellow) !important;
+    color: var(--yellow);
 }
 .green {
-    color: var(--green) !important;
+    color: var(--green);
 }
 
 /* light mode */
@@ -417,8 +417,17 @@ h3 a:hover {
     color: var(--main-color);
  }
 
- .light-mode #darkIcon, .light-mode #lightIcon {
+ .light-mode #darkIcon, .light-mode #lightIcon{
     color: #b19219;
+}
+.light-mode .yellow {
+    color: rgb(201, 201, 70);
+}
+.light-mode .red {
+    color: rgb(255, 79, 79);
+}
+.light-mode .green {
+    color: rgb(41, 203, 41);
 }
 
 /* media query for large size wieport */
