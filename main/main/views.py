@@ -37,9 +37,6 @@ def index(request):
 
     for city in start_cities:
                start_cities_info.append(get_weather(city, key, lang))
-        
-    request.session["start_cities_info"] = start_cities_info
-    print(f"Current weather cache:{get_weather.cache_info()}")
 
     return render(request, "index.html", {"city_info" : city_info, "start_cities_info" : start_cities_info})
 
@@ -93,9 +90,6 @@ def city_page(request):
                air_conditions["dominant_pollutant"] = raw_air_conditions["indexes"][0]["dominantPollutant"]
                air_conditions["pollutants"] = raw_air_conditions["pollutants"]
 
-         
-          pprint(air_conditions)
-
           for day in forecast_weather["daily"]:
 
                forecast_date = translate(translator, unix_timestamp_converter(day['dt'], date_format="date"), lang)
@@ -130,8 +124,5 @@ def city_page(request):
 
      if not city:
           return HttpResponseRedirect(reverse("index"))
-     
-     print(f"Forecast weather cache:{get_forecast_weather.cache_info()}\nAir conditions cache:{get_air_condition.cache_info()}")
-
 
      return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast, "air_conditions" : air_conditions})
