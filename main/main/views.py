@@ -8,8 +8,6 @@ from django.conf import settings
 import datetime
 import os
 import re
-from pprint import pprint
-
 
 load_dotenv()
 key = os.getenv("API_KEY")
