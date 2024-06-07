@@ -20,7 +20,7 @@ def get_user_info():
 # function to call in re.sub
 def make_link(match):
     url = match.group(0)
-    return f'<br><a href="{url}" target="_blank">{url}</a>'
+    return f'<a href="{url}" target="_blank">{url}</a>'
 
 # get current weather conditions from API
 @lru_cache

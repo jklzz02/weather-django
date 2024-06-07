@@ -301,7 +301,7 @@ font-size: var(--md-size);
 .alert {
     color: rgba(240, 20, 20);
     text-align: start;
-    font-size: var(--md-size);
+    font-size: var(--sm-size);
 }
 
 /* container to dark/light mode buttons */
