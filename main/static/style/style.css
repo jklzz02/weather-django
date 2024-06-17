@@ -157,11 +157,6 @@ iframe {
    border-radius: 15px;
    box-shadow: var(--shadow);
 
-   @media screen and (min-width: 923px) and (max-width: 1438px) {
-    width: 90%;
-    margin: auto;
-}
-
 }
 
 .city-query-box h2 {
@@ -202,6 +197,7 @@ iframe {
     border-radius: 15px;
     box-shadow: var(--shadow);
     transition: transform ease 400ms;
+    min-width: 200px;
 }
 
 .city-box:hover {
@@ -265,20 +261,19 @@ font-size: var(--md-size);
 
 #hour-container {
 
-    display: flex;
-    justify-content: center;
+    width: 91%;
     margin: auto;
     margin-top: 1rem;
-    width: 91%;
     padding: 1rem;
     border-radius: 15px;
-    gap: 1rem;
+    gap: .5rem;
     box-shadow: var(--shadow);
 }
 
 #hour-box {
+    margin: auto;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
 }
 
@@ -289,7 +284,6 @@ font-size: var(--md-size);
     gap: .5rem;
 
 }
-
 
 
 .alert-container {
@@ -457,8 +451,8 @@ h3 a:hover {
 /* media query for medium size viewport */
 @media screen and (min-width: 1440px) and (max-width: 1600px) {
     .main-icon {
-        height: 200px;
-        width: 200px;
+        height: 150px;
+        width: 150px;
     }
 
     :root {
@@ -564,8 +558,7 @@ h3 a:hover {
     }
 
     .forecast-box {
-        width: 100%;
-        margin-inline: 1rem;
+        width: 90%;
     }
 
     .air_conditions-box {
@@ -579,7 +572,7 @@ h3 a:hover {
     }
 
     #hour-container {
-        max-height: 400px;
+        max-height: 500px;
         overflow-y: scroll;
         padding: 0;
         padding-top: 1rem;
@@ -590,7 +583,7 @@ h3 a:hover {
        width: 90%;
        display: grid;
        grid-template-columns: 1fr 1fr;
-       gap: 2rem;
+       gap: 1rem;
        padding: 0;
 
     }
@@ -599,6 +592,20 @@ h3 a:hover {
         width: auto;
     }
 
+}
+
+
+/* specific media query */
+
+@media screen and (min-width: 923px) and (max-width: 1438px) {
+    
+    iframe {
+    width: 90%;
+    margin: auto;
+    }
+    .air_conditions-box, .city-query-box {
+        width: 45%;
+    }
 }
 
 /* media query for light preference from browser   
