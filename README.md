@@ -1,5 +1,5 @@
 # Weather Application
-In this project i aim to create a Web application who can provide current and forecast weather infos through a `API` from [Open Weather](https://openweathermap.org/)
+In this project i aim to create a Web application who can provide current and forecast weather info through a `API` from [Open Weather](https://openweathermap.org/)
 
 ## API Call Example
 ```
@@ -9,12 +9,12 @@ def get_weather(city, key, lang):
         return weather_data
 
 ```
-In the provided code Snippet youn can see how the API call is made to get current weather informations. 
+In the provided code Snippet you can see how the API call is made to get current weather information. 
 
 **3 parameters are required**:
 * `city` the name of the city to be geocoded 
 * `key` Developer key from [Open Weather](https://openweathermap.org/)
-* `lang` the language that you want the response with the infos to be
+* `lang` the language that you want the response with the info to be
 
 ### Google Maps Embed API
 
@@ -40,15 +40,15 @@ All of them are documented with comments in the code.
 
 * `unix_timestamp_converter(timestamp, date_format)`: Given a Unix timestamp, returns a human-readable date. The date format attribute is required to make the function reusable, this allows you to decide which date format the given timestamp should be formatted. 
 
-* `get_user_info()`: Using the `geocoder` library, this function returns the user's country code based on their IP address and their Languange and Timezone. This function is called in the [Settings](main/main/settings.py) **Django** file to change default Timezone and Language for the application
+* `get_user_info()`: Using the `geocoder` library, this function returns the user's country code based on their IP address and their Language and Timezone. This function is called in the [Settings](main/main/settings.py) **Django** file to change default Timezone and Language for the application
 
 * `translate(transalator, text, lang)`: requires a lang parameter, likely obtained via `get_user_info()`, and returns a translated version of a string in the specified language.
 
 * `make_link(match)`: to be called with the `re.sub` method of a `regex object`. It takes a match object as input and returns the match wrapped in an `<a> ` tag with the same match as the `href` attribute. converts plain text into clickable links.
 
-* `get_air_condition(lat, lon, key, lang)`: makes an `API` call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latidute and longitude of the area to check, the api key and the language in which you desire getting the informations.
+* `get_air_condition(lat, lon, key, lang)`: makes an `API` call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
 
-## Libraries & Dependancies
+## Libraries & Dependencies
 
 in the [Requirements](requirements.txt) Document, you can find every needed library which can be installed using this simple command:
 ```
