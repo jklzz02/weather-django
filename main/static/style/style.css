@@ -427,7 +427,11 @@ h3 a:hover {
 /* media query for large size wieport */
 @media screen and (min-width: 1750px) {
     
-    
+    .city-query-container {
+        max-width: 91%;
+        margin: auto;
+    }
+
      #hour-box {
 
          display: grid;
@@ -442,8 +446,7 @@ h3 a:hover {
      }
 
      iframe {
-
-        width: 40%;
+        flex-grow: 1;
      }
 
 }
