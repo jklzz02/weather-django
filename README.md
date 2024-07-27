@@ -2,7 +2,7 @@
 In this project i aim to create a Web application who can provide current and forecast weather info through a `API` from [Open Weather](https://openweathermap.org/)
 
 ## API Call Example
-```
+```python
 def get_weather(city, key, lang):
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
         weather_data = requests.get(request_url).json()
@@ -21,7 +21,7 @@ In the provided code Snippet you can see how the API call is made to get current
 In this project we also use an API provided by [Google](https://developers.google.com/maps/documentation/embed/get-started) to embed a map of the place for which we are providing the weather information.
 
 **Call URL**
-```
+```django
 https://www.google.com/maps/embed/v1/place?key={{developer key}}&q={{city name}}
 ```
 
