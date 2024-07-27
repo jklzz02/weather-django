@@ -5,7 +5,7 @@ import datetime
 import geocoder
 import json
 
-#geocoder function to get infos from user
+#geocoder function to get info from user
 @lru_cache
 def get_user_info():
      g = geocoder.ip('me')
@@ -14,8 +14,8 @@ def get_user_info():
 
      timezone_finder = TimezoneFinder()
      user_timezone = timezone_finder.timezone_at(lat=latitude, lng=longitude)
-     user_infos = {"language" : user_language, "timezone" : user_timezone}
-     return user_infos
+     user_info = {"language" : user_language, "timezone" : user_timezone}
+     return user_info
 
 # function to call in re.sub
 def make_link(match):

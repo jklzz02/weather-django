@@ -38,7 +38,7 @@ All of them are documented with comments in the code.
 
 * `get_forecast_weather(lat, lon, key, lang)`: Similar to `get_weather()`, this function makes an `API` request to retrieve a daily forecast for the upcoming week.
 
-* `unix_timestamp_converter(timestamp, date_format)`: Given a Unix timestamp, returns a human-readable date. The date format attribute is required to make the function reusable, this allows you to decide which date format the given timestamp should be formatted. 
+* `unix_timestamp_converter(timestamp, date_format)`: Given a Unix timestamp, returns a human-readable date. The date format attribute is required to make the function reusable. 
 
 * `get_user_info()`: Using the `geocoder` library, this function returns the user's country code based on their IP address and their Language and Timezone. This function is called in the [Settings](main/main/settings.py) **Django** file to change default Timezone and Language for the application
 
@@ -49,14 +49,14 @@ All of them are documented with comments in the code.
 * `get_air_condition(lat, lon, key, lang)`: makes an `API` call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
 
 ## Libraries & Dependencies
-`python3.11`or later is required and it's relative package manager.
+`python3.11`or later and it's relative package manager are required.
 
 In the [Requirements](requirements.txt) Document, you can find every needed library which can be installed using this simple command:
 ```
  pip install -r requirements.txt
 ```
 This command will read line by line the [Requirements](requirements.txt) document
-passing every package through `pip ` which is the **python** package manager.
+passing every package through `pip ` installing them.
 
 ## How to Contribute
 

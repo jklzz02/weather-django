@@ -164,11 +164,11 @@ iframe {
     color: var(--secondary-color);
 }
 
-.query-infos{
+.query-info{
     font-size: var(--md-size);
 }
 
-.query-infos > p {
+.query-info > p {
     display: inline;
 }
 .info-container {
@@ -512,7 +512,7 @@ h3 a:hover {
         text-align: start;
     }
 
-    .city-query-box .query-infos,
+    .city-query-box .query-info,
     .city-query-box .info-container 
     {
 
@@ -553,7 +553,7 @@ h3 a:hover {
        width: 100%;
     }
 
-    .query-infos {
+    .query-info {
         display: flex;
         flex-direction: column;
         justify-content: center;

@@ -16,7 +16,7 @@ import os
 
 user_info = get_user_info()
 
-# obtained user infos from get_user_info()
+# obtained user info from get_user_info()
 USER_INFO = user_info
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

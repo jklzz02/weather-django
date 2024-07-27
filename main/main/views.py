@@ -17,7 +17,7 @@ air_key = os.getenv("AIR_KEY")
 # building translator object from library
 translator = Translator()
 
-#getting user infos from settings
+#getting user info from settings
 user_info = settings.USER_INFO
 
 # get user lang from ip
