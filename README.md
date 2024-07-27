@@ -49,8 +49,9 @@ All of them are documented with comments in the code.
 * `get_air_condition(lat, lon, key, lang)`: makes an `API` call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
 
 ## Libraries & Dependencies
+`python3.11`or later is required and it's relative package manager.
 
-in the [Requirements](requirements.txt) Document, you can find every needed library which can be installed using this simple command:
+In the [Requirements](requirements.txt) Document, you can find every needed library which can be installed using this simple command:
 ```
  pip install -r requirements.txt
 ```
