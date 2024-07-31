@@ -31,10 +31,7 @@ def index(request):
     city_info = ""
     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
     
-    start_cities_info = []
-
-    for city in start_cities:
-               start_cities_info.append(get_weather(city, key, lang))
+    start_cities_info = [get_weather(city, key, lang) for city in start_cities]
 
     return render(request, "index.html", {"city_info" : city_info, "start_cities_info" : start_cities_info})
 
