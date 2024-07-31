@@ -28,12 +28,11 @@ alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
 
 # views
 def index(request):
-    city_info = ""
     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
     
     start_cities_info = [get_weather(city, key, lang) for city in start_cities]
 
-    return render(request, "index.html", {"city_info" : city_info, "start_cities_info" : start_cities_info})
+    return render(request, "index.html", {"start_cities_info" : start_cities_info})
 
 
 def city_page(request):
