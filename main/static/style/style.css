@@ -127,6 +127,7 @@ button[type="submit"]:hover, .main-icon:hover {
     gap: 1rem;
 }
 
+
 .city-query-box {
 
    padding: 1.5rem;
@@ -134,6 +135,10 @@ button[type="submit"]:hover, .main-icon:hover {
    border-radius: 15px;
    box-shadow: var(--shadow);
 
+}
+
+.city-query-box strong {
+    font-size: var(--xl-size);
 }
 
 .air_conditions-box {

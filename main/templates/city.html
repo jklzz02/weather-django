@@ -21,7 +21,6 @@
           <h2>{{city_info.name}}</h2>
         </header>
         <time class="date" datetime="{{date}}">{{date}}</time>
-
         <section>
             <strong> {{city_info.main.temp|floatformat:"0"}}°C</strong>
             {% for item in city_info.weather %}
