@@ -23,7 +23,7 @@
         <time class="date" datetime="{{date}}">{{date}}</time>
 
         <section>
-            <strong style="font-size: 46px;"> {{city_info.main.temp|floatformat:"0"}}°C</strong>
+            <strong> {{city_info.main.temp|floatformat:"0"}}°C</strong>
             {% for item in city_info.weather %}
             <figure class="info-container">
               <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png" alt="{{item.description}}">
