@@ -12,8 +12,7 @@ def get_user_info():
      latitude, longitude = g.latlng
      user_language = g.country
 
-     timezone_finder = TimezoneFinder()
-     user_timezone = timezone_finder.timezone_at(lat=latitude, lng=longitude)
+     user_timezone = TimezoneFinder().timezone_at(lat=latitude, lng=longitude)
      user_info = {"language" : user_language, "timezone" : user_timezone}
      return user_info
 
