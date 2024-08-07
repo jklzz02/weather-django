@@ -35,8 +35,7 @@ def index(request):
     return render(request, "index.html", {"start_cities_info" : start_cities_info})
 
 
-def city_page(request):
-     city = request.GET.get("id")
+def city_page(request, city=''):
      city_info = ""
      forecast_weather = ""
      air_conditions = {}
@@ -47,9 +46,6 @@ def city_page(request):
 
      today = datetime.datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
-
-     if city:
-      city = city.replace("/", "")
      
      if request.method == "POST":
 
