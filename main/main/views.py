@@ -1,10 +1,10 @@
+from django.conf import settings
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.shortcuts import render
+from django.urls import reverse
 from dotenv import load_dotenv
 from googletrans import Translator
 from .services import *
-from django.conf import settings
 import datetime
 import os
 import re
