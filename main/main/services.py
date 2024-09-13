@@ -25,14 +25,20 @@ def make_link(match:re.Match[str]) -> str:
 
 # get current weather conditions from API
 @lru_cache
-def get_weather(city:str, key:str, lang:str) -> dict:
+def get_weather(city:str, key:str, lang:str) -> dict|int:
+        
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
         weather_data = requests.get(request_url).json()
-        return weather_data
+        status_code = weather_data['cod']
+
+        if status_code == 200:
+             return weather_data
+        
+        return status_code
 
 # get current general air conditions of the zone
 @lru_cache
-def get_air_condition(lat, lon, key, lang:str) -> dict|None:
+def get_air_condition(lat, lon, key, lang:str) -> dict|int:
      url = f'https://airquality.googleapis.com/v1/currentConditions:lookup?key={key}'
 
      payload = {
@@ -58,19 +64,16 @@ def get_air_condition(lat, lon, key, lang:str) -> dict|None:
           air_conditions = response.json()
           return air_conditions
 
-     return
+     return response.status_code
 
 # get forecast info from API
 @lru_cache
 def get_forecast_weather(lat, lon, key:str, lang:str) -> dict:
-     list = [lat, lon, key, lang]
-
-     for var in list:
-          print(f'{var} -> {type(var)}')
 
      request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,current&appid={key}&units=metric&lang={lang}'
      forecast_data = requests.get(request_url).json()
-     return(forecast_data)
+     
+     return forecast_data
 
 '''
 this function converts a unix timestamp in the desired human-readable format
