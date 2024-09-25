@@ -9,7 +9,7 @@ All of them are documented with comments in the code.
 
 ### Weather API
 
-In the project there's a to make requests and retrieve various weather information.
+In the project there's a [Weather](main/main/services/Weather.py) **API** to make requests and retrieve various weather information.
 
 * `current(city, lang) -> dict|bool`: makes an **API** call to [Open Weather](https://openweathermap.org/) retrieving the current weather conditions, of the requested city in the requested language.
 ```python
