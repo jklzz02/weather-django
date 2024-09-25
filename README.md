@@ -37,7 +37,7 @@ In this project we also use an API provided by [Google](https://developers.googl
 https://www.google.com/maps/embed/v1/place?key={{developer key}}&q={{city name}}
 ```
 
-to make the call, you need to provide the name of the place to query and a developer key directly provided by google. You can review the API documentation [here](https://developers.google.com/maps/documentation/embed/get-started)
+to make the call, you need to provide the name of the place to query, and a developer key directly provided by google. You can review the API documentation [here](https://developers.google.com/maps/documentation/embed/get-started)
 
 ### Functions
 
