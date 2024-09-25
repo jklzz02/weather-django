@@ -22,7 +22,7 @@
             </a>
             
             {% block form %}
-            <form action="{% url "city_page" %}" method="post">
+            <form action="{% url "city_page" %}" method="get">
                 {% csrf_token %}
                 <div class="input-group">
                     {% if city_info %}

@@ -25,16 +25,16 @@ def make_link(match:re.Match[str]) -> str:
 
 # get current weather conditions from API
 @lru_cache
-def get_weather(city:str, key:str, lang:str) -> dict|int:
+def get_weather(city:str, key:str, lang:str) -> dict|bool:
         
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
         weather_data = requests.get(request_url).json()
         status_code = weather_data['cod']
-
-        if status_code == 200:
-             return weather_data
         
-        return status_code
+        if status_code == 200:
+          return weather_data
+        
+        return False
 
 # get current general air conditions of the zone
 @lru_cache

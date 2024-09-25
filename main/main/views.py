@@ -45,17 +45,14 @@ def city_page(request):
      error = False
 
      city = request.GET.get("city")
+     print(city)
 
      today = datetime.datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
-     
-     if request.method == "POST":
-
-        city = request.POST.get('city')
             
      city_info = get_weather(city, key, lang)
 
-     if city_info["cod"] != 200:
+     if city_info == False:
           error = True
 
      if not error:
@@ -115,6 +112,6 @@ def city_page(request):
 
 
      if not city:
-          return HttpResponseRedirect(reverse("index"))
+           return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
      return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast, "air_conditions" : air_conditions})
