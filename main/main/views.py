@@ -45,7 +45,7 @@ def city_page(request):
 
      today = datetime.datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
-            
+     
      city_info = weather_service.current(city, lang)
 
      if not city_info:

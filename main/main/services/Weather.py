@@ -2,8 +2,8 @@ from dotenv import load_dotenv
 from functools import lru_cache
 from json import dumps
 from os import getenv
-from requests import get as get_request, post as post_request
 from urllib.parse import urlencode
+from requests import get, post
 
 load_dotenv()
 key = getenv("API_KEY")
@@ -29,15 +29,8 @@ class Weather:
         }
 
         request_url = self.__build_url(self.__open_weather, endpoint, params)
-
-        weather_data = get_request(request_url).json()
-
-        status_code = weather_data['cod']
-        
-        if not status_code == 200:    
-            return False
-        
-        return weather_data
+        current_weather = self.__get(request_url)
+        return current_weather
     
     @lru_cache
     def forecast(self, lat:str, lon:str, lang:str) -> dict|bool:
@@ -52,13 +45,9 @@ class Weather:
        
         request_url = self.__build_url(self.__open_weather, endpoint, params)
 
-        forecast_data = get_request(request_url).json()
-
-        if forecast_data.get('cod'):
-            return False
-
+        forecast_data = self.__get(request_url)
         return forecast_data
-    
+
     @lru_cache
     def air_condition(self, lat:str, lon:str, lang:str) -> dict|bool:
 
@@ -84,13 +73,10 @@ class Weather:
         'Content-Type': 'application/json'
         }
 
-        response = post_request(request_url, headers=headers, data=dumps(payload))
+        air_conditions = self.__post(request_url, headers=headers, data=dumps(payload))
 
-        if not response.status_code == 200:
-            return False
-        
-        air_conditions = response.json()
         return air_conditions
+
     
     def map(self) -> str:
         return self.__map_key
@@ -98,3 +84,21 @@ class Weather:
     def __build_url(self, base:str, endpoint: str, params: dict) -> str:
 
         return f"{base}{endpoint}?{urlencode(params)}"
+    
+    def __post(self, url:str, headers:dict, data:dict) -> dict|bool:
+
+        response = post(url, headers=headers, data=data)
+
+        if not response.status_code == 200:
+            return False
+        
+        return response.json()
+    
+    def __get(self, url:str) -> dict|bool:
+
+        response = get(url)
+
+        if response.status_code != 200:
+            return False
+
+        return response.json()
