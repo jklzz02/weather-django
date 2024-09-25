@@ -1,11 +1,12 @@
 from datetime import datetime
 from functools import lru_cache
 from googletrans import Translator
+from os import getenv
 from timezonefinder import TimezoneFinder
 import geocoder
 import re
 
-#geocoder function to get info from user
+# geocoder function to get info from user ip
 @lru_cache
 def get_user_info() -> dict:
      g = geocoder.ip('me')
@@ -44,3 +45,15 @@ you can get the user language dinamically by simly importing it from the setting
 def translate(translator:Translator, text:str, lang:str) -> str:
      translation = translator.translate(text, dest=lang)
      return translation.text
+
+'''
+tries to load env variable, raises Valuerror if it fails.
+'''
+def getenvOrFail(key:str) -> str:
+
+     value = getenv(key)
+
+     if value is None or value == "":
+          raise ValueError(f"No env variable found for '{key}'")
+     
+     return value
