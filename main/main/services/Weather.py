@@ -63,5 +63,5 @@ class Weather:
 
         return response.status_code
     
-    def map(self):
+    def map(self) -> str:
         return self.__map_key

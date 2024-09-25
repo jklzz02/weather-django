@@ -1,25 +1,37 @@
 # Weather Application
 
-In this project i aim to create a Web application who can provide current and forecast weather info through a `API` from [Open Weather](https://openweathermap.org/)
+In this project i aim to create a Web application who can provide current and forecast weather info through an **API** from [Open Weather](https://openweathermap.org/)
 
 ## Services
 
-There are a series of custom functions and a [Weather](main/main/services/Weather.py) API  made for this project in [services.py](/main/main/services/).
+There are a series of custom functions and a [Weather](main/main/services/Weather.py) **API**  made for this project in [services.py](/main/main/services/).
 All of them are documented with comments in the code.
 
 ### Weather API
 
 In the project there's a to make requests and retrieve various weather information.
 
-* `current(city, lang)`: makes an `API` call to [Open Weather](https://openweathermap.org/) retrieving the current weather conditions, of the requested city in the requested language.
+* `current(city, lang) -> dict|bool`: makes an **API** call to [Open Weather](https://openweathermap.org/) retrieving the current weather conditions, of the requested city in the requested language.
+```python
+weather_service = Weather()
+city_info = weather.current('New York', 'eng')
+```
 
-* `forecast(lat, lon, lang)`: Similar to `get_weather()`, this function makes a request to retrieve a daily forecast for the upcoming week, and an hourly forecast for the current day.
+* `forecast(lat, lon, lang) -> dict`: Similar to `get_weather()`, this function makes a request to retrieve a daily forecast for the upcoming week, and an hourly forecast for the current day.
+```python
+weather_service = Weather()
+city_info = weather.forecast(you_city_latitude, your_city_longitude, 'eng')
+```
 
-* `get_air_condition(lat, lon, lang)`: makes an `API` call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
+* `air_condition(lat, lon, lang)  -> dict|int`: makes an **API** call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
+```python
+weather_service = Weather()
+city_info = weather.air_condition(you_city_latitude, your_city_longitude, 'eng')
+```
 
 #### Google Maps Embed API
 
-In this project we also use an API provided by [Google](https://developers.google.com/maps/documentation/embed/get-started) to embed a map of the place for which we are providing the weather information. The key can be retrieved with the `map()` method of [Weather](main/main/Weather.py).
+In this project we also use an API provided by [Google](https://developers.google.com/maps/documentation/embed/get-started) to embed a map of the place for which we are providing the weather information. The key can be retrieved with the `map() -> str` method of [Weather](main/main/services/Weather.py).
 
 ```django
 https://www.google.com/maps/embed/v1/place?key={{developer key}}&q={{city name}}
