@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 from functools import lru_cache
+from json import dumps
 from os import getenv
 from requests import get, post
-import json
 
 load_dotenv()
 key = getenv("API_KEY")
@@ -35,7 +35,7 @@ class Weather:
         return forecast_data
     
     @lru_cache
-    def air_condition(self, lat:str, lon:str, lang:str) -> dict|int:
+    def air_condition(self, lat:str, lon:str, lang:str) -> dict|bool:
         url = f'https://airquality.googleapis.com/v1/currentConditions:lookup?key={self.__air_key}'
 
         payload = {
@@ -55,13 +55,13 @@ class Weather:
         'Content-Type': 'application/json'
         }
 
-        response = post(url, headers=headers, data=json.dumps(payload))
+        response = post(url, headers=headers, data=dumps(payload))
 
         if response.status_code == 200:
             air_conditions = response.json()
             return air_conditions
 
-        return response.status_code
+        return False
     
     def map(self) -> str:
         return self.__map_key

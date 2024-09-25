@@ -47,7 +47,7 @@ def city_page(request):
             
      city_info = weather_service.current(city, lang)
 
-     if city_info == False:
+     if not city_info:
           error = True
 
      if not error:

@@ -26,9 +26,9 @@
                 {% csrf_token %}
                 <div class="input-group">
                     {% if city_info %}
-                    <input type="text" value="{{city_info.name}}" placeholder="{{city_info.name}}..." name="city" id="city">
+                    <input type="text" value="{{city_info.name}}" placeholder="{{city_info.name}}..." name="city" id="city" required>
                     {% else %}
-                    <input type="text" placeholder="Scrivi il nome di una città..." name="city" id="city">
+                    <input type="text" placeholder="Scrivi il nome di una città..." name="city" id="city" required>
                     {% endif %}
                     <button type="submit">
                         <i class="bi bi-search"></i>

@@ -23,7 +23,7 @@ weather_service = Weather()
 city_info = weather_service.forecast(you_city_latitude, your_city_longitude, 'eng')
 ```
 
-* `air_condition(lat, lon, lang)  -> dict|int`: makes an **API** call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
+* `air_condition(lat, lon, lang)  -> dict|bool`: makes an **API** call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
 ```python
 weather_service = Weather()
 city_info = weather_service.air_condition(you_city_latitude, your_city_longitude, 'eng')
