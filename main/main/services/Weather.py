@@ -1,28 +1,22 @@
-from dotenv import load_dotenv
 from functools import lru_cache
 from json import dumps
-from os import getenv
 from urllib.parse import urlencode
 from requests import get, post
 
-load_dotenv()
-key = getenv("API_KEY")
-air_key = getenv("AIR_KEY")
-map_key = getenv("MAP_KEY")
-
 class Weather:
-    __open_weather = 'https://api.openweathermap.org/data/'
-    __google_aqi = 'https://airquality.googleapis.com/'
-    __key = key
-    __air_key = air_key
-    __map_key = map_key
+
+    def __init__(self, weather_key:str='', air_key:str='') -> None:
+        self.__open_weather = 'https://api.openweathermap.org/data/'
+        self.__google_aqi = 'https://airquality.googleapis.com/'
+        self.__weather_key = weather_key
+        self.__air_key = air_key
 
     @lru_cache
     def current(self, city:str, lang:str) -> dict|bool:
 
         endpoint = '2.5/weather'
         params = {
-            'appid' : self.__key,
+            'appid' : self.__weather_key,
             'q' : city,
             'units' : 'metric',
             'lang' : lang
@@ -39,7 +33,7 @@ class Weather:
         params = {
             'lat' : lat,
             'lon' : lon,
-            'appid' : self.__key,
+            'appid' : self.__weather_key,
             'lang' : lang
         }
        
@@ -76,10 +70,6 @@ class Weather:
         air_conditions = self.__post(request_url, headers=headers, data=dumps(payload))
 
         return air_conditions
-
-    
-    def map(self) -> str:
-        return self.__map_key
     
     def __build_url(self, base:str, endpoint: str, params: dict) -> str:
 

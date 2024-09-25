@@ -10,14 +10,24 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+from dotenv import load_dotenv
 from pathlib import Path
 from .services.funcs import get_user_info
-import os   
+import os
 
 user_info = get_user_info()
 
 # obtained user info from get_user_info()
 USER_INFO = user_info
+
+load_dotenv()
+# env variables
+KEYS = {
+    
+    'weather_key' : os.getenv('WEATHER_KEY'),
+    'air_key' : os.getenv('AIR_KEY'),
+    'map_key' : os.getenv('MAP_KEY')
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

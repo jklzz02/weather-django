@@ -8,17 +8,12 @@ from .services.Weather import Weather
 import datetime
 import re
 
-# building translator object from library
-translator = Translator()
+keys = settings.KEYS
+user_info = settings.USER_INFO
+lang =  user_info["language"]
 
 # weather API
-weather_service = Weather()
-
-#getting user info from settings
-user_info = settings.USER_INFO
-
-# get user lang from ip
-lang =  user_info["language"]
+weather_service = Weather(keys['weather_key'], keys['air_key'])
 
 #regex for urls in alert
 alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
@@ -33,6 +28,7 @@ def index(request):
 
 
 def city_page(request):
+     translator = Translator()
      city_info = ""
      forecast_weather = ""
      air_conditions = {}
@@ -114,4 +110,4 @@ def city_page(request):
      if not city:
            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : weather_service.map(), "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast, "air_conditions" : air_conditions})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : keys['map_key'], "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast, "air_conditions" : air_conditions})

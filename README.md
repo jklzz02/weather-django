@@ -34,7 +34,7 @@ city_info = weather_service.air_condition(you_city_latitude, your_city_longitude
 
 #### Google Maps Embed API
 
-In this project we also use an API provided by [Google](https://developers.google.com/maps/documentation/embed/get-started) to embed a map of the place for which we are providing the weather information. The key can be retrieved with the `map() -> str` method of [Weather](main/main/services/Weather.py).
+In this project we also use an API provided by [Google](https://developers.google.com/maps/documentation/embed/get-started) to embed a map of the place for which we are providing the weather information. The key is retrieved from the [settings](main/main/settings.py).
 
 ```django
 https://www.google.com/maps/embed/v1/place?key={{developer key}}&q={{city name}}
