@@ -41,7 +41,6 @@ def city_page(request):
      error = False
 
      city = request.GET.get("city")
-     print(city)
 
      today = datetime.datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
