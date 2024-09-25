@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from functools import lru_cache
 from json import dumps
 from os import getenv
-from requests import get, post
+from requests import get as get_request, post as post_request
 
 load_dotenv()
 key = getenv("API_KEY")
@@ -18,20 +18,23 @@ class Weather:
     def current(self, city:str, lang:str) -> dict|bool:
 
         request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={self.__key}&q={city}&units=metric&lang={lang}'
-        weather_data = get(request_url).json()
+        weather_data = get_request(request_url).json()
         status_code = weather_data['cod']
         
-        if status_code == 200:
-          return weather_data
+        if not status_code == 200:    
+            return False
         
-        return False
+        return weather_data
     
     @lru_cache
-    def forecast(self, lat:str, lon:str, lang:str) -> dict:
+    def forecast(self, lat:str, lon:str, lang:str) -> dict|bool:
        
         request_url = f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,current&appid={self.__key}&units=metric&lang={lang}'
-        forecast_data = get(request_url).json()
-     
+        forecast_data = get_request(request_url).json()
+
+        if forecast_data.get('cod'):
+            return False
+
         return forecast_data
     
     @lru_cache
@@ -55,13 +58,13 @@ class Weather:
         'Content-Type': 'application/json'
         }
 
-        response = post(url, headers=headers, data=dumps(payload))
+        response = post_request(url, headers=headers, data=dumps(payload))
 
-        if response.status_code == 200:
-            air_conditions = response.json()
-            return air_conditions
-
-        return False
+        if not response.status_code == 200:
+            return False
+        
+        air_conditions = response.json()
+        return air_conditions
     
     def map(self) -> str:
         return self.__map_key

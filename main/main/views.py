@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from googletrans import Translator
 from .services.funcs import make_link, unix_timestamp_converter, translate
 from .services.Weather import Weather
@@ -56,6 +57,10 @@ def city_page(request):
           lon = city_info['coord']['lon']
 
           forecast_weather = weather_service.forecast(lat, lon, lang)
+
+          if not forecast_weather:
+               error = True
+               HttpResponseRedirect(reverse("city.html"))
 
           raw_air_conditions = weather_service.air_condition(lat, lon, lang)
           

@@ -17,7 +17,7 @@ weather_service = Weather()
 city_info = weather_service.current('New York', 'eng')
 ```
 
-* `forecast(lat, lon, lang) -> dict`: Similar to `current`, this function makes a request to retrieve a daily forecast for the upcoming week, and an hourly forecast for the current day.
+* `forecast(lat, lon, lang) -> dict|bool`: Similar to `current`, this function makes a request to retrieve a daily forecast for the upcoming week, and an hourly forecast for the current day.
 ```python
 weather_service = Weather()
 city_info = weather_service.forecast(you_city_latitude, your_city_longitude, 'eng')
