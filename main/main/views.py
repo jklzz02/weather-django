@@ -1,21 +1,17 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
-from dotenv import load_dotenv
 from googletrans import Translator
-from .services import *
+from .services.funcs import make_link, unix_timestamp_converter, translate
+from .services.Weather import Weather
 import datetime
-import os
 import re
-
-load_dotenv()
-key = os.getenv("API_KEY")
-map_key = os.getenv("MAP_KEY")
-air_key = os.getenv("AIR_KEY")
 
 # building translator object from library
 translator = Translator()
+
+# weather API
+weather_service = Weather()
 
 #getting user info from settings
 user_info = settings.USER_INFO
@@ -30,7 +26,7 @@ alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
 def index(request):
     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
     
-    start_cities_info = [get_weather(city, key, lang) for city in start_cities]
+    start_cities_info = [weather_service.current(city, lang) for city in start_cities]
 
     return render(request, "index.html", {"start_cities_info" : start_cities_info})
 
@@ -50,7 +46,7 @@ def city_page(request):
      today = datetime.datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
             
-     city_info = get_weather(city, key, lang)
+     city_info = weather_service.current(city, lang)
 
      if city_info == False:
           error = True
@@ -60,9 +56,9 @@ def city_page(request):
           lat = city_info['coord']['lat']
           lon = city_info['coord']['lon']
 
-          forecast_weather = get_forecast_weather(lat, lon, key, lang)
+          forecast_weather = weather_service.forecast(lat, lon, lang)
 
-          raw_air_conditions = get_air_condition(lat, lon, air_key, lang)
+          raw_air_conditions = weather_service.air_condition(lat, lon, lang)
           
           if raw_air_conditions:
                air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]
@@ -114,4 +110,4 @@ def city_page(request):
      if not city:
            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : map_key, "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast, "air_conditions" : air_conditions})
+     return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : weather_service.map(), "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast, "air_conditions" : air_conditions})

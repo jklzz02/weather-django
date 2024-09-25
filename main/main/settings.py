@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from .services import get_user_info
+from .services.funcs import get_user_info
 import os   
 
 user_info = get_user_info()

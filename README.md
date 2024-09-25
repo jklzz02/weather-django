@@ -2,27 +2,24 @@
 
 In this project i aim to create a Web application who can provide current and forecast weather info through a `API` from [Open Weather](https://openweathermap.org/)
 
-## API Call Example
+## Services
 
-```python
-def get_weather(city, key, lang):
-        request_url = f'https://api.openweathermap.org/data/2.5/weather?appid={key}&q={city}&units=metric&lang={lang}'
-        weather_data = requests.get(request_url).json()
-        return weather_data
+There are a series of custom functions and a [Weather](main/main/services/Weather.py) API  made for this project in [services.py](/main/main/services/).
+All of them are documented with comments in the code.
 
-```
+### Weather API
 
-In the provided code Snippet you can see how the API call is made to get current weather information.
+In the project there's a to make requests and retrieve various weather information.
 
-**3 parameters are required**:
+* `current(city, lang)`: makes an `API` call to [Open Weather](https://openweathermap.org/) retrieving the current weather conditions, of the requested city in the requested language.
 
-* `city` the name of the city to be geocoded
-* `key` Developer key from [Open Weather](https://openweathermap.org/)
-* `lang` the language that you want the response with the info to be
+* `forecast(lat, lon, lang)`: Similar to `get_weather()`, this function makes a request to retrieve a daily forecast for the upcoming week, and an hourly forecast for the current day.
 
-### Google Maps Embed API
+* `get_air_condition(lat, lon, lang)`: makes an `API` call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
 
-In this project we also use an API provided by [Google](https://developers.google.com/maps/documentation/embed/get-started) to embed a map of the place for which we are providing the weather information.
+#### Google Maps Embed API
+
+In this project we also use an API provided by [Google](https://developers.google.com/maps/documentation/embed/get-started) to embed a map of the place for which we are providing the weather information. The key can be retrieved with the `map()` method of [Weather](main/main/Weather.py).
 
 ```django
 https://www.google.com/maps/embed/v1/place?key={{developer key}}&q={{city name}}
@@ -30,16 +27,9 @@ https://www.google.com/maps/embed/v1/place?key={{developer key}}&q={{city name}}
 
 to make the call, you need to provide the name of the place to query and a developer key directly provided by google. You can review the API documentation [here](https://developers.google.com/maps/documentation/embed/get-started)
 
-## Services
+### Functions
 
-There are a series of custom function made for this project in the [services.py](/main/main/services.py).
-All of them are documented with comments in the code.
-
-**Services
-
-* `get_weather(city, key, lang)`: makes an `API` request to retrieve the current weather conditions.
-
-* `get_forecast_weather(lat, lon, key, lang)`: Similar to `get_weather()`, this function makes an `API` request to retrieve a daily forecast for the upcoming week.
+Utility functions in [funcs](main/main/services/funcs.py)
 
 * `unix_timestamp_converter(timestamp, date_format)`: Given a Unix timestamp, returns a human-readable date. The date format attribute is required to make the function reusable.
 
@@ -48,8 +38,6 @@ All of them are documented with comments in the code.
 * `translate(transalator, text, lang)`: requires a lang parameter, likely obtained via `get_user_info()`, and returns a translated version of a string in the specified language.
 
 * `make_link(match)`: to be called with the `re.sub` method of a `regex object`. It takes a match object as input and returns the match wrapped in an `<a>` tag with the same match as the `href` attribute. converts plain text into clickable links.
-
-* `get_air_condition(lat, lon, key, lang)`: makes an `API` call using the google [Air Quality API](https://developers.google.com/maps/documentation/air-quality/overview) to retrieve the current and general air conditions of the zone. The call requires a `KEY` provided by google, and returns in `json` format the local aqi, the dominant pollutant and it's concentration. The call is made via the library requests with `POST` method. The function requires the latitude and longitude of the area to check, the api key and the language in which you desire getting the information
 
 ## Libraries & Dependencies
 
