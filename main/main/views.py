@@ -5,7 +5,7 @@ from django.urls import reverse
 from googletrans import Translator
 from .services.funcs import make_link, unix_timestamp_converter, translate
 from .services.Weather import Weather
-import datetime
+from datetime import datetime
 import re
 
 keys = settings.KEYS
@@ -15,17 +15,12 @@ lang =  user_info["language"]
 # weather API
 weather_service = Weather(keys['weather_key'], keys['air_key'])
 
-#regex for urls in alert
-alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
-
-# views
 def home(request):
     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
     
     start_cities_info = [weather_service.current(city, lang) for city in start_cities]
 
     return render(request, "home.html", {"start_cities_info" : start_cities_info})
-
 
 def city(request):
      translator = Translator()
@@ -47,7 +42,7 @@ def city(request):
           
           return HttpResponseRedirect(reverse("home"))
 
-     today = datetime.datetime.now()
+     today = datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
      
      city_info = weather_service.current(city, lang)
@@ -110,6 +105,7 @@ def city(request):
           
 
           if "alerts" in forecast_weather:
+               alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
                alert = forecast_weather["alerts"][0]["description"]
                alert = translate(translator, alert, lang)
                alert = alertRegex.sub(make_link, alert)
