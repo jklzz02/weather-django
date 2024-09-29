@@ -22,8 +22,7 @@
             </a>
             
             {% block form %}
-            <form action="{% url "city_page" %}" method="get">
-                {% csrf_token %}
+            <form action="{% url "city" %}" method="get">
                 <div class="input-group">
                     {% if city_info %}
                     <input type="text" value="{{city_info.name}}" placeholder="{{city_info.name}}..." name="city" id="city" required>

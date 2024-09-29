@@ -20,6 +20,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name="index"),
-    re_path(r'^city(?:/(?P<city>[^/]+))?/$', views.city_page, name="city_page"),
+    path('', views.home, name="home"),
+    path('city/', views.city, name="city"),
 ]

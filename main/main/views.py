@@ -19,15 +19,15 @@ weather_service = Weather(keys['weather_key'], keys['air_key'])
 alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
 
 # views
-def index(request):
+def home(request):
     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
     
     start_cities_info = [weather_service.current(city, lang) for city in start_cities]
 
-    return render(request, "index.html", {"start_cities_info" : start_cities_info})
+    return render(request, "home.html", {"start_cities_info" : start_cities_info})
 
 
-def city_page(request):
+def city(request):
      translator = Translator()
      city_info = ""
      forecast_weather = ""
@@ -37,7 +37,15 @@ def city_page(request):
      hourly_forecast = []
      error = False
 
-     city = request.GET.get("city")
+     city = request.GET.get("city").strip()
+
+     if not city:
+          referer = request.META.get('HTTP_REFERER')
+
+          if referer:
+               return HttpResponseRedirect(referer)
+          
+          return HttpResponseRedirect(reverse("home"))
 
      today = datetime.datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
@@ -105,9 +113,5 @@ def city_page(request):
                alert = forecast_weather["alerts"][0]["description"]
                alert = translate(translator, alert, lang)
                alert = alertRegex.sub(make_link, alert)
-
-
-     if not city:
-           return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
      return render(request, "city.html", {"city" : city, "error" : error, "city_info" : city_info, "map_key" : keys['map_key'], "date" : formatted_date, "forecast_info" : forecast_info, "alert" : alert, "hourly_forecast" : hourly_forecast, "air_conditions" : air_conditions})
