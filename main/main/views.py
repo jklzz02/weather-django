@@ -16,7 +16,7 @@ lang =  user_info["language"]
 weather_service = Weather(keys['weather_key'], keys['air_key'])
 
 def home(request):
-    start_cities = ["turin", "rome", "florence", "naples", "milan"]
+    start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
     
     start_cities_info = [weather_service.current(city, lang) for city in start_cities]
 
