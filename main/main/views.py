@@ -36,11 +36,7 @@ def city(request):
 
      if not city:
           referer = request.META.get('HTTP_REFERER')
-
-          if referer:
-               return HttpResponseRedirect(referer)
-          
-          return HttpResponseRedirect(reverse("home"))
+          return HttpResponseRedirect(referer if referer else reverse("home"))
 
      today = datetime.now()
      formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'), lang)
