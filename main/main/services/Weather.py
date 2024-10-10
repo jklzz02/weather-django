@@ -6,7 +6,7 @@ from requests import get, post
 class Weather:
 
     def __init__(self, weather_key:str='', air_key:str='') -> None:
-        self.__open_weather = 'https://api.openweathermap.org/data/'
+        self.__open_weather = 'https://api.openweathermap.org/'
         self.__google_aqi = 'https://airquality.googleapis.com/'
         self.__weather_key = weather_key
         self.__air_key = air_key
@@ -14,7 +14,7 @@ class Weather:
     @lru_cache
     def current(self, city:str, lang:str) -> dict|bool:
 
-        endpoint = '2.5/weather'
+        endpoint = 'data/2.5/weather'
         params = {
             'appid' : self.__weather_key,
             'q' : city,
@@ -29,7 +29,7 @@ class Weather:
     @lru_cache
     def forecast(self, lat:str, lon:str, lang:str) -> dict|bool:
 
-        endpoint = '3.0/onecall'
+        endpoint = 'data/3.0/onecall'
         params = {
             'lat' : lat,
             'lon' : lon,
@@ -70,6 +70,31 @@ class Weather:
         air_conditions = self.__post(request_url, headers=headers, data=dumps(payload))
 
         return air_conditions
+    
+    def geo_code(self, city:str, state_code:str='', country_code:str='') -> dict|bool:
+
+        query = f"{city},{state_code},{country_code}".strip(',')
+
+        endpoint = "geo/1.0/direct"
+        params = {
+            'q' : query,
+            'appid' : self.__weather_key
+
+        }
+
+        request_url = self.__build_url(self.__open_weather, endpoint, params)
+        response = self.__get(request_url)
+
+        if not response:
+            return False
+
+        coord = {
+            'lat' : response[0]['lat'],
+            'lon' : response[0]['lon']
+        }
+        
+        return coord
+
     
     def __build_url(self, base:str, endpoint: str, params: dict) -> str:
 
