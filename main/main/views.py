@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from googletrans import Translator
-from .services import *
+from services import Weather, translate, make_link, unix_timestamp_converter
 from datetime import datetime
 import re
 
