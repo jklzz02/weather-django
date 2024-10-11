@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from googletrans import Translator
-from services import Weather, translate, make_link, unix_timestamp_converter
+from services import Weather, RequestHelper, translate, make_link, unix_timestamp_converter
 from datetime import datetime
 import re
 
@@ -12,7 +12,7 @@ user_info = settings.USER_INFO
 lang =  user_info["language"]
 
 # weather API
-weather_service = Weather(keys['weather_key'], keys['air_key'])
+weather_service = Weather(RequestHelper(), keys['weather_key'], keys['air_key'])
 
 def home(request):
     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]

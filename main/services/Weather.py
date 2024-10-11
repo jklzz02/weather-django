@@ -1,15 +1,15 @@
 from functools import lru_cache
 from json import dumps
-from urllib.parse import urlencode
-from requests import get, post
+from .RequestHelper import RequestHelper
 
 class Weather:
 
-    def __init__(self, weather_key:str='', air_key:str='') -> None:
+    def __init__(self, RequestHelper:RequestHelper, weather_key:str, air_key:str) -> None:
         self.__open_weather = 'https://api.openweathermap.org/'
         self.__google_aqi = 'https://airquality.googleapis.com/'
         self.__weather_key = weather_key
         self.__air_key = air_key
+        self.__request = RequestHelper
 
     @lru_cache
     def current(self, city:str, lang:str) -> dict|bool:
@@ -22,8 +22,8 @@ class Weather:
             'lang' : lang
         }
 
-        request_url = self.__build_url(self.__open_weather, endpoint, params)
-        current_weather = self.__get(request_url)
+        request_url = self.__request.build_url(self.__open_weather, endpoint, params)
+        current_weather = self.__request.get(request_url)
         return current_weather
     
     @lru_cache
@@ -37,9 +37,9 @@ class Weather:
             'lang' : lang
         }
        
-        request_url = self.__build_url(self.__open_weather, endpoint, params)
+        request_url = self.__request.build_url(self.__open_weather, endpoint, params)
 
-        forecast_data = self.__get(request_url)
+        forecast_data = self.__request.get(request_url)
         return forecast_data
 
     @lru_cache
@@ -48,7 +48,7 @@ class Weather:
         endpoint = 'v1/currentConditions:lookup'
         params = {'key' : self.__air_key} 
 
-        request_url = self.__build_url(self.__google_aqi, endpoint, params)
+        request_url = self.__request.build_url(self.__google_aqi, endpoint, params)
 
         payload = {
         "location": {
@@ -67,10 +67,11 @@ class Weather:
         'Content-Type': 'application/json'
         }
 
-        air_conditions = self.__post(request_url, headers=headers, data=dumps(payload))
+        air_conditions = self.__request.post(request_url, headers=headers, data=dumps(payload))
 
         return air_conditions
     
+    @lru_cache
     def geo_code(self, city:str, state_code:str='', country_code:str='') -> dict|bool:
 
         query = f"{city},{state_code},{country_code}".strip(',')
@@ -82,8 +83,8 @@ class Weather:
 
         }
 
-        request_url = self.__build_url(self.__open_weather, endpoint, params)
-        response = self.__get(request_url)
+        request_url = self.__request.build_url(self.__open_weather, endpoint, params)
+        response = self.__request.get(request_url)
 
         if not response:
             return False
@@ -94,26 +95,3 @@ class Weather:
         }
         
         return coord
-
-    
-    def __build_url(self, base:str, endpoint: str, params: dict) -> str:
-
-        return f"{base}{endpoint}?{urlencode(params)}"
-    
-    def __post(self, url:str, headers:dict, data:dict) -> dict|bool:
-
-        response = post(url, headers=headers, data=data)
-
-        if not response.status_code == 200:
-            return False
-        
-        return response.json()
-    
-    def __get(self, url:str) -> dict|bool:
-
-        response = get(url)
-
-        if response.status_code != 200:
-            return False
-
-        return response.json()
