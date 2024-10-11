@@ -1,7 +1,7 @@
 from requests import get, post, RequestException
 from urllib.parse import urlencode
 
-class   RequestHelper:
+class RequestHelper:
 
     def build_url(self, base:str, endpoint: str, params: dict) -> str:
 
