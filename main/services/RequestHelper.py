@@ -2,10 +2,6 @@ from requests import get, post, RequestException
 from urllib.parse import urlencode
 
 class RequestHelper:
-
-    def build_url(self, base:str, endpoint: str, params: dict) -> str:
-
-        return f"{base}{endpoint}?{urlencode(params)}"
     
     def get(self, url:str) -> dict|bool:
 
@@ -30,3 +26,7 @@ class RequestHelper:
             status_code = e.response.status_code if e.response.status_code else "Uknown"
             print(f"POST request failed with status code: {status_code}")
             return False
+    
+    def build_url(self, base:str, endpoint: str, params: dict) -> str:
+
+        return f"{base}{endpoint}?{urlencode(params)}"

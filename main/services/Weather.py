@@ -68,7 +68,6 @@ class Weather:
         }
 
         air_conditions = self.__request.post(request_url, headers=headers, data=dumps(payload))
-
         return air_conditions
     
     @lru_cache
@@ -80,7 +79,6 @@ class Weather:
         params = {
             'q' : query,
             'appid' : self.__weather_key
-
         }
 
         request_url = self.__request.build_url(self.__open_weather, endpoint, params)
