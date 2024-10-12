@@ -82,14 +82,14 @@ class Weather:
         }
 
         request_url = self.__request.build_url(self.__open_weather, endpoint, params)
-        response = self.__request.get(request_url)
+        coord = self.__request.get(request_url)
 
-        if not response:
+        if not coord:
             return False
 
         coord = {
-            'lat' : response[0]['lat'],
-            'lon' : response[0]['lon']
+            'lat' : coord[0]['lat'],
+            'lon' : coord[0]['lon']
         }
         
         return coord

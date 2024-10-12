@@ -11,7 +11,7 @@ class RequestHelper:
             return response.json()
         
         except RequestException as e:
-            status_code = e.response.status_code if e.response.status_code else "Uknown"
+            status_code = e.response.status_code if e.response else "Unknown"
             print(f"GET request failed with status code: {status_code}")
             return False
 
@@ -23,7 +23,7 @@ class RequestHelper:
             return response.json()
         
         except RequestException as e:
-            status_code = e.response.status_code if e.response.status_code else "Uknown"
+            status_code = e.response.status_code if e.response else "Unknown"
             print(f"POST request failed with status code: {status_code}")
             return False
     
