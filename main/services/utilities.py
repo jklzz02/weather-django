@@ -1,7 +1,30 @@
 from datetime import datetime
 from django.conf import settings
 from googletrans import Translator
+from requests import get, post, RequestException
 import re
+
+# helpers to make POST and GET requests, for API calls.
+
+def get_request(url:str, params:dict) -> dict|bool:
+    try:
+        response = get(url, params=params)
+        response.raise_for_status()
+        return response.json()
+    
+    except RequestException as e:
+        code = e.response.status_code if e.response.status_code else "Unkown"
+        print(f'GET request failed with status code {code}')
+
+def post_request(url:str, params:dict, json) -> dict|bool:
+    try:
+        response = post(url, params=params, json=json)
+        response.raise_for_status()
+        return response.json()
+
+    except RequestException as e:
+        code = e.response.status_code if e.response.status_code else "Unkown"
+        print(f'POST request failed with status code {code}')
 
 # function to call in re.sub
 def make_link(match:re.Match[str]) -> str:

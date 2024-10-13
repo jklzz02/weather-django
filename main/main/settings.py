@@ -27,8 +27,6 @@ def get_user_info() -> dict:
      return user_info
 
 env = environ.Env()
-user_info = get_user_info()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +35,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # obtained user info from get_user_info()
-USER_INFO = user_info
+USER_INFO = get_user_info()
 
 # env vars
 KEYS = {
@@ -134,9 +132,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = user_info["language"]
+LANGUAGE_CODE = USER_INFO["language"]
 
-TIME_ZONE = user_info["timezone"]
+TIME_ZONE = USER_INFO["timezone"]
 
 USE_I18N = True
 
