@@ -13,7 +13,7 @@ def get_request(url:str, params:dict) -> dict|bool:
         return response.json()
     
     except RequestException as e:
-        code = e.response.status_code if e.response.status_code else "Unkown"
+        code = e.response.status_code if e.response.status_code else "Unknown"
         print(f'GET request failed with status code {code}')
 
 def post_request(url:str, params:dict, json) -> dict|bool:
@@ -23,7 +23,7 @@ def post_request(url:str, params:dict, json) -> dict|bool:
         return response.json()
 
     except RequestException as e:
-        code = e.response.status_code if e.response.status_code else "Unkown"
+        code = e.response.status_code if e.response.status_code else "Unknown"
         print(f'POST request failed with status code {code}')
 
 # function to call in re.sub
