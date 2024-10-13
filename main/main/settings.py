@@ -10,27 +10,41 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from dotenv import load_dotenv
 from pathlib import Path
-from services import get_user_info, getenvOrFail
+from geocoder import ip
+from timezonefinder import TimezoneFinder
+import environ
 import os
 
+# geocoder function to get info from user ip
+def get_user_info() -> dict:
+     g = ip('me')
+     latitude, longitude = g.latlng
+     user_language = g.country
+
+     user_timezone = TimezoneFinder().timezone_at(lat=latitude, lng=longitude)
+     user_info = {"language" : user_language, "timezone" : user_timezone}
+     return user_info
+
+env = environ.Env()
 user_info = get_user_info()
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# load env variables
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 
 # obtained user info from get_user_info()
 USER_INFO = user_info
 
-load_dotenv()
-# env variables
+# env vars
 KEYS = {
-
-    'weather_key' : getenvOrFail('WEATHER_KEY'),
-    'air_key' : getenvOrFail('AIR_KEY'),
-    'map_key' : getenvOrFail('MAP_KEY')
+    "map_key" : env("MAP_KEY"),
+    "air_key" : env("AIR_KEY"),
+    "weather_key" : env("WEATHER_KEY") 
 }
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
