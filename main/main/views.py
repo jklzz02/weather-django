@@ -70,7 +70,7 @@ def city(request):
 
           for day in forecast_weather["daily"]:
 
-               forecast_date = translate(translator, unix_timestamp_converter(day['dt'], date_format="date"))
+               forecast_date = translate(translator, unix_timestamp_converter(day['dt'], date_format="%A %d/%m/%Y"))
                summary = translate(translator, day["summary"])
                weather = day["weather"]
                temp = day["temp"]
@@ -92,7 +92,7 @@ def city(request):
                if i >= 12:
                     break
 
-               hour_date = unix_timestamp_converter(hour["dt"], date_format="hour")
+               hour_date = unix_timestamp_converter(hour["dt"], date_format="%H:%M")
                description = hour["weather"][0]["description"]
                icon = hour["weather"][0]["icon"]
                hour_temp = hour["temp"]

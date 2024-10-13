@@ -33,18 +33,12 @@ def make_link(match:re.Match[str]) -> str:
 
 '''
 converts a unix timestamp in the desired human-readable format
-it takes as an argument the timestamp to be converted and the format you want it to
-be returned in. You can simply pass in date_format="date".
+it takes as an argument the timestamp to be converted and 
+the format you want it to be returned in, which get passed to the method strftime.
 '''
-def unix_timestamp_converter(timestamp:int, date_format:str='') -> str:
+def unix_timestamp_converter(timestamp:int, date_format:str) -> str:
      dt_object = datetime.fromtimestamp(timestamp)
-
-     if date_format == "date":
-          readable_date = dt_object.strftime("%A %d/%m/%Y")
-     else:
-         readable_date = dt_object.strftime("%H:%M")
-
-     return readable_date
+     return dt_object.strftime(date_format)
 
 '''
 takes as arguments a translator object from googletrans, 
