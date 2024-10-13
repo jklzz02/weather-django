@@ -26,9 +26,9 @@ def city(request):
      hourly_forecast = []
      error = False
 
-     city = request.GET.get("city").strip()
+     city = request.GET.get("city")
 
-     if not city:
+     if city is None or not city.strip():
           referer = request.META.get('HTTP_REFERER')
           return HttpResponseRedirect(referer if referer else reverse("home"))
 
@@ -37,6 +37,8 @@ def city(request):
      
      city_info = get_current_weather(city)
 
+
+     # need refacort 
      if not city_info:
           error = True
 
