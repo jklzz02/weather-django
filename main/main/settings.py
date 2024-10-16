@@ -11,20 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-from geocoder import ip
-from timezonefinder import TimezoneFinder
+from services import get_user_info
 import environ
 import os
-
-# geocoder function to get info from user ip
-def get_user_info() -> dict:
-     g = ip('me')
-     latitude, longitude = g.latlng
-     user_language = g.country
-
-     user_timezone = TimezoneFinder().timezone_at(lat=latitude, lng=longitude)
-     user_info = {"language" : user_language, "timezone" : user_timezone}
-     return user_info
 
 env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

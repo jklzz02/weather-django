@@ -1,5 +1,6 @@
 from functools import lru_cache
 from django.conf import settings
+from typing import Optional
 from .utilities import get_request, post_request
 
 lang = settings.LANGUAGE_CODE
@@ -10,7 +11,7 @@ __open_weather = 'https://api.openweathermap.org'
 __google_aqi = 'https://airquality.googleapis.com'
 
 @lru_cache
-def get_current_weather(city:str, lang:str=lang) -> dict|bool:
+def get_current_weather(city:str, lang:str=lang) -> Optional[dict]:
     url = f'{__open_weather}/data/2.5/weather'
     params = {
             'appid' : __weather_key,
@@ -23,7 +24,7 @@ def get_current_weather(city:str, lang:str=lang) -> dict|bool:
     return current_weather
 
 @lru_cache
-def get_forecast_weather(lat:str, lon:str, lang:str=lang) -> dict|bool:
+def get_forecast_weather(lat:str, lon:str, lang:str=lang) -> Optional[dict]:
     url = f'{__open_weather}/data/3.0/onecall'
     params = {
             'lat' : lat,
@@ -36,7 +37,7 @@ def get_forecast_weather(lat:str, lon:str, lang:str=lang) -> dict|bool:
     return forecast_data
 
 @lru_cache
-def get_air_conditions(lat:str, lon:str, lang:str=lang) -> dict|bool:
+def get_air_conditions(lat:str, lon:str, lang:str=lang) -> Optional[dict]:
 
     url = f'{__google_aqi}/v1/currentConditions:lookup'
     params = {"key" : __air_key}

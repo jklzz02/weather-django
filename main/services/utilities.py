@@ -2,11 +2,12 @@ from datetime import datetime
 from django.conf import settings
 from googletrans import Translator
 from requests import get, post, RequestException
+from typing import Optional
 import re
 
 # helpers to make POST and GET requests, for API calls.
 
-def get_request(url:str, params:dict) -> dict|bool:
+def get_request(url:str, params:dict) -> Optional[dict]:
     try:
         response = get(url, params=params)
         response.raise_for_status()
@@ -16,7 +17,7 @@ def get_request(url:str, params:dict) -> dict|bool:
         code = e.response.status_code if e.response.status_code else "Unknown"
         print(f'GET request failed with status code {code}')
 
-def post_request(url:str, params:dict, json) -> dict|bool:
+def post_request(url:str, params:dict, json) -> Optional[dict]:
     try:
         response = post(url, params=params, json=json)
         response.raise_for_status()
