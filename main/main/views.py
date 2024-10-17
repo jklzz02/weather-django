@@ -50,8 +50,7 @@ def city(request):
           forecast_weather = get_forecast_weather(lat, lon)
 
           if not forecast_weather:
-               error = True
-               HttpResponseRedirect(reverse("city.html"))
+               return render(request, "city/layout.html", {"city" : city, "error" : True})
 
           raw_air_conditions = get_air_conditions(lat, lon)
           
@@ -69,6 +68,7 @@ def city(request):
                air_conditions["category"] = raw_air_conditions["indexes"][0]["category"]
                air_conditions["dominant_pollutant"] = raw_air_conditions["indexes"][0]["dominantPollutant"]
                air_conditions["pollutants"] = raw_air_conditions["pollutants"]
+
 
           for day in forecast_weather["daily"]:
 
@@ -109,7 +109,7 @@ def city(request):
                alert = translate(translator, alert)
                alert = alertRegex.sub(make_link, alert)
 
-     return render(request, "city.html", {
+     return render(request, "city/layout.html", {
           "city" : city,
           "error" : error,
           "city_info" : city_info,

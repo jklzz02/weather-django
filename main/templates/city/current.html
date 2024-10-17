@@ -1,0 +1,38 @@
+    <section class="city-query-box">
+        <header>
+          <h2>{{city_info.name}}</h2>
+        </header>
+        <time class="date" datetime="{{date}}">{{date}}</time>
+        <section>
+            <strong> {{city_info.main.temp|floatformat:"0"}}°C</strong>
+            {% for item in city_info.weather %}
+            <figure class="info-container">
+              <img src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png" alt="{{item.description}}">
+              <figcaption>{{item.description}} </figcaption>
+            </figure>
+            {% endfor %}
+        </section>
+
+        <footer class="query-info">
+          <p>Umidità {{city_info.main.humidity}}%</p>
+          <p>Vento {{city_info.wind.speed}} m/s</p>
+        </footer>
+    </section>
+
+  {% if air_conditions %}
+    <section class="air_conditions-box">
+        <h2 class="{{air_conditions.aqi_color}}">{{air_conditions.category}}</h2>
+        <h3>Indice di AQI {{air_conditions.aqi}}</h3>
+        <p>Contaminante principale: {{air_conditions.dominant_pollutant}}</p>
+        {% for pollutant in air_conditions.pollutants %}
+          <h3>{{pollutant.fullName}}</h3>
+          <p>{{pollutant.displayName}} {{pollutant.concentration.value}}</p>
+        {% endfor %}
+    </section>
+  {% endif %}
+
+  <iframe
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key={{map_key}}&q={{city_info.name}}"
+  allowfullscreen>
+  </iframe>

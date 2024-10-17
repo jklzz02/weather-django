@@ -1,0 +1,17 @@
+<div id="hour-box">
+    {% for item in hourly_forecast %}
+      <ul class="hour-list">
+        <li><h2>{{item.hour}}</h2></li>
+        <li><strong>{{item.temp|floatformat:"0"}}°C</strong></li>
+        <li>
+          <img 
+          class="hour-icon" 
+          src="https://openweathermap.org/img/wn/{{item.icon}}@2x.png"
+          alt="{{item.description}}"
+          title="{{item.description}}">
+        </li>
+        <li>{{item.description}}</li>
+      </ul>
+    {% endfor %}
+
+</div>
