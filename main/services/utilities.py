@@ -46,6 +46,6 @@ takes as arguments a translator object from googletrans,
 the text to be translated and the lang for which you want the text to be returned in
 you can get the user language dinamically by simly importing it from the settings file
 '''
-def translate(translator:Translator, text:str, lang:str=settings.USER_INFO['language']) -> str:
+def translate(text:str, lang:str=settings.USER_INFO['language'], translator:Translator=Translator()) -> str:
      translation = translator.translate(text, dest=lang)
      return translation.text

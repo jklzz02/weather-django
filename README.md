@@ -45,25 +45,32 @@ to make the call, you need to provide the name of the place to query, and a deve
 #### Utility functions in [utilities.py](main/services/utilities.py)
 
 * `unix_timestamp_formatter(timestamp:int, date_format:str)`: Given a Unix timestamp, returns a human-readable date. The date format attribute is required to make the function reusable.
+
 ```python
 readable_date = unix_timestamp_formatter(your_timestamp, date_format="%A %d/%m/%Y")
 ```
 
 * `get_user_info()`: Using the `geocoder` library, this function returns the user's country code based on their IP address and their Language and Timezone. This function is called in the [Settings](main/main/settings.py) **Django** file to change default Timezone and Language for the application
-```
+
+```python
 user_info = get_user_info()
 ```
 
-* `translate(transalator:Translator, text:str, lang:str=lang)`: requires a lang parameter, likely obtained via `get_user_info()`, and returns a translated version of a string in the specified language, the default value of `lang` is retrieved from the [settings](main/main/settings.py), the function uses the Translator object from [googletrans](https://pypi.org/project/googletrans/).
+* `translate(text:str, lang:str=lang)`: requires a lang parameter, likely obtained via `get_user_info()`, and returns a translated version of a string in the specified language, the default value of `lang` is retrieved from the [settings](main/main/settings.py), the function uses the Translator object from [googletrans](https://pypi.org/project/googletrans/).
+
 ```python
-translated_text = translate(Translator(), "Hello, World")
+translated_text = translate("Hello, World") # will translate the string in the language retrieved from the settings
+translated_text = translate("Hello, World", "es") # will translate the string in spanish, regardless of the languange in the settings
 ```
 
 * `make_link(match)`: to be called with the `re.sub` method of a `regex object`. It takes a match object as input and returns the match wrapped in an `<a>` tag with the same match as the `href` attribute. converts plain text into clickable links.
+
 ```python
 alert = alertRegex.sub(make_link, alert)
 ```
+
 #### Requests Helpers
+
 In utilities there are also 2 helpers to make `GET`and `POST` requests using the [requests](https://pypi.org/project/requests/) lybrary.
 
 * `get_request(url:str, params:dict) -> Optional[dict]`

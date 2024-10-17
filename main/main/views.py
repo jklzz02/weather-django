@@ -3,7 +3,6 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from googletrans import Translator
 from services.utilities import make_link, unix_timestamp_converter, translate
 from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
 import re
@@ -17,7 +16,6 @@ def home(request):
     return render(request, "home.html", {"start_cities_info" : start_cities_info})
 
 def city(request):
-     translator = Translator()
      city_info = ""
      forecast_weather= ""
      air_conditions = {}
@@ -33,12 +31,12 @@ def city(request):
           return HttpResponseRedirect(referer if referer else reverse("home"))
 
      today = datetime.now()
-     formatted_date = translate(translator, today.strftime('%A %d/%m/%Y %H:%M'))
+     formatted_date = translate(today.strftime('%A %d/%m/%Y %H:%M'))
      
      city_info = get_current_weather(city)
 
 
-     # need refacort 
+     # need refactor 
      if not city_info:
           error = True
 
@@ -72,8 +70,8 @@ def city(request):
 
           for day in forecast_weather["daily"]:
 
-               forecast_date = translate(translator, unix_timestamp_converter(day['dt'], date_format="%A %d/%m/%Y"))
-               summary = translate(translator, day["summary"])
+               forecast_date = translate(unix_timestamp_converter(day['dt'], date_format="%A %d/%m/%Y"))
+               summary = translate(day["summary"])
                weather = day["weather"]
                temp = day["temp"]
                humidity = day["humidity"]
@@ -106,7 +104,7 @@ def city(request):
           if "alerts" in forecast_weather:
                alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
                alert = forecast_weather["alerts"][0]["description"]
-               alert = translate(translator, alert)
+               alert = translate(alert)
                alert = alertRegex.sub(make_link, alert)
 
      return render(request, "city.html", {
