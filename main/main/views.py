@@ -50,7 +50,7 @@ def city(request):
           forecast_weather = get_forecast_weather(lat, lon)
 
           if not forecast_weather:
-               return render(request, "city/layout.html", {"city" : city, "error" : True})
+               return render(request, "city.html", {"city" : city, "error" : True})
 
           raw_air_conditions = get_air_conditions(lat, lon)
           
@@ -109,7 +109,7 @@ def city(request):
                alert = translate(translator, alert)
                alert = alertRegex.sub(make_link, alert)
 
-     return render(request, "city/layout.html", {
+     return render(request, "city.html", {
           "city" : city,
           "error" : error,
           "city_info" : city_info,
