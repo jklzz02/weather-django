@@ -1,34 +1,40 @@
 {% for day in forecast_info %}
-<article class="forecast-box">
-  <header>
-    <h2>{{city_info.name}}</h2>
-    <time  class="date" datetime="{{day.forecast_date}}"><span>{{day.forecast_date}}</span></time>
-  </header>
-  <section>
-    <strong>Temperatura</strong>
-    <ul>
-      <li>mattina    {{day.temp.day|floatformat:"0"}}°C</li>
-      <li>pomeriggio {{day.temp.eve|floatformat:"0"}}°C</li>
-      <li>sera       {{day.temp.night|floatformat:"0"}}°C</li>
-    </ul>
-  </section>
-  <section>
-    <p class="summary">{{day.summary}}</p>
-  </section>
-  {% for info in day.weather %}
-    <figure class="info-container">
-      <img
-      src="https://openweathermap.org/img/wn/{{info.icon}}@2x.png"
-      alt="{{info.description}}">
-      <figcaption>{{info.description}} </figcaption>
-    </figure>
-    <aside>
-      <span>Umidità {{day.humidity}}%</span>
-      <span>Vento {{day.wind}} m/s</span>
-    </aside>
-  {% endfor %}
-  {% if forecast_info.alert %}
-    <p>{{forecast_info.alert}}</p>
-  {% endif %}
-</article>
+  <article class="forecast-box">
+    
+    <header>
+      <h2>{{city_info.name}}</h2>
+      <time  class="date" datetime="{{day.forecast_date}}"><span>{{day.forecast_date}}</span></time>
+    </header>
+
+    <section>
+      <strong>Temperatura</strong>
+      <ul>
+        <li>mattina    {{day.temp.day|floatformat:"0"}}°C</li>
+        <li>pomeriggio {{day.temp.eve|floatformat:"0"}}°C</li>
+        <li>sera       {{day.temp.night|floatformat:"0"}}°C</li>
+      </ul>
+    </section>
+
+    <section>
+      <p class="summary">{{day.summary}}</p>
+    </section>
+
+    {% for info in day.weather %}
+        <figure class="info-container">
+          <img
+          src="https://openweathermap.org/img/wn/{{info.icon}}@2x.png"
+          alt="{{info.description}}">
+          <figcaption>{{info.description}} </figcaption>
+        </figure>
+        <aside>
+          <span>Umidità {{day.humidity}}%</span>
+          <span>Vento {{day.wind}} m/s</span>
+        </aside>
+    {% endfor %}
+
+    {% if forecast_info.alert %}
+      <p>{{forecast_info.alert}}</p>
+    {% endif %}
+    
+  </article>
 {% endfor %}
