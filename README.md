@@ -61,8 +61,10 @@ user_info = get_user_info()
 ```python
 # will translate the string in the language retrieved from the settings
 translated_text = translate("Hello, World")
+
 # will translate the string in spanish, regardless of the languange in the settings
 translated_text = translate("Hello, World", "es")
+
 ```
 
 * `make_link(match)`: to be called with the `re.sub` method of a `regex object`. It takes a match object as input and returns the match wrapped in an `<a>` tag with the same match as the `href` attribute. converts plain text into clickable links.
