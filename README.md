@@ -59,8 +59,10 @@ user_info = get_user_info()
 * `translate(text:str, lang:str=lang)`: requires a lang parameter, likely obtained via `get_user_info()`, and returns a translated version of a string in the specified language, the default value of `lang` is retrieved from the [settings](main/main/settings.py), the function uses the Translator object from [googletrans](https://pypi.org/project/googletrans/).
 
 ```python
-translated_text = translate("Hello, World") # will translate the string in the language retrieved from the settings
-translated_text = translate("Hello, World", "es") # will translate the string in spanish, regardless of the languange in the settings
+# will translate the string in the language retrieved from the settings
+translated_text = translate("Hello, World")
+# will translate the string in spanish, regardless of the languange in the settings
+translated_text = translate("Hello, World", "es")
 ```
 
 * `make_link(match)`: to be called with the `re.sub` method of a `regex object`. It takes a match object as input and returns the match wrapped in an `<a>` tag with the same match as the `href` attribute. converts plain text into clickable links.
