@@ -1,30 +1,30 @@
 from datetime import datetime
 from django.conf import settings
 from googletrans import Translator
-from requests import get, post, RequestException
 from typing import Optional
+import aiohttp
 import re
 
-# helpers to make POST and GET requests, for API calls.
+# helpers to make asyncronous POST and GET requests, for API calls.
 
-def get_request(url:str, params:dict) -> Optional[dict]:
+async def get_request(url: str, params: dict) -> Optional[dict]:
     try:
-        response = get(url, params=params)
-        response.raise_for_status()
-        return response.json()
-    
-    except RequestException as e:
-        code = e.response.status_code if e.response.status_code else "Unknown"
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params) as response:
+                response.raise_for_status()
+                return await response.json()
+    except aiohttp.ClientResponseError as e:
+        code = e.status if e.status else "Unknown"
         print(f'GET request failed with status code {code}')
 
-def post_request(url:str, params:dict, json) -> Optional[dict]:
+async def post_request(url: str, params: dict, json: dict) -> Optional[dict]:
     try:
-        response = post(url, params=params, json=json)
-        response.raise_for_status()
-        return response.json()
-
-    except RequestException as e:
-        code = e.response.status_code if e.response.status_code else "Unknown"
+        async with aiohttp.ClientSession() as session:
+            async with session.post(url, params=params, json=json) as response:
+                response.raise_for_status()
+                return await response.json()
+    except aiohttp.ClientResponseError as e:
+        code = e.status if e.status else "Unknown"
         print(f'POST request failed with status code {code}')
 
 # function to call in re.sub

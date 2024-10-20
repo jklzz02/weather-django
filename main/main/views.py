@@ -5,13 +5,18 @@ from django.shortcuts import render
 from django.urls import reverse
 from services.utilities import make_link, unix_timestamp_converter, translate
 from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
+from typing import Optional, Tuple
+import asyncio
 import re
 
 # weather API
 def home(request):
-    start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
     
-    start_cities_info = [get_current_weather(city) for city in start_cities]
+    async def get_cities_info() -> Optional[list]:
+     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
+     return await asyncio.gather(*(get_current_weather(city) for city in start_cities))
+    
+    start_cities_info = asyncio.run(get_cities_info())
 
     return render(request, "home.html", {"start_cities_info" : start_cities_info})
 
@@ -32,25 +37,32 @@ def city(request):
 
      today = datetime.now()
      formatted_date = translate(today.strftime('%A %d/%m/%Y %H:%M'))
-     
-     city_info = get_current_weather(city)
+
+     async def weather_info() -> Optional[Tuple[dict, dict, dict]]:
+          city_info = await get_current_weather(city)
+          
+          if city_info:
+               lat = city_info['coord']['lat']
+               lon = city_info['coord']['lon']
+
+               forecast_weather = await get_forecast_weather(lat, lon)
+               air_conditions = await get_air_conditions(lat, lon)
+
+               return city_info, forecast_weather, air_conditions
+          
+          return None, None, None
+          
+     city_info, forecast_weather, raw_air_conditions = asyncio.run(weather_info())
 
 
-     # need refactor 
      if not city_info:
           error = True
 
      if not error:
 
-          lat = city_info['coord']['lat']
-          lon = city_info['coord']['lon']
-
-          forecast_weather = get_forecast_weather(lat, lon)
-
           if not forecast_weather:
                return render(request, "city.html", {"city" : city, "error" : True})
 
-          raw_air_conditions = get_air_conditions(lat, lon)
           
           if raw_air_conditions:
                air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]
