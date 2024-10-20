@@ -45,6 +45,5 @@ sqlparse==0.4.4
 timezonefinder==6.5.0
 tomli==2.0.1
 typing_extensions==4.11.0
-urllib3==2.2.1
 yarl==1.15.5
 zope.interface==6.2
