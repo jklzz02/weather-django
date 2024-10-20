@@ -21,12 +21,9 @@ def home(request):
     return render(request, "home.html", {"start_cities_info" : start_cities_info})
 
 def city(request):
-     city_info = ""
-     forecast_weather= ""
+     city_info = forecast_weather = alert = ""
      air_conditions = {}
-     alert = ""
-     forecast_info = []
-     hourly_forecast = []
+     forecast_info = hourly_forecast = []
      error = False
 
      city = request.GET.get("city")
@@ -35,8 +32,7 @@ def city(request):
           referer = request.META.get('HTTP_REFERER')
           return HttpResponseRedirect(referer if referer else reverse("home"))
 
-     today = datetime.now()
-     formatted_date = today.strftime('%d/%m/%Y %H:%M')
+     formatted_date = datetime.now().strftime('%d/%m/%Y %H:%M')
 
      async def weather_info() -> Optional[Tuple[dict, dict, dict]]:
           city_info = await get_current_weather(city)
@@ -87,10 +83,7 @@ def city(request):
           
           forecast_info.append(city_forecast)
 
-     for i, hour in enumerate(forecast_weather["hourly"]):
-
-          if i >= 12:
-               break
+     for hour in forecast_weather["hourly"][:12]:
 
           hour_city_forecast = {
                "hour" : unix_timestamp_converter(hour["dt"], date_format="%H:%M"),
