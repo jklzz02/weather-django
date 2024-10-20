@@ -1,31 +1,44 @@
 from datetime import datetime
 from logging import getLogger
-from typing import Optional
+from typing import Optional, Dict, Callable
 import aiohttp
 import re
 
 __logger = getLogger(__name__)
 
-# helpers to make asyncronous POST and GET requests, for API calls.
-async def get_request(url: str, params: dict) -> Optional[dict]:
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url, params=params) as response:
-                response.raise_for_status()
-                return await response.json()
-    except aiohttp.ClientResponseError as e:
-        code = e.status if e.status else "Unknown"
-        __logger.warning(f'GET request failed with status code {code}')
+# helper to make asyncronous requests, for API calls.
+async def request(url: str, params: Optional[dict]=None, json:Optional[dict]=None, method:str="GET", timeout :int=10) -> Optional[dict]:
 
-async def post_request(url: str, params: dict, json: dict) -> Optional[dict]:
     try:
         async with aiohttp.ClientSession() as session:
-            async with session.post(url, params=params, json=json) as response:
+
+            method_map: Dict[str, Callable] = {
+                'GET': session.get,
+                'POST': session.post,
+                'PUT': session.put,
+                'DELETE': session.delete,
+            }
+
+            request = method_map.get(method.upper())
+
+            if request is None:
+                __logger.error(f"Unsupported HTTP method {method}")
+                return None
+            
+            async with request(url, params=params, json=json, timeout=timeout) as response:
                 response.raise_for_status()
                 return await response.json()
+            
     except aiohttp.ClientResponseError as e:
-        code = e.status if e.status else "Unknown"
-        __logger.warning(f'POST request failed with status code {code}')
+        __logger.warning(f"GET request failed with status {e.status}: {e.message}, URL: {url}")
+
+    except aiohttp.ClientConnectorError as e:
+        __logger.error(f"GET request connection error: {e}, URL: {url}")
+
+    except Exception as e:
+        __logger.exception(f"GET request encountered an unexpected error: {e}, URL: {url}")
+
+    return None
 
 # function to call in re.sub
 def make_link(match:re.Match[str]) -> str:
@@ -40,16 +53,3 @@ the format you want it to be returned in, which get passed to the method strftim
 def unix_timestamp_converter(timestamp:int, date_format:str) -> str:
      dt_object = datetime.fromtimestamp(timestamp)
      return dt_object.strftime(date_format)
-
-'''
-
-google trans library doesn't work properly
-
-takes as arguments a translator object from googletrans, 
-the text to be translated and the lang for which you want the text to be returned in
-you can get the user language dinamically by simly importing it from the settings file
-'''
-# @lru_cache(maxsize=1024)
-# def translate(text:str, lang:str=settings.USER_INFO['language']) -> str:
-#      translation = Translator().translate(text, dest=lang)
-#      return translation.text

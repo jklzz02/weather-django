@@ -1,7 +1,7 @@
 from aiocache import cached
 from django.conf import settings
 from typing import Optional
-from .utilities import get_request, post_request
+from .utilities import request
 
 lang = settings.LANGUAGE_CODE
 
@@ -19,7 +19,7 @@ async def get_current_weather(city: str, lang: str=lang) -> Optional[dict]:
         'units': 'metric',
         'lang': lang
     }
-    return await get_request(url, params)
+    return await request(url, params)
 
 @cached(ttl=180)
 async def get_forecast_weather(lat: str, lon: str, lang: str=lang) -> Optional[dict]:
@@ -31,7 +31,7 @@ async def get_forecast_weather(lat: str, lon: str, lang: str=lang) -> Optional[d
         'appid': __weather_key,
         'lang': lang
     }
-    return await get_request(url, params)
+    return await request(url, params)
 
 @cached(ttl=180)
 async def get_air_conditions(lat: str, lon: str, lang: str=lang) -> Optional[dict]:
@@ -49,4 +49,4 @@ async def get_air_conditions(lat: str, lon: str, lang: str=lang) -> Optional[dic
         ],
         "languageCode": lang,
     }
-    return await post_request(url, params, json)
+    return await request(url, params, json, method="POST")
