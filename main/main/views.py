@@ -3,7 +3,7 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from services.utilities import make_link, unix_timestamp_converter, translate
+from services.utilities import make_link, unix_timestamp_converter
 from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
 from typing import Optional, Tuple
 import asyncio
@@ -13,7 +13,7 @@ import re
 def home(request):
     
     async def get_cities_info() -> Optional[list]:
-     start_cities = ["turin", "rome, it", "florence", "naples", "milan"]
+     start_cities = ["turin, it", "rome, it", "florence, it", "naples, it", "milan, it"]
      return await asyncio.gather(*(get_current_weather(city) for city in start_cities))
     
     start_cities_info = asyncio.run(get_cities_info())
@@ -36,7 +36,7 @@ def city(request):
           return HttpResponseRedirect(referer if referer else reverse("home"))
 
      today = datetime.now()
-     formatted_date = translate(today.strftime('%A %d/%m/%Y %H:%M'))
+     formatted_date = today.strftime('%A %d/%m/%Y %H:%M')
 
      async def weather_info() -> Optional[Tuple[dict, dict, dict]]:
           city_info = await get_current_weather(city)
@@ -78,8 +78,8 @@ def city(request):
 
      for day in forecast_weather["daily"]:
 
-          forecast_date = translate(unix_timestamp_converter(day['dt'], date_format="%A %d/%m/%Y"))
-          summary = translate(day["summary"])
+          forecast_date = unix_timestamp_converter(day['dt'], date_format="%A %d/%m/%Y")
+          summary = day["summary"]
           weather = day["weather"]
           temp = day["temp"]
           humidity = day["humidity"]
@@ -112,7 +112,6 @@ def city(request):
      if "alerts" in forecast_weather:
           alertRegex =  re.compile(r'https://www\.\w+\.\w+(\.\w+)*[^\"]')
           alert = forecast_weather["alerts"][0]["description"]
-          alert = translate(alert)
           alert = alertRegex.sub(make_link, alert)
 
      return render(request, "city.html", {

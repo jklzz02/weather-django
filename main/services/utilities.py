@@ -1,8 +1,6 @@
 from datetime import datetime
 from django.conf import settings
-from googletrans import Translator
 from typing import Optional
-from functools import lru_cache
 import aiohttp
 import re
 
@@ -43,11 +41,14 @@ def unix_timestamp_converter(timestamp:int, date_format:str) -> str:
      return dt_object.strftime(date_format)
 
 '''
+
+google trans library doesn't work properly
+
 takes as arguments a translator object from googletrans, 
 the text to be translated and the lang for which you want the text to be returned in
 you can get the user language dinamically by simly importing it from the settings file
 '''
-@lru_cache(maxsize=1024)
-def translate(text:str, lang:str=settings.USER_INFO['language']) -> str:
-     translation = Translator().translate(text, dest=lang)
-     return translation.text
+# @lru_cache(maxsize=1024)
+# def translate(text:str, lang:str=settings.USER_INFO['language']) -> str:
+#      translation = Translator().translate(text, dest=lang)
+#      return translation.text

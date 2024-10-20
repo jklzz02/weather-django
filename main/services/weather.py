@@ -27,6 +27,7 @@ async def get_forecast_weather(lat: str, lon: str, lang: str=lang) -> Optional[d
     params = {
         'lat': lat,
         'lon': lon,
+        'units': 'metric',
         'appid': __weather_key,
         'lang': lang
     }

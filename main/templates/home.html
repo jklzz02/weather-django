@@ -13,10 +13,10 @@
                       {% for item in city_info.weather %}
                       <li><strong>{{item.description}}</strong></li>
                       {% endfor %}
-                      <li>Gradi {{city_info.main.temp|floatformat:"0"}}°</li>
-                      <li>Percepiti {{city_info.main.feels_like|floatformat:"0"}}°</li>
-                      <li>Umidità {{city_info.main.humidity}}%</li>
-                      <li>Vento {{city_info.wind.speed}} m/s</li>
+                      <li>Temperature {{city_info.main.temp|floatformat:"0"}}°</li>
+                      <li>Feels like {{city_info.main.feels_like|floatformat:"0"}}°</li>
+                      <li>Humidity {{city_info.main.humidity}}%</li>
+                      <li>Wind {{city_info.wind.speed}} m/s</li>
                   </ul>
                 </article>
               </a>
