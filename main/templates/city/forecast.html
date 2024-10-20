@@ -7,16 +7,12 @@
     </header>
 
     <section>
-      <strong>Temperature</strong>
+      <strong>Temperatura</strong>
       <ul>
-        <li>Morning {{day.temp.day|floatformat:"0"}}°C</li>
-        <li>Evening {{day.temp.eve|floatformat:"0"}}°C</li>
-        <li>Night {{day.temp.night|floatformat:"0"}}°C</li>
+        <li>Mattina {{day.temp.day|floatformat:"0"}}°C</li>
+        <li>Pomeriggio {{day.temp.eve|floatformat:"0"}}°C</li>
+        <li>Sera {{day.temp.night|floatformat:"0"}}°C</li>
       </ul>
-    </section>
-
-    <section>
-      <p class="summary">{{day.summary}}</p>
     </section>
 
     {% for info in day.weather %}
@@ -27,8 +23,8 @@
           <figcaption>{{info.description}} </figcaption>
         </figure>
         <aside>
-          <span>Humidity {{day.humidity}}%</span>
-          <span>Wind {{day.wind}} m/s</span>
+          <span>Umidità {{day.humidity}}%</span>
+          <span>Vento {{day.wind}} m/s</span>
         </aside>
     {% endfor %}
 

@@ -36,7 +36,7 @@ def city(request):
           return HttpResponseRedirect(referer if referer else reverse("home"))
 
      today = datetime.now()
-     formatted_date = today.strftime('%A %d/%m/%Y %H:%M')
+     formatted_date = today.strftime('%d/%m/%Y %H:%M')
 
      async def weather_info() -> Optional[Tuple[dict, dict, dict]]:
           city_info = await get_current_weather(city)
@@ -78,20 +78,12 @@ def city(request):
 
      for day in forecast_weather["daily"]:
 
-          forecast_date = unix_timestamp_converter(day['dt'], date_format="%A %d/%m/%Y")
-          summary = day["summary"]
-          weather = day["weather"]
-          temp = day["temp"]
-          humidity = day["humidity"]
-          wind = day["wind_speed"]
-
           city_forecast = {
-               "forecast_date" : forecast_date,
-               "summary" : summary,
-               "weather" : weather,
-               "temp" : temp,
-               "humidity" : humidity,
-               "wind" : wind}
+               "forecast_date" : unix_timestamp_converter(day['dt'], date_format="%d/%m/%Y"),
+               "weather" : day["weather"],
+               "temp" : day["temp"],
+               "humidity" : day["humidity"],
+               "wind" : day["wind_speed"]}
           
           forecast_info.append(city_forecast)
 
@@ -100,12 +92,12 @@ def city(request):
           if i >= 12:
                break
 
-          hour_date = unix_timestamp_converter(hour["dt"], date_format="%H:%M")
-          description = hour["weather"][0]["description"]
-          icon = hour["weather"][0]["icon"]
-          hour_temp = hour["temp"]
-
-          hour_city_forecast = {"hour" : hour_date, "description" : description, "icon" : icon, "temp" : hour_temp }
+          hour_city_forecast = {
+               "hour" : unix_timestamp_converter(hour["dt"], date_format="%H:%M"),
+               "description" : hour["weather"][0]["description"],
+               "icon" : hour["weather"][0]["icon"],
+               "temp" : hour["temp"]
+               }
           hourly_forecast.append(hour_city_forecast)
      
 
