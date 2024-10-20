@@ -1,11 +1,12 @@
 from datetime import datetime
-from django.conf import settings
+from logging import getLogger
 from typing import Optional
 import aiohttp
 import re
 
-# helpers to make asyncronous POST and GET requests, for API calls.
+__logger = getLogger(__name__)
 
+# helpers to make asyncronous POST and GET requests, for API calls.
 async def get_request(url: str, params: dict) -> Optional[dict]:
     try:
         async with aiohttp.ClientSession() as session:
@@ -14,7 +15,7 @@ async def get_request(url: str, params: dict) -> Optional[dict]:
                 return await response.json()
     except aiohttp.ClientResponseError as e:
         code = e.status if e.status else "Unknown"
-        print(f'GET request failed with status code {code}')
+        __logger.warning(f'GET request failed with status code {code}')
 
 async def post_request(url: str, params: dict, json: dict) -> Optional[dict]:
     try:
@@ -24,7 +25,7 @@ async def post_request(url: str, params: dict, json: dict) -> Optional[dict]:
                 return await response.json()
     except aiohttp.ClientResponseError as e:
         code = e.status if e.status else "Unknown"
-        print(f'POST request failed with status code {code}')
+        __logger.warning(f'POST request failed with status code {code}')
 
 # function to call in re.sub
 def make_link(match:re.Match[str]) -> str:
