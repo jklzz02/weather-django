@@ -45,7 +45,10 @@ def city(request):
                lat = city_info['coord']['lat']
                lon = city_info['coord']['lon']
 
-               forecast_weather, air_conditions = await asyncio.gather(get_forecast_weather(lat, lon), get_air_conditions(lat, lon))
+               forecast_weather, air_conditions = await asyncio.gather(
+                    get_forecast_weather(lat, lon),
+                    get_air_conditions(lat, lon)
+               )
 
                return city_info, forecast_weather, air_conditions
           

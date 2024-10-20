@@ -2,6 +2,7 @@ from datetime import datetime
 from django.conf import settings
 from googletrans import Translator
 from typing import Optional
+from functools import lru_cache
 import aiohttp
 import re
 
@@ -46,6 +47,7 @@ takes as arguments a translator object from googletrans,
 the text to be translated and the lang for which you want the text to be returned in
 you can get the user language dinamically by simly importing it from the settings file
 '''
+@lru_cache
 def translate(text:str, lang:str=settings.USER_INFO['language'], translator:Translator=Translator()) -> str:
      translation = translator.translate(text, dest=lang)
      return translation.text
