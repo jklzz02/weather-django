@@ -6,7 +6,6 @@ from django.urls import reverse
 from services.utilities import make_link, unix_timestamp_converter
 from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
 from typing import Optional, Tuple
-from pprint import pprint
 import asyncio
 import re
 
