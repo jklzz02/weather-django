@@ -6,6 +6,7 @@ from django.urls import reverse
 from services.utilities import make_link, unix_timestamp_converter
 from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
 from typing import Optional, Tuple
+from pprint import pprint
 import asyncio
 import re
 
@@ -21,9 +22,12 @@ def home(request):
     return render(request, "home.html", {"start_cities_info" : start_cities_info})
 
 def city(request):
-     city_info = forecast_weather = alert = ""
+     city_info = ""  
+     forecast_weather = "" 
+     alert = ""
      air_conditions = {}
-     forecast_info = hourly_forecast = []
+     forecast_info = [] 
+     hourly_forecast = []
      error = False
 
      city = request.GET.get("city")
@@ -91,6 +95,7 @@ def city(request):
                "icon" : hour["weather"][0]["icon"],
                "temp" : hour["temp"]
                }
+          
           hourly_forecast.append(hour_city_forecast)
      
 
