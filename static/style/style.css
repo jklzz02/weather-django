@@ -41,6 +41,8 @@ body {
 
 main {
     text-align: center;
+    display: grid;
+    place-items: center;
 }
 
 h1 {
@@ -62,6 +64,7 @@ strong {
 
 form {
     margin-top: 1rem;
+    width: 100%;
 }
 
 .main-icon {
@@ -81,7 +84,7 @@ form {
 }
 
 input[type="text"] {
-    min-width: 40%;
+    width: 40%;
     background: none;
     border: none;
     color: var(--light-color);
@@ -123,6 +126,7 @@ button[type="submit"]:hover, .main-icon:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 90%;
     margin-top: 2rem;
     gap: 1rem;
 }
@@ -134,6 +138,7 @@ button[type="submit"]:hover, .main-icon:hover {
    min-height: 500px;
    border-radius: 15px;
    box-shadow: var(--shadow);
+   flex-grow: 1;
 
 }
 
@@ -266,7 +271,7 @@ font-size: var(--md-size);
 
 #hour-container {
 
-    width: 91%;
+    width: 90%;
     margin: auto;
     margin-top: 1rem;
     padding: 1rem;
@@ -433,7 +438,7 @@ h3 a:hover {
 @media screen and (min-width: 1750px) {
     
     .city-query-container {
-        max-width: 91%;
+        max-width: 90%;
         margin: auto;
     }
 
@@ -476,12 +481,6 @@ h3 a:hover {
         font-size: var(--md-size);
     }
 
-    .city-query-container {
-
-        margin-inline: 2rem;
-
-    }
-
     iframe {
         flex-grow: 1;
     }
@@ -505,7 +504,6 @@ h3 a:hover {
     .city-container {
         padding: 0;
         margin: 0;
-        margin-inline: 10px;
     }
 
     .city-box {
@@ -537,8 +535,8 @@ h3 a:hover {
     }
 
     iframe, .city-query-box {
-        height: auto !important;
-        width: 80% !important;
+        height: auto;
+        width: 90%;
     }
 
     .info-container {
@@ -570,9 +568,8 @@ h3 a:hover {
     }
 
     .air_conditions-box {
-        padding: 2rem;
-        width: 80%;
         margin: auto;
+        width: 90%;
     }
 
     .air_conditions-box p, .air_conditions-box h3, .air_conditions-box h2 {
