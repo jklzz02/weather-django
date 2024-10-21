@@ -22,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # load env variables
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-
 # obtained user info from get_user_info()
 USER_INFO = get_user_info()
 
