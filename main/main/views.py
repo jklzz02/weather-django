@@ -57,10 +57,6 @@ async def city(request):
 
      if not city_info or not forecast_weather:
            return render(request, "city.html", {"city" : city, "error" : True})
-
-     async def process_info(raw_airconditions :dict, forecast_weather :dict) -> Optional[Tuple[dict, dict, dict]]:
-          
-          pass
         
      if raw_air_conditions:
           air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]
