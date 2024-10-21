@@ -10,17 +10,17 @@ import asyncio
 import re
 
 # weather API
-def home(request):
+async def home(request):
     
     async def get_cities_info() -> Optional[list]:
      start_cities = ["turin, it", "rome, it", "florence, it", "naples, it", "milan, it"]
      return await asyncio.gather(*(get_current_weather(city) for city in start_cities))
     
-    start_cities_info = asyncio.run(get_cities_info())
+    start_cities_info = await get_cities_info()
 
     return render(request, "home.html", {"start_cities_info" : start_cities_info})
 
-def city(request):
+async def city(request):
      city_info = ""  
      forecast_weather = "" 
      alert = ""
@@ -53,7 +53,7 @@ def city(request):
           
           return None, None, None
           
-     city_info, forecast_weather, raw_air_conditions = asyncio.run(weather_info())
+     city_info, forecast_weather, raw_air_conditions = await weather_info()
 
 
      if not city_info or not forecast_weather:
