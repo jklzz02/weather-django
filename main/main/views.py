@@ -9,7 +9,6 @@ from typing import Optional, Tuple
 import asyncio
 import re
 
-# weather API
 async def home(request):
     
     async def get_cities_info() -> Optional[list]:
