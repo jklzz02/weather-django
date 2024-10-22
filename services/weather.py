@@ -11,7 +11,7 @@ __open_weather = 'https://api.openweathermap.org'
 __google_aqi = 'https://airquality.googleapis.com'
 
 @cached(ttl=180) # cache expires in 2 min
-async def get_current_weather(city: str, lat: str="", lon: str="", lang: str=lang) -> Optional[dict]:
+async def get_current_weather(city: str="", lat: str="", lon: str="", lang: str=lang) -> Optional[dict]:
     url = f'{__open_weather}/data/2.5/weather'
     params = {
         'appid': __weather_key,

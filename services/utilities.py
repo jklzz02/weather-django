@@ -1,4 +1,3 @@
-from asgiref.sync import sync_to_async
 from datetime import datetime
 from cities.models import City
 from fuzzywuzzy import process
@@ -60,7 +59,6 @@ def unix_timestamp_converter(timestamp:int, date_format:str) -> str:
 '''
 function to get city suggestions based on a user input resulted in a not found error
 '''
-@sync_to_async
 def suggest_city(user_input :str) -> Optional[dict]:
     if not user_input or len(user_input) < 2:
         return []
@@ -70,5 +68,5 @@ def suggest_city(user_input :str) -> Optional[dict]:
     if not cities:
         return []
 
-    suggestions = process.extract(user_input, cities, limit=5)
+    suggestions = process.extract(user_input, cities, limit=3)
     return [s[0] for s in suggestions]

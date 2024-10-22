@@ -22,7 +22,7 @@ def home(request):
 
     return render(request, "home.html", {"start_cities_info": start_cities_info})
 
-async def city(request):
+def city(request):
      city_info = ""  
      forecast_weather = "" 
      alert = ""
@@ -39,29 +39,26 @@ async def city(request):
 
      formatted_date = datetime.now().strftime('%d/%m/%Y %H:%M')
 
-     async def weather_info() -> Optional[Tuple[dict, dict, dict]]:
-          city_info = await get_current_weather(city)
-          
-          if city_info:
-               lat = city_info['coord']['lat']
-               lon = city_info['coord']['lon']
+     city_info = asyncio.run(get_current_weather(city))
 
-               forecast_weather, air_conditions = await asyncio.gather(
+     if not city_info:
+          suggestions = suggest_city(city)
+          return render(request, "city.html", {"city" : city, "suggestions" : suggestions, "error" : True})     
+
+     async def weather_info(lat :str, lon: str) -> Optional[Tuple[dict, dict]]:
+
+          forecast_weather, air_conditions = await asyncio.gather(
                     get_forecast_weather(lat, lon),
                     get_air_conditions(lat, lon)
                )
 
-               return city_info, forecast_weather, air_conditions
+          return forecast_weather, air_conditions
           
-          return None, None, None
-          
-     city_info, forecast_weather, raw_air_conditions = await weather_info()
-
-
-     if not city_info or not forecast_weather:
-
-          suggestions = await suggest_city(city)
-          return render(request, "city.html", {"city" : city, "suggestions" : suggestions, "error" : True})
+     forecast_weather, raw_air_conditions = asyncio.run(
+          weather_info(
+               city_info['coord']['lat'],
+               city_info['coord']['lon']
+          ))
         
      if raw_air_conditions:
           air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]
