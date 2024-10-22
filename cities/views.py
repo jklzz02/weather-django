@@ -13,8 +13,12 @@ import asyncio
 import re
 
 @sync_to_async
-def get_cities_starting_with(user_input: str) -> List:
-    return list(City.objects.filter(name__istartswith=user_input[0]).values_list('name', flat=True))
+def get_cities_starting_with(user_input: str) -> Optional[List]:
+    
+    if len(user_input) < 2:
+         return None
+    
+    return list(City.objects.filter(name__istartswith=user_input[:1]).values_list('name', flat=True))
 
 async def suggest_city(user_input :str) -> Optional[dict]:
     if not user_input:
@@ -25,7 +29,7 @@ async def suggest_city(user_input :str) -> Optional[dict]:
     if not cities:
         return []
 
-    suggestions = process.extract(user_input, cities, limit=3)
+    suggestions = process.extract(user_input, cities, limit=5)
     return [s[0] for s in suggestions]
 
 async def home(request):
