@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.conf import settings
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -113,3 +114,11 @@ def city(request):
           "hourly_forecast" : hourly_forecast,
           "air_conditions" : air_conditions
           })
+
+def cities_list(request, page=1):
+
+     cities_list = City.objects.all().order_by('population').reverse()
+     paginator = Paginator(cities_list, 10)
+     page_obj = paginator.get_page(page)
+
+     return render(request, "cities_list.html", {"page_obj" : page_obj})
