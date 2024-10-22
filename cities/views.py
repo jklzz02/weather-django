@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from .models import City
 from services.utilities import make_link, unix_timestamp_converter, suggest_city
-from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
+from services.weather import get_weather, get_air_conditions
 from typing import Optional, Tuple
 import asyncio
 import re
@@ -13,7 +13,7 @@ import re
 def home(request):
     
     async def get_cities_info(cities: list) -> Optional[list]:
-        return await asyncio.gather(*(get_current_weather(city["name"], city["lat"], city["lon"]) for city in cities))
+        return await asyncio.gather(*(get_weather(city["name"], city["lat"], city["lon"]) for city in cities))
 
     cities = City.objects.filter(country_code=settings.COUNTRY_CODE).order_by('-population')[:5]
 
@@ -39,7 +39,7 @@ def city(request):
 
      formatted_date = datetime.now().strftime('%d/%m/%Y %H:%M')
 
-     city_info = asyncio.run(get_current_weather(city))
+     city_info = asyncio.run(get_weather(city=city))
 
      if not city_info:
           suggestions = suggest_city(city)
@@ -48,7 +48,7 @@ def city(request):
      async def weather_info(lat :str, lon: str) -> Optional[Tuple[dict, dict]]:
 
           forecast_weather, air_conditions = await asyncio.gather(
-                    get_forecast_weather(lat, lon),
+                    get_weather(lat=lat, lon=lon, mode="forecast"),
                     get_air_conditions(lat, lon)
                )
 
