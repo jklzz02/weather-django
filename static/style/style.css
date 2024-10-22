@@ -388,6 +388,7 @@ th, td {
 }
 
 td {
+    font-size: var(--sm-size);
     border-bottom: 1px solid var(--grey);
 }
 
