@@ -14,7 +14,7 @@ import re
 
 @sync_to_async
 def get_cities_starting_with(user_input: str) -> List[str]:
-    return list(City.objects.filter(name__istartswith=user_input).values_list('name', flat=True))
+    return list(City.objects.filter(name__istartswith=user_input[0]).values_list('name', flat=True))
 
 async def suggest_city(user_input :str) -> Optional[dict]:
     if not user_input:
