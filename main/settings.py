@@ -74,7 +74,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             'templates',
-            'templates/city'
+            'templates/cities'
             ],
         'APP_DIRS': True,
         'OPTIONS': {
