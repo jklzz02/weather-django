@@ -64,7 +64,7 @@ def city(request):
           air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]
 
           if int(air_conditions["aqi"]) < 50:
-               color = "green";
+               color = "green"
           elif int(air_conditions["aqi"]) < 100:
                color = "yellow"
           else:

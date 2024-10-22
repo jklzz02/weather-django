@@ -365,6 +365,74 @@ h3 a:hover {
     opacity: .8;
 }
 
+/* table */
+table {
+    padding: 1rem;
+    box-shadow: var(--shadow);
+    border-radius: 8px;
+    border-spacing: 0;
+    width: 40%;
+}
+
+tr,th,td, td > a{
+    text-align: start;
+}
+
+th {
+    color: var(--complementary-color);
+    font-size: var(--md-size);
+}
+
+th, td {
+    padding: .5rem;
+}
+
+td {
+    border-bottom: 1px solid var(--grey);
+}
+
+/* pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.step-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.step-links a {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: var(--light-color);
+    background-color: var(--main-color);
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: var(--sm-size);
+}
+
+.step-links a:hover {
+    background-color: var(--secondary-color);
+}
+
+.step-links .current {
+    font-weight: bold;
+    color: var(--light-color);
+    font-size: var(--sm-size);
+}
+
+.step-links{
+    margin-right: 0.5rem;
+}
+
+.step-links {
+    margin-left: 0.5rem;
+}
 
 /* utility classes */
 
