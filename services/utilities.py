@@ -9,7 +9,7 @@ import re
 
 __logger = getLogger(__name__)
 
-# helper to make asyncronous requests, for API calls.
+# helper to make asynchronous requests, for API calls.
 async def request(url: str, params: Optional[dict]=None, json:Optional[dict]=None, method:str="GET", timeout :int=10) -> Optional[dict]:
 
     try:
