@@ -29,7 +29,6 @@ def city(request):
      air_conditions = {}
      forecast_info = [] 
      hourly_forecast = []
-     error = False
 
      city = request.GET.get("city")
 
@@ -106,7 +105,6 @@ def city(request):
 
      return render(request, "city.html", {
           "city" : city,
-          "error" : error,
           "city_info" : city_info,
           "map_key" : settings.KEYS['map_key'],
           "date" : formatted_date,
