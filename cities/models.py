@@ -12,3 +12,6 @@ class City(models.Model):
             models.Index(fields=['name']),
             models.Index(fields=['country_code']),
         ]
+
+    def __str__(self):
+        return f"{self.name}, {self.country_code}"
