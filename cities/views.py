@@ -1,13 +1,32 @@
+from asgiref.sync import sync_to_async
+from .models import City
 from datetime import datetime
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from fuzzywuzzy import process
 from services.utilities import make_link, unix_timestamp_converter
 from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
-from typing import Optional, Tuple
+from typing import Optional, Tuple, List
 import asyncio
 import re
+
+@sync_to_async
+def get_cities_starting_with(user_input: str) -> List[str]:
+    return list(City.objects.filter(name__istartswith=user_input).values_list('name', flat=True))
+
+async def suggest_city(user_input :str) -> Optional[dict]:
+    if not user_input:
+        return []
+
+    cities = await get_cities_starting_with(user_input)
+
+    if not cities:
+        return []
+
+    suggestions = process.extract(user_input, cities, limit=3)
+    return [s[0] for s in suggestions]
 
 async def home(request):
     
@@ -56,7 +75,9 @@ async def city(request):
 
 
      if not city_info or not forecast_weather:
-           return render(request, "city.html", {"city" : city, "error" : True})
+
+          suggestions = await suggest_city(city)
+          return render(request, "city.html", {"city" : city, "suggestions" : suggestions, "error" : True})
         
      if raw_air_conditions:
           air_conditions["aqi"] = raw_air_conditions["indexes"][0]["aqiDisplay"]

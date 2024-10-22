@@ -34,6 +34,18 @@
   {% else %}
     <div class="error-box">
       <h2>Città - {{ city }} - non trovata</h2>
+      {% if suggestions %}
+        <section class="suggestion-box">
+          <h3>Forse intendevi</h3>
+          <ul id="suggestion-list">
+            {% for suggestion in suggestions %}
+              <li>
+                <a href="/city/?city={{suggestion}}">{{suggestion}}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
       <img class="error-icon" src="{% static "img/not-found.png" %}" alr="city not found">
     </div>
   {% endif %}

@@ -221,6 +221,20 @@ iframe {
     color: var(--light-color);
 }
 
+.suggestion-box{
+    text-align: start;
+    padding: .5rem;
+}
+
+.suggestion-box h3 {
+    color: var(--accent-color);
+    font-size: var(--md-size);
+}
+
+#suggestion-list {
+    list-style: inside;
+}
+
 ul {
     list-style: none;
 }

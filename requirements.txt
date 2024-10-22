@@ -19,6 +19,7 @@ django-environ==0.11.2
 exceptiongroup==1.2.2
 frozenlist==1.4.1
 future==1.0.0
+fuzzywuzzy==0.18.0
 geocoder==1.38.1
 h11==0.9.0
 h2==3.2.0
@@ -28,6 +29,7 @@ hstspreload==2024.4.1
 httpcore==0.9.1
 hyperframe==5.2.0
 idna==2.10
+Levenshtein==0.26.0
 multidict==6.1.0
 numpy==1.26.4
 packaging==24.1
@@ -35,7 +37,9 @@ pip-tools==7.4.1
 propcache==0.2.0
 pycparser==2.22
 pyproject_hooks==1.1.0
+python-Levenshtein==0.26.0
 pytz==2024.1
+RapidFuzz==3.10.0
 ratelim==0.1.6
 requests==2.32.3
 rfc3986==1.5.0
