@@ -1,36 +1,13 @@
-from asgiref.sync import sync_to_async
-from .models import City
 from datetime import datetime
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from fuzzywuzzy import process
-from services.utilities import make_link, unix_timestamp_converter
+from services.utilities import make_link, unix_timestamp_converter, suggest_city
 from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
-from typing import Optional, Tuple, List
+from typing import Optional, Tuple
 import asyncio
 import re
-
-@sync_to_async
-def get_cities_starting_with(user_input: str) -> Optional[List]:
-    
-    if len(user_input) < 2:
-         return None
-    
-    return list(City.objects.filter(name__istartswith=user_input[:1]).values_list('name', flat=True))
-
-async def suggest_city(user_input :str) -> Optional[dict]:
-    if not user_input:
-        return []
-
-    cities = await get_cities_starting_with(user_input)
-
-    if not cities:
-        return []
-
-    suggestions = process.extract(user_input, cities, limit=5)
-    return [s[0] for s in suggestions]
 
 async def home(request):
     

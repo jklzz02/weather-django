@@ -1,4 +1,7 @@
+from asgiref.sync import sync_to_async
 from datetime import datetime
+from cities.models import City
+from fuzzywuzzy import process
 from logging import getLogger
 from typing import Optional, Dict, Callable
 import aiohttp
@@ -53,3 +56,19 @@ the format you want it to be returned in, which get passed to the method strftim
 def unix_timestamp_converter(timestamp:int, date_format:str) -> str:
      dt_object = datetime.fromtimestamp(timestamp)
      return dt_object.strftime(date_format)
+
+'''
+function to get city suggestions based on a user input resulted in a not found error
+'''
+@sync_to_async
+def suggest_city(user_input :str) -> Optional[dict]:
+    if not user_input or len(user_input) < 2:
+        return []
+
+    cities = City.objects.filter(name__istartswith=user_input[:1]).values_list('name', flat=True)
+
+    if not cities:
+        return []
+
+    suggestions = process.extract(user_input, cities, limit=5)
+    return [s[0] for s in suggestions]
