@@ -3,21 +3,24 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from .models import City
 from services.utilities import make_link, unix_timestamp_converter, suggest_city
 from services.weather import get_current_weather, get_forecast_weather, get_air_conditions
 from typing import Optional, Tuple
 import asyncio
 import re
 
-async def home(request):
+def home(request):
     
-    async def get_cities_info() -> Optional[list]:
-     start_cities = ["turin, it", "rome, it", "florence, it", "naples, it", "milan, it"]
-     return await asyncio.gather(*(get_current_weather(city) for city in start_cities))
-    
-    start_cities_info = await get_cities_info()
+    async def get_cities_info(cities: list) -> Optional[list]:
+        return await asyncio.gather(*(get_current_weather(city["name"], city["lat"], city["lon"]) for city in cities))
 
-    return render(request, "home.html", {"start_cities_info" : start_cities_info})
+    cities = City.objects.filter(country_code=settings.COUNTRY_CODE).order_by('-population')[:5]
+
+    start_cities = [{"name": city.name, "lat": city.latitude, "lon": city.longitude} for city in cities]
+    start_cities_info = asyncio.run(get_cities_info(start_cities))
+
+    return render(request, "home.html", {"start_cities_info": start_cities_info})
 
 async def city(request):
      city_info = ""  

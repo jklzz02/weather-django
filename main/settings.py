@@ -128,6 +128,8 @@ LANGUAGE_CODE = USER_INFO["language"]
 
 TIME_ZONE = USER_INFO["timezone"]
 
+COUNTRY_CODE = USER_INFO["language"]
+
 USE_I18N = True
 
 USE_TZ = True
