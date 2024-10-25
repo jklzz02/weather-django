@@ -115,7 +115,11 @@ def city(request):
           "air_conditions" : air_conditions
           })
 
-def cities_list(request, page=1):
+def cities_list(request, page):
+
+     if page is None:
+          referer = request.META.get('HTTP_REFERER')
+          return HttpResponseRedirect(referer if referer else reverse("home"))
 
      cities_list = City.objects.all().order_by('population').reverse()
      paginator = Paginator(cities_list, 10)
