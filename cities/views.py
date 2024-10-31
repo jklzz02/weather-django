@@ -42,7 +42,7 @@ def city(request):
      city_info = asyncio.run(get_weather(city=city))
 
      if not city_info:
-          suggestions = suggest_city(city)
+          suggestions = suggest_city(city, 4)
           return render(request, "city.html", {"city" : city, "suggestions" : suggestions, "error" : True})     
 
      async def weather_info(lat :str, lon: str) -> Optional[Tuple[dict, dict]]:

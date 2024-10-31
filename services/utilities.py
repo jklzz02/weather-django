@@ -1,6 +1,6 @@
 from datetime import datetime
 from cities.models import City
-from fuzzywuzzy import process
+from functools import lru_cache
 from logging import getLogger
 from typing import Optional, Dict, Callable
 import aiohttp
@@ -59,14 +59,40 @@ def unix_timestamp_converter(timestamp:int, date_format:str) -> str:
 '''
 function to get city suggestions based on a user input resulted in a not found error
 '''
-def suggest_city(user_input :str) -> Optional[dict]:
-    if not user_input or len(user_input) < 2:
+@lru_cache(maxsize=128)
+def suggest_city(user_input :str, matches_num :int=5) -> list[str]:
+
+    if not user_input:
         return []
+    
+    cities = list(City.objects.values_list('name', flat=True))
 
-    cities = City.objects.filter(name__istartswith=user_input[:1]).values_list('name', flat=True)
+    matches = []
+    input_len = len(user_input)
+    input_lower = user_input.lower()
+    seen = set()
 
-    if not cities:
-        return []
+    for city in cities:
+        points = 0
+        city_lower = city.lower()
 
-    suggestions = process.extract(user_input, cities, limit=3)
-    return [s[0] for s in suggestions]
+        if input_lower in city_lower:
+            points += input_len + 2
+
+        if city_lower.startswith(user_input[:1]):
+            points += 2
+
+        for i, letter in enumerate(input_lower):
+            if letter in city_lower:
+                points += 1
+            
+            if i == city.find(letter):
+                points += 2
+
+        if points > 0 and city not in seen:
+            matches.append({"match" : city, "score" : points})
+            seen.add(city)
+
+    
+    matches = sorted(matches, key=lambda x: x['score'], reverse=True)[:matches_num]
+    return [city['match'] for city in matches]
