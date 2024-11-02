@@ -65,12 +65,11 @@ def suggest_city(user_input :str, matches_num :int=5) -> list[str]:
     if not user_input:
         return []
     
-    cities = list(City.objects.values_list('name', flat=True))
+    cities = set(City.objects.values_list('name', flat=True))
 
     matches = []
     input_len = len(user_input)
     input_lower = user_input.lower()
-    seen = set()
 
     for city in cities:
         points = 0
@@ -89,10 +88,8 @@ def suggest_city(user_input :str, matches_num :int=5) -> list[str]:
             if i == city.find(letter):
                 points += 2
 
-        if points > 0 and city not in seen:
+        if points > 0:
             matches.append({"match" : city, "score" : points})
-            seen.add(city)
-
     
     matches = sorted(matches, key=lambda x: x['score'], reverse=True)[:matches_num]
     return [city['match'] for city in matches]
