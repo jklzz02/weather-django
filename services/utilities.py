@@ -20,7 +20,8 @@ async def request(url: str, params: Optional[dict]=None, json:Optional[dict]=Non
                 'DELETE': session.delete,
             }
 
-            request = method_map.get(method.upper())
+            method = method.upper()
+            request = method_map.get(method)
 
             if request is None:
                 __logger.error(f"Unsupported HTTP method {method}")
@@ -31,13 +32,13 @@ async def request(url: str, params: Optional[dict]=None, json:Optional[dict]=Non
                 return await response.json()
             
     except aiohttp.ClientResponseError as e:
-        __logger.warning(f"GET request failed with status {e.status}: {e.message}, URL: {url}")
+        __logger.warning(f"{method} request failed with status {e.status}: {e.message}, URL: {url}")
 
     except aiohttp.ClientConnectorError as e:
-        __logger.error(f"GET request connection error: {e}, URL: {url}")
+        __logger.error(f"{method} request connection error: {e}, URL: {url}")
 
     except Exception as e:
-        __logger.exception(f"GET request encountered an unexpected error: {e}, URL: {url}")
+        __logger.exception(f"{method} request encountered an unexpected error: {e}, URL: {url}")
 
     return None
 
@@ -55,12 +56,11 @@ def suggest_city(user_input :str, matches_num :int=5) -> list[str]:
     if not user_input:
         return []
     
-    cities = list(City.objects.values_list('name', flat=True))
+    cities = set(City.objects.values_list('name', flat=True))
 
     matches = []
     input_len = len(user_input)
     input_lower = user_input.lower()
-    seen = set()
 
     for city in cities:
         points = 0
@@ -79,10 +79,8 @@ def suggest_city(user_input :str, matches_num :int=5) -> list[str]:
             if i == city.find(letter):
                 points += 2
 
-        if points > 0 and city not in seen:
+        if points > 0:
             matches.append({"match" : city, "score" : points})
-            seen.add(city)
-
     
     matches = sorted(matches, key=lambda x: x['score'], reverse=True)[:matches_num]
     return [city['match'] for city in matches]
