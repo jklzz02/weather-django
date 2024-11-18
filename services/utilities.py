@@ -8,7 +8,6 @@ import re
 
 __logger = getLogger(__name__)
 
-# helper to make asynchronous requests, for API calls.
 async def request(url: str, params: Optional[dict]=None, json:Optional[dict]=None, method:str="GET", timeout :int=10) -> Optional[dict]:
 
     try:
@@ -42,23 +41,14 @@ async def request(url: str, params: Optional[dict]=None, json:Optional[dict]=Non
 
     return None
 
-# function to call in re.sub
 def make_link(match:re.Match[str]) -> str:
     url = match.group(0)
     return f'<a href="{url}" target="_blank">{url}</a>'
 
-'''
-converts a unix timestamp in the desired human-readable format
-it takes as an argument the timestamp to be converted and 
-the format you want it to be returned in, which get passed to the method strftime.
-'''
 def unix_timestamp_converter(timestamp:int, date_format:str) -> str:
      dt_object = datetime.fromtimestamp(timestamp)
      return dt_object.strftime(date_format)
 
-'''
-function to get city suggestions based on a user input resulted in a not found error
-'''
 @lru_cache(maxsize=128)
 def suggest_city(user_input :str, matches_num :int=5) -> list[str]:
 
