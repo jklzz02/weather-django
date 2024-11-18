@@ -9,9 +9,9 @@ All of them are documented with comments in the code.
 
 ### Weather API
 
-In the project there's a [weather](main/services/weather.py) **module** to make requests and retrieve various weather information. All of the functions use `@cached` from [aiocache](https://pypi.org/project/aiocache/) for better performance and to litimate API call usage. The API keys are loaded using Django's [environ library](https://pypi.org/project/django-environ/). The keys are then stored in pseudo private variables. The `lang` parameter has a default value retrieved from the [settings](main/main/settings.py) `LANGUAGE_CODE`, it can be specified a different languange as a parameter.
+In the project there's a [weather](main/services/weather.py) **module** to make asynchronous requests and retrieve various weather information. All of the functions use `@cached` from [aiocache](https://pypi.org/project/aiocache/) for better performance and to litimate API call usage. The API keys are loaded using Django's [environ library](https://pypi.org/project/django-environ/). The keys are then stored in pseudo private variables. The `lang` parameter has a default value retrieved from the [settings](main/main/settings.py) `LANGUAGE_CODE`, it can be specified a different languange as a parameter.
 
-* `async def get_weather(city: str="", lat: str="", lon: str="", mode: str="current", lang: str=lang) -> Optional[dict]`: makes an **API** call to [Open Weather](https://openweathermap.org/) retrieving the current or forecast weather conditions, of the requested city, in the requested language.
+* `get_weather(city: str="", lat: str="", lon: str="", mode: str="current", lang: str=lang) -> Optional[dict]`: makes an **API** call to [Open Weather](https://openweathermap.org/) retrieving the current or forecast weather conditions, of the requested city, in the requested language.
 
 ```python
 # Retrieves current weather conditions
