@@ -60,6 +60,8 @@ user_info = get_user_info()
 alert = alertRegex.sub(make_link, alert)
 ```
 
+* `suggest_city(user_input :str, matches_num :int=5) -> list[str]`: Receives a user input and with a score system returns the most similar results from the cities database table, the number of matches can be specified as a parameter.
+
 #### Requests Helper
 
 In utilities there are also 2 helpers to make **asynchronous** requests using the [aiohttp](https://docs.aiohttp.org/en/stable/) lybrary.
