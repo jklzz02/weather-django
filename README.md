@@ -1,6 +1,6 @@
 # Weather Application
 
-This project is a Web application which can provide current and forecast weather info through an **API** from [Open Weather](https://openweathermap.org/)
+This project is a Web application that provides current and forecast weather info through an **API** from [Open Weather](https://openweathermap.org/)
 
 ## Services
 
